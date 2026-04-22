@@ -1,0 +1,47 @@
+{
+  "header": {
+    "eyebrow": "SUPPORT REPORTING",
+    "title": "Submit a Report",
+    "description": "Tell us more about the issue so we can help."
+  },
+  "fieldLabels": {
+    "category": "COMPLAINT CATEGORY",
+    "title": "TITLE",
+    "description": "DESCRIPTION",
+    "location": "LOCATION",
+    "priority": "PRIORITY SELECTION",
+    "attachments": "ATTACHMENTS"
+  },
+  "placeholders": {
+    "category": "Select a category",
+    "title": "e.g., Leaking pipe in hallway",
+    "description": "Please provide as much detail as possible...",
+    "location": "e.g., Block B, Level 4"
+  },
+  "categories": [
+    { "id": "maintenance", "label": "Maintenance" },
+    { "id": "cleanliness", "label": "Cleanliness" },
+    { "id": "security", "label": "Security" },
+    { "id": "billing", "label": "Billing" }
+  ],
+  "priorities": [
+    { "id": "low", "label": "Low" },
+    { "id": "medium", "label": "Medium" },
+    { "id": "high", "label": "High" }
+  ],
+  "uploadCard": {
+    "title": "ATTACHMENTS",
+    "description": "Upload Photos or Videos",
+    "helperText": "Drag and drop or click to browse",
+    "buttonLabel": "BROWSE FILES"
+  },
+  "cta": {
+    "submitLabel": "Submit Report"
+  },
+  "messages": {
+    "loading": "Loading complaint form...",
+    "errorTitle": "Complaint form unavailable",
+    "errorDescription": "The complaint mock request failed. Replace the service when the real complaint API is ready.",
+    "successDescription": "Your complaint has been submitted to the building operations team."
+  }
+}

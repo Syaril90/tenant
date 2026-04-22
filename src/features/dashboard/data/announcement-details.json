@@ -1,0 +1,109 @@
+{
+  "header": {
+    "eyebrow": "ANNOUNCEMENT DETAILS",
+    "title": "Community Notices",
+    "description": "Review the latest resident updates, operational changes, and any action required from your unit."
+  },
+  "labels": {
+    "category": "Category",
+    "publishedAt": "Published",
+    "affectedArea": "Affected Area",
+    "schedule": "Schedule",
+    "contact": "Contact",
+    "attachmentsTitle": "Attachments",
+    "primaryCtaLabel": "Contact Management",
+    "secondaryCtaLabel": "Back to Home"
+  },
+  "items": [
+    {
+      "id": "water-main-repair",
+      "badge": "URGENT MAINTENANCE",
+      "badgeTone": "danger",
+      "title": "Emergency Water Main Repair",
+      "description": "Notice of immediate water service disruption affecting North Wing residents due to a critical main break.",
+      "icon": "construct-outline",
+      "accentColor": "#E77A34",
+      "publishedAt": "Oct 24, 2023 • 09:15 AM",
+      "affectedArea": "Blocks A, B, and C (North Wing)",
+      "schedule": "Estimated completion by 4:00 PM today",
+      "contact": "Management Office • 24/7 line",
+      "summaryTitle": "The Situation",
+      "summaryParagraphs": [
+        "At approximately 8:45 AM today, site security identified a significant leak near the North Entryway Gate. Engineering teams have confirmed a primary water main rupture. To facilitate emergency repairs, water service has been temporarily suspended for the following blocks:"
+      ],
+      "highlightedAreaTitle": "Affected Areas",
+      "highlightedAreaItems": [
+        "Blocks A, B, and C (North Wing)",
+        "Central Clubhouse & Fitness Center",
+        "North Entryway Hydrants"
+      ],
+      "timelineTitle": "Resolution Timeline",
+      "timelineParagraphs": [
+        "Our technicians are currently on-site excavating the affected section. We estimate repairs will be completed by 4:00 PM today, October 24th. Please note that when service is restored, you may experience temporary air in the pipes or slight discoloration. We recommend running your cold water taps for 2 minutes once service returns."
+      ],
+      "etaLabel": "Estimated Time",
+      "etaValue": "6.5 Hours remaining",
+      "teamLabel": "Team Assigned",
+      "teamValue": "Precision Plumbing Co.",
+      "attachments": [
+        {
+          "id": "official-notice",
+          "title": "Official_Notice_WM04.pdf",
+          "meta": "2.4 MB • PDF Document",
+          "type": "pdf"
+        },
+        {
+          "id": "affected-zone-map",
+          "title": "Affected_Zone_Map.jpg",
+          "meta": "1.1 MB • Image",
+          "type": "image"
+        }
+      ],
+      "supportTitle": "Still have questions?",
+      "supportDescription": "Our management team is available 24/7 to assist with any concerns regarding this outage.",
+      "imageUri": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "elevator-modernization",
+      "badge": "COMMUNITY UPDATE",
+      "badgeTone": "brand",
+      "title": "Elevator Modernization",
+      "description": "Service improvements are starting next week to upgrade the South Wing lifts with smarter controls and faster response times.",
+      "icon": "business-outline",
+      "accentColor": "#50636F",
+      "publishedAt": "Oct 20, 2023 • 04:30 PM",
+      "affectedArea": "South Wing Lift Lobby",
+      "schedule": "Works scheduled from Oct 28 to Nov 12",
+      "contact": "Building Management Desk",
+      "summaryTitle": "The Situation",
+      "summaryParagraphs": [
+        "The South Wing modernization project will upgrade control systems, cabin interiors, and safety communications. Lift operations will continue in phases so residents maintain access throughout the work period."
+      ],
+      "highlightedAreaTitle": "Impacted Zones",
+      "highlightedAreaItems": [
+        "South Wing passenger lifts",
+        "Level G and Podium transfer lobby",
+        "Move-in and vendor access scheduling"
+      ],
+      "timelineTitle": "Resolution Timeline",
+      "timelineParagraphs": [
+        "Contractors will rotate one lift offline at a time to minimize disruption. Peak-hour wait times may increase, especially between 7:00 AM to 9:00 AM and 5:30 PM to 8:00 PM. Signage and temporary queue markers will be installed during each phase."
+      ],
+      "etaLabel": "Project Duration",
+      "etaValue": "15 Days scheduled",
+      "teamLabel": "Team Assigned",
+      "teamValue": "Vertical Transit Systems",
+      "attachments": [
+        {
+          "id": "upgrade-schedule",
+          "title": "Lift_Upgrade_Schedule.pdf",
+          "meta": "1.8 MB • PDF Document",
+          "type": "pdf"
+        }
+      ],
+      "supportTitle": "Need access coordination?",
+      "supportDescription": "Contact the concierge if you need lift reservations for movers, deliveries, or assisted resident access.",
+      "imageUri": "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80"
+    }
+  ]
+}

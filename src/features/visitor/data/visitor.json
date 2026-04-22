@@ -1,0 +1,72 @@
+{
+  "header": {
+    "eyebrow": "VISITOR ACCESS",
+    "title": "Register Your Guest",
+    "description": "Create visitor passes, review expected arrivals, and track recent entry activity for your unit."
+  },
+  "summary": {
+    "badge": "2 EXPECTED TODAY",
+    "title": "Visitor access is active for Unit 402.",
+    "description": "Security will validate registered guests at the main gate before allowing entry."
+  },
+  "form": {
+    "title": "New Visitor",
+    "fields": {
+      "nameLabel": "VISITOR NAME",
+      "purposeLabel": "PURPOSE",
+      "dateLabel": "VISIT DATE",
+      "vehicleLabel": "VEHICLE NUMBER",
+      "namePlaceholder": "e.g. Sarah Lim",
+      "purposePlaceholder": "e.g. Family visit",
+      "datePlaceholder": "Select visit date",
+      "vehiclePlaceholder": "e.g. WXY 2041",
+      "datePickerTitle": "Select a visit date",
+      "datePickerCancelLabel": "Cancel"
+    },
+    "submitLabel": "Register Visitor"
+  },
+  "sections": {
+    "upcomingLabel": "UPCOMING VISITS",
+    "historyLabel": "RECENT ACTIVITY",
+    "generatePassLabel": "Generate Pass"
+  },
+  "upcomingVisitors": [
+    {
+      "id": "visitor-sarah-lim",
+      "name": "Sarah Lim",
+      "purpose": "Family visit",
+      "dateLabel": "Today • 7:30 PM",
+      "vehicleLabel": "WXY 2041",
+      "statusLabel": "Approved"
+    },
+    {
+      "id": "visitor-adam-lee",
+      "name": "Adam Lee",
+      "purpose": "Delivery handover",
+      "dateLabel": "Today • 9:00 PM",
+      "vehicleLabel": "No vehicle",
+      "statusLabel": "Pending arrival"
+    }
+  ],
+  "recentActivity": [
+    {
+      "id": "activity-kenny-tan",
+      "title": "Kenny Tan checked in",
+      "description": "Security granted access for a maintenance appointment.",
+      "timestampLabel": "Yesterday • 11:15 AM"
+    },
+    {
+      "id": "activity-priya-nair",
+      "title": "Priya Nair pass expired",
+      "description": "Visitor pass closed automatically after exit confirmation.",
+      "timestampLabel": "Yesterday • 5:42 PM"
+    }
+  ],
+  "messages": {
+    "loading": "Loading visitor access...",
+    "errorTitle": "Visitor access unavailable",
+    "errorDescription": "The visitor mock request failed. Replace the service when the real visitor API is ready.",
+    "successPrefix": "Registered",
+    "successSuffix": "for your visitor list."
+  }
+}

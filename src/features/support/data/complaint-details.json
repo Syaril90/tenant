@@ -1,0 +1,150 @@
+{
+  "labels": {
+    "loading": "Loading complaint details...",
+    "errorTitle": "Complaint details unavailable",
+    "errorDescription": "The complaint detail mock request failed. Replace the service when the live endpoint is ready.",
+    "notFoundTitle": "Complaint not found",
+    "notFoundDescription": "The selected complaint does not exist in the current mock dataset.",
+    "backToSupportLabel": "Back to support"
+  },
+  "items": [
+    {
+      "id": "water-leak-lobby",
+      "eyebrow": "SUPPORT / TICKET #492-B8",
+      "title": "Water Seepage in Master Bathroom",
+      "category": "Maintenance",
+      "statusLabel": "In Progress",
+      "statusTone": "warning",
+      "reference": "CMP-240381",
+      "location": "Master Bathroom",
+      "submittedAt": "June 14, 2024 · 11:20 PM",
+      "updatedAt": "Today, 10:45 AM",
+      "priorityLabel": "High Priority",
+      "assignedTeam": "Building Engineering",
+      "reportDateLabel": "Reported June 14, 2024",
+      "primaryActionLabel": "Edit Report",
+      "secondaryActionLabel": "Download PDF",
+      "summaryTitle": "Detailed Description",
+      "summaryBody": "I noticed a significant damp patch appearing on the ceiling of the master bathroom directly below the HVAC unit. The moisture seems to be spreading toward the vanity area. It was first observed after the heavy rainfall last Tuesday evening. There is no active dripping yet, but the drywall feels soft to the touch and there is a faint musty odor beginning to develop.",
+      "previews": [
+        {
+          "id": "ceiling",
+          "imageUrl": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=400&q=80"
+        },
+        {
+          "id": "hvac",
+          "imageUrl": "https://images.unsplash.com/photo-1631545806526-39d49d336f06?auto=format&fit=crop&w=400&q=80"
+        }
+      ],
+      "addMoreLabel": "ADD MORE",
+      "timelineTitle": "STATUS TIMELINE",
+      "timeline": [
+        {
+          "id": "resolved",
+          "title": "Resolved",
+          "description": "Issue has been fully repaired and closed.",
+          "timestamp": ""
+        },
+        {
+          "id": "in-progress",
+          "title": "In Progress",
+          "description": "Technician Mark S. has been dispatched to assess the HVAC drainage system. Expected arrival within 2 hours.",
+          "timestamp": "Today, 10:45 AM",
+          "isCurrent": true
+        },
+        {
+          "id": "submitted",
+          "title": "Submitted",
+          "description": "Report received by management system.",
+          "timestamp": "June 14, 2024 · 11:20 PM"
+        }
+      ],
+      "attachmentsTitle": "ATTACHMENTS",
+      "attachments": [
+        {
+          "id": "doc-1",
+          "title": "Lease_Addendum_C.pdf",
+          "meta": "1.2 MB",
+          "type": "document"
+        },
+        {
+          "id": "image-1",
+          "title": "HVAC_Log_May.jpg",
+          "meta": "450 KB",
+          "type": "image"
+        }
+      ],
+      "conciergeTitle": "CONCIERGE NOTES",
+      "conciergeMessage": "We have alerted the building engineering team. Since this is in the master bathroom, we have prioritized this as an emergency repair. Please ensure the area remains clear for the technicians.",
+      "conciergeManagerName": "Sarah Miller",
+      "conciergeManagerRole": "Senior Property Manager",
+      "helpTitle": "NEED HELP ?",
+      "helpBody": "If this issue becomes urgent or water begins to leak actively, please call our 24/7 emergency line immediately.",
+      "helpActionLabel": "Emergency Support"
+    },
+    {
+      "id": "parking-bay-lighting",
+      "eyebrow": "SUPPORT / TICKET #377-C1",
+      "title": "Parking bay lighting outage",
+      "category": "Electrical",
+      "statusLabel": "Resolved",
+      "statusTone": "success",
+      "reference": "CMP-238914",
+      "location": "Basement 2, Bay C12 to C18",
+      "submittedAt": "Apr 19, 2026 • 7:48 PM",
+      "updatedAt": "Apr 21, 2026 • 3:15 PM",
+      "priorityLabel": "Medium",
+      "assignedTeam": "Electrical Services",
+      "reportDateLabel": "Reported Apr 19, 2026",
+      "primaryActionLabel": "Edit Report",
+      "secondaryActionLabel": "Download PDF",
+      "summaryTitle": "Issue summary",
+      "summaryBody": "Multiple residents reported dim or non-functioning lights across the parking row, reducing visibility during evening access.",
+      "previews": [
+        {
+          "id": "preview-1",
+          "imageUrl": "https://images.unsplash.com/photo-1519583272095-6433daf26b6e?auto=format&fit=crop&w=400&q=80"
+        }
+      ],
+      "addMoreLabel": "ADD MORE",
+      "timelineTitle": "STATUS TIMELINE",
+      "timeline": [
+        {
+          "id": "submitted",
+          "title": "Complaint submitted",
+          "description": "Your case was logged for the facilities team.",
+          "timestamp": "Apr 19, 2026 • 7:48 PM"
+        },
+        {
+          "id": "inspection",
+          "title": "Electrical inspection completed",
+          "description": "The team identified ballast failures affecting several fixtures.",
+          "timestamp": "Apr 20, 2026 • 10:10 AM"
+        },
+        {
+          "id": "resolved",
+          "title": "Case resolved",
+          "description": "Repairs were completed and the affected row was restored to full brightness.",
+          "timestamp": "Apr 21, 2026 • 3:15 PM",
+          "isCurrent": true
+        }
+      ],
+      "attachmentsTitle": "ATTACHMENTS",
+      "attachments": [
+        {
+          "id": "doc-1",
+          "title": "electrical-service-note.pdf",
+          "meta": "Document • 684 KB",
+          "type": "document"
+        }
+      ],
+      "conciergeTitle": "CONCIERGE NOTES",
+      "conciergeMessage": "The lighting contractor confirmed the damaged ballast units were replaced and the row tested normally before reopening the area to residents.",
+      "conciergeManagerName": "Daniel Wong",
+      "conciergeManagerRole": "Facilities Supervisor",
+      "helpTitle": "NEED HELP ?",
+      "helpBody": "If lighting fails again in a high-traffic area, please contact concierge so we can dispatch the on-duty team immediately.",
+      "helpActionLabel": "Emergency Support"
+    }
+  ]
+}

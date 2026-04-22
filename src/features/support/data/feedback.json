@@ -1,0 +1,47 @@
+{
+  "header": {
+    "eyebrow": "RESIDENT RELATIONS",
+    "titleLines": ["Share Your", "Voice."],
+    "description": "Your insights help us refine the sanctuary experience. Tell us what is on your mind. We are listening."
+  },
+  "typeSection": {
+    "title": "WHAT KIND OF FEEDBACK IS THIS?",
+    "options": [
+      { "id": "suggestion", "label": "Suggestion" },
+      { "id": "general", "label": "General" },
+      { "id": "complaint", "label": "Complaint" },
+      { "id": "praise", "label": "Praise" }
+    ]
+  },
+  "ratingSection": {
+    "title": "HOW WOULD YOU RATE YOUR RECENT EXPERIENCE?",
+    "options": [
+      { "id": "poor", "label": "Poor", "icon": "sad-outline" },
+      { "id": "fair", "label": "Fair", "icon": "remove-circle-outline" },
+      { "id": "good", "label": "Good", "icon": "happy-outline" },
+      { "id": "great", "label": "Great", "icon": "happy" },
+      { "id": "excellent", "label": "Elite", "icon": "sparkles-outline" }
+    ]
+  },
+  "detailsSection": {
+    "title": "THE DETAILS",
+    "placeholder": "Tell us more about your experience...",
+    "characterLimit": 500
+  },
+  "uploadSection": {
+    "title": "SUPPORTING FILES",
+    "description": "Drop photos or documents here to clarify your point.",
+    "buttonLabel": "BROWSE FILES"
+  },
+  "cta": {
+    "submitLabel": "Submit Feedback",
+    "helperText": "Your feedback is handled with care. A Resident Experience Manager will review this within 24 hours."
+  },
+  "messages": {
+    "loading": "Loading feedback...",
+    "errorTitle": "Feedback unavailable",
+    "errorDescription": "The feedback mock request failed. Replace the service when the real feedback API is ready.",
+    "successTitle": "Feedback sent",
+    "successDescription": "Your response has been recorded for the resident experience team."
+  }
+}

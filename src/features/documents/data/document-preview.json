@@ -1,0 +1,17 @@
+{
+  "header": {
+    "eyebrow": "IN-APP VIEW",
+    "title": "Document Preview",
+    "description": "Preview a lightweight in-app representation before downloading the original file."
+  },
+  "labels": {
+    "fileType": "FILE TYPE",
+    "fileSize": "SIZE",
+    "fileCategory": "CATEGORY",
+    "fileUpdatedAt": "UPDATED",
+    "fileSummary": "SUMMARY",
+    "primaryCtaLabel": "Download File",
+    "secondaryCtaLabel": "Back To Files"
+  }
+}
+

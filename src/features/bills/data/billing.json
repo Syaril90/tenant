@@ -1,0 +1,119 @@
+{
+  "header": {
+    "eyebrow": "PAYMENTS",
+    "title": "Settle Your Balance",
+    "description": "Review open charges, choose a payment method, and complete the transaction flow."
+  },
+  "summary": {
+    "badge": "TOTAL OUTSTANDING",
+    "amountDue": "$1,248.50",
+    "highlightLabel": "2 Overdue Bills",
+    "primaryActionLabel": "Pay All Now",
+    "dueDateLabel": "Due on 28 May 2026",
+    "description": "Your maintenance charges and sinking fund fees are ready for payment."
+  },
+  "invoices": [
+    {
+      "id": "invoice-maintenance-may",
+      "title": "Electricity Bill",
+      "periodLabel": "October 2023",
+      "invoiceLabel": "Inv-8842",
+      "dueLabel": "Due Oct 15",
+      "amount": 245,
+      "displayAmount": "$245.00",
+      "statusLabel": "OVERDUE",
+      "statusTone": "danger",
+      "icon": "flash-outline",
+      "selectedByDefault": true
+    },
+    {
+      "id": "invoice-sinking-may",
+      "title": "Water & Sewage",
+      "periodLabel": "September 2023",
+      "invoiceLabel": "Inv-7721",
+      "dueLabel": "Due Sep 28",
+      "amount": 82.3,
+      "displayAmount": "$82.30",
+      "statusLabel": "OVERDUE",
+      "statusTone": "danger",
+      "icon": "water-outline",
+      "selectedByDefault": true
+    },
+    {
+      "id": "invoice-water-adjustment",
+      "title": "Maintenance Fee",
+      "periodLabel": "November 2023",
+      "invoiceLabel": "Inv-9901",
+      "dueLabel": "Due Nov 30",
+      "amount": 921.2,
+      "displayAmount": "$921.20",
+      "statusLabel": "UNPAID",
+      "statusTone": "neutral",
+      "icon": "briefcase-outline",
+      "selectedByDefault": true
+    }
+  ],
+  "paymentMethods": [
+    {
+      "id": "card-ending-1842",
+      "typeLabel": "Visa ending 1842",
+      "metaLabel": "Default card",
+      "selectedByDefault": true
+    },
+    {
+      "id": "fpx-cimb",
+      "typeLabel": "FPX via CIMB",
+      "metaLabel": "Instant online banking",
+      "selectedByDefault": false
+    },
+    {
+      "id": "duitnow-qr",
+      "typeLabel": "DuitNow QR",
+      "metaLabel": "Mobile banking payment",
+      "selectedByDefault": false
+    }
+  ],
+  "summaryBreakdown": {
+    "subtotalLabel": "Selected charges",
+    "feeLabel": "Processing fee",
+    "feeAmount": 0,
+    "feeDisplayAmount": "$0.00",
+    "totalLabel": "Amount to pay"
+  },
+  "labels": {
+    "openCharges": "OPEN CHARGES",
+    "paymentMethod": "PAYMENT METHOD",
+    "paymentSummary": "PAYMENT SUMMARY",
+    "recentPayments": "RECENT PAYMENTS",
+    "activeInvoicesTitle": "Active Invoices",
+    "recentActivityTitle": "Recent Activity",
+    "outstandingTabLabel": "Outstanding",
+    "paidTabLabel": "Paid",
+    "paymentHistoryActionLabel": "Payment history",
+    "mockPaymentTitle": "Mock Payment Completed",
+    "allPaidBadge": "ALL PAID",
+    "allPaidDueDateLabel": "No outstanding charges",
+    "emptyChargesTitle": "No open charges",
+    "emptyChargesDescription": "Your account is settled. New charges will appear here when billed."
+  },
+  "cta": {
+    "primaryLabel": "Pay Now",
+    "secondaryLabel": "View Statement"
+  },
+  "recentPayments": [
+    {
+      "id": "payment-apr-2026",
+      "title": "Rent - October",
+      "dateLabel": "Oct 01, 2023",
+      "amountDisplay": "$3,200.00",
+      "statusLabel": "SUCCESS"
+    },
+    {
+      "id": "payment-mar-2026",
+      "title": "Parking Fee",
+      "dateLabel": "Sep 25, 2023",
+      "amountDisplay": "$150.00",
+      "statusLabel": "SUCCESS"
+    }
+  ]
+}

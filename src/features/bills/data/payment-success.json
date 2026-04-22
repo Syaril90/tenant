@@ -1,0 +1,19 @@
+{
+  "header": {
+    "eyebrow": "PAYMENT COMPLETE",
+    "title": "Payment Successful",
+    "description": "Your mock gateway flow completed successfully. Replace this handoff with the real payment callback later."
+  },
+  "labels": {
+    "status": "STATUS",
+    "transactionId": "TRANSACTION ID",
+    "paidAt": "PAID AT",
+    "paymentMethod": "PAYMENT METHOD",
+    "amount": "AMOUNT",
+    "summaryTitle": "Transaction Summary",
+    "primaryCtaLabel": "Back To Bills",
+    "secondaryCtaLabel": "Go To Home",
+    "receiptCtaLabel": "View Receipt"
+  }
+}
+

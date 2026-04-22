@@ -1,0 +1,19 @@
+{
+  "header": {
+    "eyebrow": "VISITOR PASS",
+    "title": "Access Pass Ready",
+    "description": "Show this QR code at the main gate. Security will validate the guest details before entry."
+  },
+  "labels": {
+    "qrTitle": "Gate QR",
+    "visitorName": "VISITOR",
+    "purpose": "PURPOSE",
+    "visitDate": "VISIT DATE",
+    "vehicle": "VEHICLE",
+    "status": "STATUS",
+    "passCode": "PASS CODE",
+    "primaryCtaLabel": "Back To Visitor List",
+    "secondaryCtaLabel": "Create Another Visitor"
+  }
+}
+

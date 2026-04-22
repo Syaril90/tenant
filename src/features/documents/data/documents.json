@@ -1,0 +1,106 @@
+{
+  "header": {
+    "eyebrow": "RESOURCE CENTER",
+    "titleLines": ["Forms and", "Documents"],
+    "description": "Browse building records, meeting logs, circulars, and financial statements in one place."
+  },
+  "searchPlaceholder": "Find a specific file...",
+  "categories": [
+    {
+      "id": "house-rules",
+      "title": "House Rules",
+      "description": "Legal & Community",
+      "icon": "hammer-outline",
+      "featured": true
+    },
+    {
+      "id": "agm-minutes",
+      "title": "AGM Minutes",
+      "description": "Meeting Logs",
+      "icon": "people-outline",
+      "featured": false
+    },
+    {
+      "id": "circulars",
+      "title": "Circulars",
+      "description": "Announcements",
+      "icon": "megaphone-outline",
+      "featured": false
+    },
+    {
+      "id": "financials",
+      "title": "Financials",
+      "description": "Budget & Statements",
+      "icon": "wallet-outline",
+      "featured": false
+    }
+  ],
+  "repository": {
+    "title": "Recently Uploaded",
+    "viewAllLabel": "View All",
+    "tableHeaders": {
+      "fileName": "FILE NAME",
+      "actions": "ACTIONS"
+    }
+  },
+  "documents": [
+    {
+      "id": "renovation-guidelines-2024",
+      "title": "Renovation_Guidelines_2024.pdf",
+      "sizeLabel": "2.4 MB",
+      "description": "Guidelines for unit renovation and contractor access approvals.",
+      "categoryId": "house-rules",
+      "categoryLabel": "House Rules",
+      "fileTypeLabel": "PDF",
+      "tone": "danger",
+      "updatedAtLabel": "Updated 15 May 2026",
+      "previewTitle": "Renovation Guidelines 2024",
+      "previewBody": "This mocked in-app view represents a resident-readable summary of the renovation rules, approved working hours, deposit requirements, and contractor onboarding conditions."
+    },
+    {
+      "id": "agm-minutes-q4-2023",
+      "title": "AGM_Minutes_Q4_2023.docx",
+      "sizeLabel": "856 KB",
+      "description": "Minutes recorded during the fourth quarter annual general meeting.",
+      "categoryId": "agm-minutes",
+      "categoryLabel": "AGM Minutes",
+      "fileTypeLabel": "DOCX",
+      "tone": "info",
+      "updatedAtLabel": "Updated 21 Apr 2026",
+      "previewTitle": "AGM Minutes Q4 2023",
+      "previewBody": "This mocked in-app view summarizes agenda items, voting outcomes, maintenance updates, and community decisions recorded during the AGM."
+    },
+    {
+      "id": "annual-financial-statement",
+      "title": "Annual_Financial_Statement.xlsx",
+      "sizeLabel": "4.1 MB",
+      "description": "Annual summary of account balances, maintenance collections, and expenses.",
+      "categoryId": "financials",
+      "categoryLabel": "Financials",
+      "fileTypeLabel": "XLSX",
+      "tone": "success",
+      "updatedAtLabel": "Updated 09 May 2026",
+      "previewTitle": "Annual Financial Statement",
+      "previewBody": "This mocked in-app view provides a simplified summary of the statement, including maintenance income, sinking fund allocation, and major operating expenses."
+    },
+    {
+      "id": "lift-modernization-circular",
+      "title": "Lift_Modernization_Circular.pdf",
+      "sizeLabel": "1.3 MB",
+      "description": "Announcement for elevator upgrade schedule and expected service impact.",
+      "categoryId": "circulars",
+      "categoryLabel": "Circulars",
+      "fileTypeLabel": "PDF",
+      "tone": "neutral",
+      "updatedAtLabel": "Updated 11 May 2026",
+      "previewTitle": "Lift Modernization Circular",
+      "previewBody": "This mocked in-app view outlines the modernization timeline, affected towers, and alternative access guidance for residents."
+    }
+  ],
+  "helpCard": {
+    "titleLines": ["Can't find what", "you're looking", "for?"],
+    "description": "Official hard copies of old deed records and structural blueprints can still be requested at the Concierge Desk.",
+    "primaryActionLabel": "Request a Document"
+  }
+}
+
