@@ -43,7 +43,7 @@ export function Screen({ children, headerMode = "auto" }: ScreenProps) {
 }
 
 function AppHeader({ mode }: { mode: "main" | "sub" }) {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme, toggleNightMode } = useAppTheme();
   const { signOut, user } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
@@ -102,7 +102,8 @@ function AppHeader({ mode }: { mode: "main" | "sub" }) {
           alignItems: "center",
           justifyContent: "space-between",
           borderBottomWidth: 1,
-          borderBottomColor: "rgba(215,222,231,0.55)"
+          borderBottomColor:
+            colorScheme === "dark" ? "rgba(34,53,78,0.9)" : "rgba(215,222,231,0.55)"
         }}
       >
         <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[4], flex: 1 }}>
@@ -114,9 +115,11 @@ function AppHeader({ mode }: { mode: "main" | "sub" }) {
                 width: 38,
                 height: 38,
                 borderRadius: 19,
-                backgroundColor: "rgba(255,255,255,0.9)",
+                backgroundColor:
+                  colorScheme === "dark" ? theme.semantic.background.muted : "rgba(255,255,255,0.9)",
                 borderWidth: 1,
-                borderColor: "rgba(215,222,231,0.8)",
+                borderColor:
+                  colorScheme === "dark" ? theme.semantic.border.subtle : "rgba(215,222,231,0.8)",
                 alignItems: "center",
                 justifyContent: "center"
               }}
@@ -256,6 +259,53 @@ function AppHeader({ mode }: { mode: "main" | "sub" }) {
                 color={theme.semantic.foreground.brand}
               />
               <ThemedText>{authContent.accountMenu.supportLabel}</ThemedText>
+            </Pressable>
+
+            <Pressable
+              onPress={toggleNightMode}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: theme.spacing[3],
+                paddingVertical: theme.spacing[2]
+              }}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[3] }}>
+                <Ionicons
+                  name={colorScheme === "dark" ? "moon-outline" : "sunny-outline"}
+                  size={18}
+                  color={theme.semantic.foreground.brand}
+                />
+                <ThemedText>{authContent.accountMenu.nightModeLabel}</ThemedText>
+              </View>
+
+              <View
+                style={{
+                  width: 44,
+                  height: 26,
+                  borderRadius: 13,
+                  backgroundColor:
+                    colorScheme === "dark"
+                      ? theme.semantic.foreground.brand
+                      : theme.semantic.background.muted,
+                  padding: 3,
+                  justifyContent: "center"
+                }}
+              >
+                <View
+                  style={{
+                    width: 20,
+                    height: 20,
+                    borderRadius: 10,
+                    backgroundColor:
+                      colorScheme === "dark"
+                        ? theme.semantic.foreground.inverse
+                        : theme.semantic.background.surface,
+                    alignSelf: colorScheme === "dark" ? "flex-end" : "flex-start"
+                  }}
+                />
+              </View>
             </Pressable>
 
             <Pressable

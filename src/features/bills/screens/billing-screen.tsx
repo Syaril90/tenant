@@ -23,7 +23,7 @@ function formatCurrency(amount: number) {
 }
 
 export function BillingScreen() {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
   const billingQuery = useBillingQuery();
   const submitPaymentMutation = useSubmitPaymentMutation();
 
@@ -309,7 +309,7 @@ export function BillingScreen() {
 }
 
 function PaidActivitySection() {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
   const billingQuery = useBillingQuery();
   const data = billingQuery.data;
 
@@ -341,7 +341,8 @@ function PaidActivitySection() {
                       width: 38,
                       height: 38,
                       borderRadius: 19,
-                      backgroundColor: "#DDF7EC",
+                      backgroundColor:
+                        colorScheme === "dark" ? "#143126" : "#DDF7EC",
                       alignItems: "center",
                       justifyContent: "center"
                     }}
@@ -361,7 +362,8 @@ function PaidActivitySection() {
                       <View
                         style={{
                           alignSelf: "flex-start",
-                          backgroundColor: "#ECF9F1",
+                          backgroundColor:
+                            colorScheme === "dark" ? "#143126" : "#ECF9F1",
                           borderRadius: theme.radius.pill,
                           paddingHorizontal: theme.spacing[2],
                           paddingVertical: 2
@@ -440,13 +442,27 @@ function InvoiceCard({
   loading: boolean;
   onPay: () => void;
 }) {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
   const statusBackground =
-    invoice.statusTone === "danger" ? "#CC1F1A" : "#D8E1EA";
+    invoice.statusTone === "danger"
+      ? colorScheme === "dark"
+        ? "#5B2624"
+        : "#CC1F1A"
+      : colorScheme === "dark"
+        ? theme.semantic.background.muted
+        : "#D8E1EA";
   const statusTextColor =
-    invoice.statusTone === "danger" ? theme.semantic.foreground.inverse : "#5C7385";
+    invoice.statusTone === "danger"
+      ? theme.semantic.foreground.inverse
+      : colorScheme === "dark"
+        ? theme.semantic.foreground.secondary
+        : "#5C7385";
   const buttonBackground =
-    invoice.statusTone === "danger" ? theme.semantic.foreground.brand : "#D8E1EA";
+    invoice.statusTone === "danger"
+      ? theme.semantic.foreground.brand
+      : colorScheme === "dark"
+        ? theme.semantic.background.muted
+        : "#D8E1EA";
   const buttonTextColor =
     invoice.statusTone === "danger" ? theme.semantic.foreground.inverse : theme.semantic.foreground.primary;
 
@@ -459,12 +475,27 @@ function InvoiceCard({
               width: 42,
               height: 42,
               borderRadius: theme.radius.md,
-              backgroundColor: "#F9EDEC",
+              backgroundColor:
+                invoice.statusTone === "danger"
+                  ? colorScheme === "dark"
+                    ? "#3A2323"
+                    : "#F9EDEC"
+                  : theme.semantic.background.accent,
               alignItems: "center",
               justifyContent: "center"
             }}
           >
-            <Ionicons name={invoice.icon as IoniconName} size={20} color="#D7261E" />
+            <Ionicons
+              name={invoice.icon as IoniconName}
+              size={20}
+              color={
+                invoice.statusTone === "danger"
+                  ? colorScheme === "dark"
+                    ? theme.semantic.status.danger
+                    : "#D7261E"
+                  : theme.semantic.foreground.brand
+              }
+            />
           </View>
 
           <View style={{ gap: 2, flex: 1 }}>

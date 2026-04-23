@@ -169,7 +169,7 @@ export const darkTheme = {
       primary: "#F7FAFD",
       secondary: "#C9D4E0",
       tertiary: "#9AABBD",
-      inverse: primitives.color.ink900,
+      inverse: "#F7FAFD",
       brand: "#9CC3FF"
     },
     border: {

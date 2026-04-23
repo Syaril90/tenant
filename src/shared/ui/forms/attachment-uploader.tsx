@@ -28,7 +28,7 @@ export function AttachmentUploader({
   onBrowse,
   onRemoveAttachment
 }: AttachmentUploaderProps) {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
 
   return (
     <FormField label={label}>
@@ -78,7 +78,8 @@ export function AttachmentUploader({
           <Pressable
             onPress={onBrowse}
             style={{
-              backgroundColor: "#DDE7FF",
+              backgroundColor:
+                colorScheme === "dark" ? theme.semantic.background.accent : "#DDE7FF",
               borderRadius: theme.radius.pill,
               paddingHorizontal: theme.spacing[5],
               paddingVertical: theme.spacing[3]

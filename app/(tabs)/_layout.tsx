@@ -6,7 +6,7 @@ import { tabs } from "@/shared/constants/routes";
 import { useAppTheme } from "@/shared/theme/theme-provider";
 
 export default function TabsLayout() {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
 
   return (
     <Tabs
@@ -41,11 +41,13 @@ export default function TabsLayout() {
               flex: 1,
               borderTopLeftRadius: 28,
               borderTopRightRadius: 28,
-              backgroundColor: "rgba(255,255,255,0.96)",
+              backgroundColor:
+                colorScheme === "dark" ? "rgba(16,27,43,0.97)" : "rgba(255,255,255,0.96)",
               borderTopWidth: 1,
               borderLeftWidth: 1,
               borderRightWidth: 1,
-              borderColor: "rgba(215,222,231,0.95)",
+              borderColor:
+                colorScheme === "dark" ? "rgba(34,53,78,0.95)" : "rgba(215,222,231,0.95)",
               shadowColor: theme.shadow.floating.shadowColor,
               shadowOpacity: 0.12,
               shadowRadius: 18,
@@ -84,15 +86,25 @@ export default function TabsLayout() {
               <View
                 style={{
                   minWidth: focused ? 46 : 40,
-                  height: focused ? 32 : 28,
-                  borderRadius: 16,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: focused ? "rgba(13,71,161,0.12)" : "transparent",
-                  borderWidth: focused ? 1 : 0,
-                  borderColor: focused ? "rgba(13,71,161,0.08)" : "transparent"
-                }}
-              >
+                height: focused ? 32 : 28,
+                borderRadius: 16,
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor:
+                  focused
+                    ? colorScheme === "dark"
+                      ? "rgba(156,195,255,0.18)"
+                      : "rgba(13,71,161,0.12)"
+                    : "transparent",
+                borderWidth: focused ? 1 : 0,
+                borderColor:
+                  focused
+                    ? colorScheme === "dark"
+                      ? "rgba(156,195,255,0.12)"
+                      : "rgba(13,71,161,0.08)"
+                    : "transparent"
+              }}
+            >
                 <Ionicons name={tab.icon} color={color} size={Math.min(size, focused ? 19 : 18)} />
               </View>
             )

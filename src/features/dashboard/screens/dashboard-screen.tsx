@@ -13,7 +13,7 @@ import { useAppTheme } from "@/shared/theme/theme-provider";
 import { ThemedText } from "@/shared/ui/primitives/themed-text";
 
 export function DashboardScreen() {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
   const dashboardQuery = useDashboardQuery();
   const { user } = useAuth();
 
@@ -53,7 +53,8 @@ export function DashboardScreen() {
             <View
               style={{
                 alignSelf: "flex-start",
-                backgroundColor: "#EAF2FF",
+                backgroundColor:
+                  colorScheme === "dark" ? theme.semantic.background.accent : "#EAF2FF",
                 borderRadius: theme.radius.pill,
                 paddingHorizontal: theme.spacing[4],
                 paddingVertical: theme.spacing[2]

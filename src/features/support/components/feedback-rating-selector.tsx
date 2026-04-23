@@ -17,7 +17,7 @@ export function FeedbackRatingSelector({
   selectedId,
   onSelect
 }: FeedbackRatingSelectorProps) {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
 
   return (
     <SurfaceCard muted elevated={false} style={{ gap: theme.spacing[4] }}>
@@ -57,7 +57,11 @@ export function FeedbackRatingSelector({
                   color={selected ? theme.semantic.foreground.inverse : theme.semantic.foreground.tertiary}
                 />
               </View>
-              <ThemedText variant="label" size="sm" color={selected ? "brand" : "tertiary"}>
+              <ThemedText
+                variant="label"
+                size="sm"
+                color={selected ? "brand" : colorScheme === "dark" ? "secondary" : "tertiary"}
+              >
                 {option.label}
               </ThemedText>
             </Pressable>

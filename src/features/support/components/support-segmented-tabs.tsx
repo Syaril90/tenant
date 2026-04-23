@@ -19,13 +19,13 @@ export function SupportSegmentedTabs({
   activeTabId,
   onChange
 }: SupportSegmentedTabsProps) {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
 
   return (
     <View
       style={{
         flexDirection: "row",
-        backgroundColor: "#F2F5F9",
+        backgroundColor: theme.semantic.background.muted,
         borderRadius: theme.radius.md,
         padding: 4,
         gap: 4
@@ -48,7 +48,13 @@ export function SupportSegmentedTabs({
             }}
           >
             <ThemedText
-              style={{ color: active ? theme.semantic.foreground.brand : "#8A98A8" }}
+              style={{
+                color: active
+                  ? theme.semantic.foreground.brand
+                  : colorScheme === "dark"
+                    ? theme.semantic.foreground.tertiary
+                    : "#8A98A8"
+              }}
             >
               {tab.label}
             </ThemedText>

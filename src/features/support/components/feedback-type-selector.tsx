@@ -16,7 +16,7 @@ export function FeedbackTypeSelector({
   selectedId,
   onSelect
 }: FeedbackTypeSelectorProps) {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
 
   return (
     <SurfaceCard muted elevated={false} style={{ gap: theme.spacing[4] }}>
@@ -36,10 +36,16 @@ export function FeedbackTypeSelector({
                 minWidth: "31%",
                 backgroundColor: selected
                   ? theme.semantic.background.surface
-                  : "#DDE4ED",
+                  : colorScheme === "dark"
+                    ? theme.semantic.background.surface
+                    : "#DDE4ED",
                 borderRadius: theme.radius.sm,
-                borderWidth: selected ? 1 : 0,
-                borderColor: selected ? theme.semantic.foreground.brand : "transparent",
+                borderWidth: 1,
+                borderColor: selected
+                  ? theme.semantic.foreground.brand
+                  : colorScheme === "dark"
+                    ? theme.semantic.border.subtle
+                    : "transparent",
                 paddingHorizontal: theme.spacing[4],
                 paddingVertical: theme.spacing[3],
                 alignItems: "center"
@@ -48,7 +54,7 @@ export function FeedbackTypeSelector({
               <ThemedText
                 variant="label"
                 size="sm"
-                color={selected ? "brand" : "secondary"}
+                color={selected ? "brand" : colorScheme === "dark" ? "primary" : "secondary"}
               >
                 {option.label}
               </ThemedText>

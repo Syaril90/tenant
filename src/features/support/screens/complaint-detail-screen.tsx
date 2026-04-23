@@ -20,18 +20,6 @@ type ComplaintDetailRouteParams = {
   complaintId?: string;
 };
 
-const statusStyles: Record<
-  ComplaintDetailStatusTone,
-  {
-    backgroundColor: string;
-    color: string;
-  }
-> = {
-  warning: { backgroundColor: "#FFE4DE", color: "#C94E2F" },
-  success: { backgroundColor: "#ECF9F1", color: "#1B7A46" },
-  neutral: { backgroundColor: "#EDF2F7", color: "#51606D" }
-};
-
 const attachmentIcons: Record<ComplaintDetailAttachment["type"], IoniconName> = {
   image: "image-outline",
   video: "videocam-outline",
@@ -39,7 +27,7 @@ const attachmentIcons: Record<ComplaintDetailAttachment["type"], IoniconName> = 
 };
 
 export function ComplaintDetailScreen() {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
   const params = useLocalSearchParams<ComplaintDetailRouteParams>();
   const detailQuery = useComplaintDetailQuery();
 
@@ -78,7 +66,18 @@ export function ComplaintDetailScreen() {
     );
   }
 
-  const statusStyle = statusStyles[complaint.statusTone];
+  const statusStyle =
+    colorScheme === "dark"
+      ? {
+          warning: { backgroundColor: "#4A2E21", color: "#F0C674" },
+          success: { backgroundColor: "#173528", color: "#7ED8A7" },
+          neutral: { backgroundColor: "#1A2A3D", color: "#C9D4E0" }
+        }[complaint.statusTone]
+      : {
+          warning: { backgroundColor: "#FFE4DE", color: "#C94E2F" },
+          success: { backgroundColor: "#ECF9F1", color: "#1B7A46" },
+          neutral: { backgroundColor: "#EDF2F7", color: "#51606D" }
+        }[complaint.statusTone];
 
   return (
     <Screen>
@@ -94,7 +93,10 @@ export function ComplaintDetailScreen() {
               paddingHorizontal: theme.spacing[6],
               paddingTop: theme.spacing[5],
               paddingBottom: theme.spacing[6],
-              backgroundColor: "#F3F7FB",
+              backgroundColor:
+                colorScheme === "dark" ? theme.semantic.background.app : "#F3F7FB",
+              borderBottomWidth: colorScheme === "dark" ? 1 : 0,
+              borderColor: colorScheme === "dark" ? theme.semantic.border.soft : "transparent",
               borderBottomLeftRadius: 28,
               borderBottomRightRadius: 28,
               gap: theme.spacing[5]
@@ -120,7 +122,9 @@ export function ComplaintDetailScreen() {
               <View style={{ flexDirection: "row", gap: theme.spacing[2], flexWrap: "wrap" }}>
                 <TagChip
                   label={complaint.category}
-                  backgroundColor="#EEF2F6"
+                  backgroundColor={
+                    colorScheme === "dark" ? theme.semantic.background.muted : "#EEF2F6"
+                  }
                   color={theme.semantic.foreground.tertiary}
                 />
                 <TagChip
@@ -156,7 +160,7 @@ export function ComplaintDetailScreen() {
                   alignItems: "center",
                   justifyContent: "center",
                   backgroundColor: theme.semantic.foreground.brand,
-                  shadowColor: "#003178",
+                  shadowColor: theme.shadow.floating.shadowColor,
                   shadowOpacity: 0.18,
                   shadowRadius: 12,
                   shadowOffset: { width: 0, height: 6 },
@@ -225,7 +229,10 @@ export function ComplaintDetailScreen() {
             style={{
               gap: theme.spacing[5],
               borderRadius: 28,
-              backgroundColor: "#F0F5FB"
+              backgroundColor:
+                colorScheme === "dark" ? theme.semantic.background.app : "#F0F5FB",
+              borderWidth: colorScheme === "dark" ? 1 : 0,
+              borderColor: colorScheme === "dark" ? theme.semantic.border.soft : "transparent"
             }}
           >
             <ThemedText variant="heading" size="lg" color="brand">
@@ -250,7 +257,10 @@ export function ComplaintDetailScreen() {
             style={{
               gap: theme.spacing[4],
               borderRadius: 28,
-              backgroundColor: "#EAF0F7"
+              backgroundColor:
+                colorScheme === "dark" ? theme.semantic.background.app : "#EAF0F7",
+              borderWidth: colorScheme === "dark" ? 1 : 0,
+              borderColor: colorScheme === "dark" ? theme.semantic.border.soft : "transparent"
             }}
           >
             <ThemedText variant="label" size="md" color="brand">
@@ -275,10 +285,25 @@ export function ComplaintDetailScreen() {
               gap: theme.spacing[4]
             }}
           >
-            <ThemedText variant="label" size="md" style={{ color: "rgba(255,255,255,0.72)" }}>
+            <ThemedText
+              variant="label"
+              size="md"
+              style={{
+                color:
+                  colorScheme === "dark"
+                    ? "rgba(247,250,253,0.72)"
+                    : "rgba(255,255,255,0.72)"
+              }}
+            >
               {complaint.conciergeTitle}
             </ThemedText>
-            <ThemedText style={{ color: "#FFFFFF", fontStyle: "italic", lineHeight: 24 }}>
+            <ThemedText
+              style={{
+                color: theme.semantic.foreground.inverse,
+                fontStyle: "italic",
+                lineHeight: 24
+              }}
+            >
               "{complaint.conciergeMessage}"
             </ThemedText>
             <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[3] }}>
@@ -289,7 +314,10 @@ export function ComplaintDetailScreen() {
                   borderRadius: 13,
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "rgba(255,255,255,0.18)"
+                  backgroundColor:
+                    colorScheme === "dark"
+                      ? "rgba(247,250,253,0.14)"
+                      : "rgba(255,255,255,0.18)"
                 }}
               >
                 <ThemedText variant="label" size="sm" color="inverse">
@@ -298,7 +326,14 @@ export function ComplaintDetailScreen() {
               </View>
               <View style={{ gap: 2 }}>
                 <ThemedText color="inverse">{complaint.conciergeManagerName}</ThemedText>
-                <ThemedText style={{ color: "rgba(255,255,255,0.68)" }}>
+                <ThemedText
+                  style={{
+                    color:
+                      colorScheme === "dark"
+                        ? "rgba(247,250,253,0.68)"
+                        : "rgba(255,255,255,0.68)"
+                  }}
+                >
                   {complaint.conciergeManagerRole}
                 </ThemedText>
               </View>
@@ -379,7 +414,7 @@ function TimelineRow({
   timestamp: string;
   isCurrent?: boolean;
 }) {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
 
   if (isCurrent) {
     return (
@@ -423,7 +458,14 @@ function TimelineRow({
   }
 
   return (
-    <View style={{ flexDirection: "row", gap: theme.spacing[4], alignItems: "flex-start", opacity: 0.56 }}>
+    <View
+      style={{
+        flexDirection: "row",
+        gap: theme.spacing[4],
+        alignItems: "flex-start",
+        opacity: colorScheme === "dark" ? 0.78 : 0.56
+      }}
+    >
       <View
         style={{
           width: 26,
@@ -431,7 +473,8 @@ function TimelineRow({
           borderRadius: 13,
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#F8FBFF",
+          backgroundColor:
+            colorScheme === "dark" ? theme.semantic.background.surface : "#F8FBFF",
           borderWidth: 1,
           borderColor: theme.semantic.border.soft,
           marginTop: 4
@@ -456,7 +499,7 @@ function TimelineRow({
 }
 
 function AttachmentRow({ attachment }: { attachment: ComplaintDetailAttachment }) {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
 
   return (
     <View
@@ -477,7 +520,8 @@ function AttachmentRow({ attachment }: { attachment: ComplaintDetailAttachment }
           borderRadius: 10,
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#EEF5FB"
+          backgroundColor:
+            colorScheme === "dark" ? theme.semantic.background.accent : "#EEF5FB"
         }}
       >
         <Ionicons

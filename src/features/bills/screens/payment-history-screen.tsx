@@ -44,7 +44,7 @@ const statusStyles = {
 } as const;
 
 export function PaymentHistoryScreen() {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
   const paymentHistoryQuery = usePaymentHistoryContentQuery();
   const [query, setQuery] = useState("");
   const [activeFilterId, setActiveFilterId] = useState("all");
@@ -158,8 +158,15 @@ function PaymentHistorySummaryCard({
   card: PaymentHistoryContent["summaryCards"][number];
   featured?: boolean;
 }) {
-  const { theme } = useAppTheme();
-  const tone = toneStyles[card.tone];
+  const { colorScheme, theme } = useAppTheme();
+  const tone =
+    colorScheme === "dark"
+      ? {
+          brand: { backgroundColor: "#183252", foregroundColor: "#9CC3FF" },
+          success: { backgroundColor: "#143126", foregroundColor: "#7ED8A7" },
+          neutral: { backgroundColor: "#1A2A3D", foregroundColor: "#C9D4E0" }
+        }[card.tone]
+      : toneStyles[card.tone];
 
   return (
     <SurfaceCard
@@ -218,8 +225,15 @@ function PaymentHistorySummaryCard({
 }
 
 function PaymentHistoryCard({ payment }: { payment: PaymentHistoryItem }) {
-  const { theme } = useAppTheme();
-  const status = statusStyles[payment.statusTone];
+  const { colorScheme, theme } = useAppTheme();
+  const status =
+    colorScheme === "dark"
+      ? {
+          success: { backgroundColor: "#143126", foregroundColor: "#7ED8A7" },
+          warning: { backgroundColor: "#352814", foregroundColor: "#F0C674" },
+          neutral: { backgroundColor: "#1A2A3D", foregroundColor: "#C9D4E0" }
+        }[payment.statusTone]
+      : statusStyles[payment.statusTone];
 
   return (
     <SurfaceCard style={{ gap: theme.spacing[4] }}>
@@ -230,7 +244,8 @@ function PaymentHistoryCard({ payment }: { payment: PaymentHistoryItem }) {
               width: 42,
               height: 42,
               borderRadius: 21,
-              backgroundColor: "#EDF4FF",
+              backgroundColor:
+                colorScheme === "dark" ? theme.semantic.background.accent : "#EDF4FF",
               alignItems: "center",
               justifyContent: "center"
             }}

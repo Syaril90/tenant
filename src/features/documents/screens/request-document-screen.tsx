@@ -19,7 +19,7 @@ import { ThemedText } from "@/shared/ui/primitives/themed-text";
 import requestDocumentJson from "@/features/documents/data/request-document.json";
 
 export function RequestDocumentScreen() {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
   const requestDocumentQuery = useRequestDocumentContentQuery();
   const submitRequestMutation = useSubmitDocumentRequestMutation();
   const fallbackContent = requestDocumentJson as RequestDocumentContent;
@@ -206,9 +206,18 @@ export function RequestDocumentScreen() {
           </SurfaceCard>
 
           {submitted ? (
-            <SurfaceCard style={{ backgroundColor: "#ECF9F1" }}>
+            <SurfaceCard
+              style={{
+                backgroundColor:
+                  colorScheme === "dark" ? theme.semantic.background.muted : "#ECF9F1"
+              }}
+            >
               <View style={{ gap: theme.spacing[2] }}>
-                <ThemedText variant="heading" size="md" style={{ color: "#1B7A46" }}>
+                <ThemedText
+                  variant="heading"
+                  size="md"
+                  style={{ color: theme.semantic.status.success }}
+                >
                   {data.messages.successTitle}
                 </ThemedText>
                 <ThemedText color="secondary">{data.messages.successDescription}</ThemedText>
