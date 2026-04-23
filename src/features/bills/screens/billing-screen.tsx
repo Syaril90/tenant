@@ -138,10 +138,10 @@ export function BillingScreen() {
             style={{
               backgroundColor: theme.semantic.foreground.brand,
               borderRadius: 30,
-              padding: theme.spacing[6],
+              padding: theme.spacing[4],
               borderWidth: 1,
               borderColor: "rgba(255,255,255,0.08)",
-              gap: theme.spacing[5],
+              gap: theme.spacing[3],
               shadowColor: theme.shadow.floating.shadowColor,
               shadowOpacity: 0.12,
               shadowRadius: 14,
@@ -158,29 +158,28 @@ export function BillingScreen() {
               }}
             >
               <View style={{ flex: 1, gap: theme.spacing[3] }}>
-                <View
-                  style={{
-                    alignSelf: "flex-start",
-                    backgroundColor: "rgba(255,255,255,0.14)",
-                    borderRadius: theme.radius.pill,
-                    paddingHorizontal: theme.spacing[4],
-                    paddingVertical: 6
-                  }}
-                >
-                  <ThemedText variant="label" size="sm" color="inverse">
-                    {data.summary.badge}
-                  </ThemedText>
-                </View>
-
                 <View style={{ gap: theme.spacing[2] }}>
-                  <ThemedText variant="heading" size="md" color="inverse">
-                    {data.summary.title}
-                  </ThemedText>
+                  <View
+                    style={{
+                      alignSelf: "flex-start",
+                      backgroundColor: "rgba(255,255,255,0.14)",
+                      borderRadius: theme.radius.pill,
+                      paddingHorizontal: theme.spacing[3],
+                      paddingVertical: 5
+                    }}
+                  >
+                    <ThemedText variant="label" size="sm" color="inverse">
+                      {data.summary.badge}
+                    </ThemedText>
+                  </View>
                   <ThemedText variant="display" size="large" color="inverse">
                     {data.summary.amountDue}
                   </ThemedText>
-                  <ThemedText color="inverse" style={{ opacity: 0.8 }}>
-                    {data.summary.description}
+                  <ThemedText variant="heading" size="md" color="inverse">
+                    {data.summary.title}
+                  </ThemedText>
+                  <ThemedText color="inverse" style={{ opacity: 0.78 }}>
+                    {data.summary.dueDateLabel}
                   </ThemedText>
                 </View>
               </View>
@@ -197,26 +196,10 @@ export function BillingScreen() {
               >
                 <Ionicons
                   name="wallet-outline"
-                  size={22}
+                  size={20}
                   color={theme.semantic.foreground.inverse}
                 />
               </View>
-            </View>
-
-            <View
-              style={{
-                backgroundColor: "rgba(255,255,255,0.1)",
-                borderRadius: 18,
-                paddingHorizontal: theme.spacing[4],
-                paddingVertical: theme.spacing[3],
-                alignItems: "flex-start",
-                gap: theme.spacing[1]
-              }}
-            >
-              <ThemedText variant="label" size="sm" color="inverse" style={{ opacity: 0.72 }}>
-                PAYMENT WINDOW
-              </ThemedText>
-              <ThemedText color="inverse">{data.summary.dueDateLabel}</ThemedText>
             </View>
 
             <View style={{ flexDirection: "row", gap: theme.spacing[3] }}>
@@ -227,8 +210,8 @@ export function BillingScreen() {
                   flex: 1,
                   backgroundColor: theme.semantic.foreground.inverse,
                   borderRadius: 14,
-                  paddingHorizontal: theme.spacing[6],
-                  paddingVertical: theme.spacing[4],
+                  paddingHorizontal: theme.spacing[5],
+                  paddingVertical: 14,
                   alignItems: "center",
                   justifyContent: "center",
                   flexDirection: "row",
@@ -254,8 +237,8 @@ export function BillingScreen() {
                   borderRadius: 14,
                   borderWidth: 1,
                   borderColor: "rgba(255,255,255,0.22)",
-                  paddingHorizontal: theme.spacing[6],
-                  paddingVertical: theme.spacing[4],
+                  paddingHorizontal: theme.spacing[5],
+                  paddingVertical: 14,
                   alignItems: "center",
                   justifyContent: "center",
                   flexDirection: "row",
@@ -293,83 +276,131 @@ export function BillingScreen() {
             />
           </View>
 
-          <View style={{ gap: theme.spacing[4] }}>
-            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+          {activeTab === "outstanding" ? (
+            <View style={{ gap: theme.spacing[4] }}>
               <ThemedText variant="heading" size="lg">
                 {data.labels.activeInvoicesTitle}
               </ThemedText>
-              <Pressable
-                onPress={() => router.push("/payment-history")}
-                style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
-              >
-                <ThemedText color="brand">{data.labels.paymentHistoryActionLabel}</ThemedText>
-                <Ionicons name="chevron-forward" size={14} color={theme.semantic.foreground.brand} />
-              </Pressable>
-            </View>
 
-            <View style={{ gap: theme.spacing[4] }}>
-              {visibleInvoices.length ? (
-                visibleInvoices.map((invoice) => (
-                  <InvoiceCard
-                    key={invoice.id}
-                    invoice={invoice}
-                    loading={submitPaymentMutation.isPending}
-                    onPay={() => handleSubmitPayment([invoice.id])}
-                  />
-                ))
-              ) : (
-                <SurfaceCard muted elevated={false}>
-                  <ThemedText color="secondary">{data.labels.allPaidDueDateLabel}</ThemedText>
-                </SurfaceCard>
-              )}
+              <View style={{ gap: theme.spacing[4] }}>
+                {visibleInvoices.length ? (
+                  visibleInvoices.map((invoice) => (
+                    <InvoiceCard
+                      key={invoice.id}
+                      invoice={invoice}
+                      loading={submitPaymentMutation.isPending}
+                      onPay={() => handleSubmitPayment([invoice.id])}
+                    />
+                  ))
+                ) : (
+                  <SurfaceCard muted elevated={false}>
+                    <ThemedText color="secondary">{data.labels.allPaidDueDateLabel}</ThemedText>
+                  </SurfaceCard>
+                )}
+              </View>
             </View>
-          </View>
-
-          <View style={{ gap: theme.spacing[4] }}>
-            <ThemedText variant="heading" size="lg">
-              {data.labels.recentActivityTitle}
-            </ThemedText>
-            <View style={{ gap: theme.spacing[3] }}>
-              {data.recentPayments.map((payment) => (
-                <SurfaceCard key={payment.id} muted style={{ paddingVertical: theme.spacing[5] }}>
-                  <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: theme.spacing[4] }}>
-                    <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[4], flex: 1 }}>
-                      <View
-                        style={{
-                          width: 34,
-                          height: 34,
-                          borderRadius: theme.radius.pill,
-                          backgroundColor: "#DDF7EC",
-                          alignItems: "center",
-                          justifyContent: "center"
-                        }}
-                      >
-                        <Ionicons name="checkmark-circle-outline" size={20} color={theme.semantic.status.success} />
-                      </View>
-                      <View style={{ gap: 2, flex: 1 }}>
-                        <ThemedText variant="heading" size="md">
-                          {payment.title}
-                        </ThemedText>
-                        <ThemedText color="tertiary">{payment.dateLabel}</ThemedText>
-                      </View>
-                    </View>
-
-                    <View style={{ alignItems: "flex-end", gap: 2 }}>
-                      <ThemedText variant="heading" size="md">
-                        {payment.amountDisplay}
-                      </ThemedText>
-                      <ThemedText style={{ color: theme.semantic.status.success }}>
-                        {payment.statusLabel}
-                      </ThemedText>
-                    </View>
-                  </View>
-                </SurfaceCard>
-              ))}
-            </View>
-          </View>
+          ) : (
+            <PaidActivitySection />
+          )}
         </View>
       </ScrollView>
     </Screen>
+  );
+}
+
+function PaidActivitySection() {
+  const { theme } = useAppTheme();
+  const billingQuery = useBillingQuery();
+  const data = billingQuery.data;
+
+  if (!data) {
+    return null;
+  }
+
+  return (
+    <View style={{ gap: theme.spacing[5] }}>
+      <View style={{ gap: theme.spacing[4] }}>
+        <ThemedText variant="heading" size="lg">
+          {data.labels.recentActivityTitle}
+        </ThemedText>
+
+        <View style={{ gap: theme.spacing[3] }}>
+          {data.recentPayments.map((payment, index) => (
+            <SurfaceCard
+              key={payment.id}
+              style={{
+                gap: theme.spacing[4],
+                borderRadius: 24,
+                paddingVertical: theme.spacing[5]
+              }}
+            >
+              <View style={{ flexDirection: "row", justifyContent: "space-between", gap: theme.spacing[4] }}>
+                <View style={{ flexDirection: "row", alignItems: "flex-start", gap: theme.spacing[4], flex: 1 }}>
+                  <View
+                    style={{
+                      width: 38,
+                      height: 38,
+                      borderRadius: 19,
+                      backgroundColor: "#DDF7EC",
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}
+                  >
+                    <Ionicons
+                      name="checkmark-circle-outline"
+                      size={20}
+                      color={theme.semantic.status.success}
+                    />
+                  </View>
+
+                  <View style={{ gap: 4, flex: 1 }}>
+                    <View style={{ gap: theme.spacing[2] }}>
+                      <ThemedText variant="heading" size="md">
+                        {payment.title}
+                      </ThemedText>
+                      <View
+                        style={{
+                          alignSelf: "flex-start",
+                          backgroundColor: "#ECF9F1",
+                          borderRadius: theme.radius.pill,
+                          paddingHorizontal: theme.spacing[2],
+                          paddingVertical: 2
+                        }}
+                      >
+                        <ThemedText
+                          variant="label"
+                          size="sm"
+                          style={{ color: theme.semantic.status.success }}
+                        >
+                          {payment.statusLabel}
+                        </ThemedText>
+                      </View>
+                    </View>
+
+                    <ThemedText color="tertiary">{payment.dateLabel}</ThemedText>
+                    <ThemedText color="secondary">
+                      Reference {String(index + 1).padStart(2, "0")} • Posted to resident ledger
+                    </ThemedText>
+                  </View>
+                </View>
+
+                <View style={{ alignItems: "flex-end", gap: 6 }}>
+                  <ThemedText variant="heading" size="md">
+                    {payment.amountDisplay}
+                  </ThemedText>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+                    <ThemedText variant="label" size="sm" color="brand">
+                      Receipt
+                    </ThemedText>
+                    <Ionicons name="receipt-outline" size={14} color={theme.semantic.foreground.brand} />
+                  </View>
+                </View>
+              </View>
+            </SurfaceCard>
+          ))}
+        </View>
+      </View>
+    </View>
   );
 }
 

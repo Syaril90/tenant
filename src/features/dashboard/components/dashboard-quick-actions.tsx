@@ -46,16 +46,42 @@ export function DashboardQuickActions({ section }: DashboardQuickActionsProps) {
               }
             }}
           >
-            <SurfaceCard style={{ gap: theme.spacing[4], minHeight: 132 }}>
-              <Ionicons
-                name={item.icon as IoniconName}
-                size={22}
-                color={theme.semantic.foreground.brand}
-              />
+            <SurfaceCard
+              elevated={false}
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                gap: theme.spacing[4],
+                minHeight: 118,
+                paddingHorizontal: theme.spacing[4]
+              }}
+            >
+              <View
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: 19,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: theme.semantic.background.accent
+                }}
+              >
+                <Ionicons
+                  name={item.icon as IoniconName}
+                  size={18}
+                  color={theme.semantic.foreground.brand}
+                />
+              </View>
 
-              <View>
+              <View style={{ gap: 2 }}>
                 {item.titleLines.map((line) => (
-                  <ThemedText key={line} variant="heading" size="md">
+                  <ThemedText
+                    key={line}
+                    variant="label"
+                    size="sm"
+                    color="brand"
+                    style={{ textAlign: "center", lineHeight: 18 }}
+                  >
                     {line}
                   </ThemedText>
                 ))}

@@ -165,31 +165,54 @@ function PaymentHistorySummaryCard({
     <SurfaceCard
       style={{
         flex: featured ? undefined : 1,
-        gap: featured ? theme.spacing[3] : theme.spacing[2],
-        paddingVertical: featured ? theme.spacing[6] : theme.spacing[5]
+        gap: featured ? theme.spacing[4] : theme.spacing[3],
+        paddingVertical: featured ? theme.spacing[5] : theme.spacing[4],
+        borderRadius: featured ? 28 : 22
       }}
     >
-      <ThemedText color="tertiary">{card.label}</ThemedText>
-      <ThemedText
-        variant="heading"
-        size={featured ? "lg" : "md"}
-        style={{ color: tone.foregroundColor }}
-      >
-        {card.value}
-      </ThemedText>
       <View
         style={{
-          alignSelf: "flex-start",
-          backgroundColor: tone.backgroundColor,
-          borderRadius: theme.radius.pill,
-          paddingHorizontal: theme.spacing[3],
-          paddingVertical: theme.spacing[2]
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          gap: theme.spacing[3]
         }}
       >
-        <ThemedText variant="label" size="sm" style={{ color: tone.foregroundColor }}>
-          {featured ? "Overview" : "Indicator"}
-        </ThemedText>
+        <View style={{ gap: theme.spacing[1], flex: 1 }}>
+          <ThemedText color="tertiary">{card.label}</ThemedText>
+          <ThemedText
+            variant="heading"
+            size={featured ? "lg" : "md"}
+            style={{ color: tone.foregroundColor }}
+          >
+            {card.value}
+          </ThemedText>
+        </View>
+
+        <View
+          style={{
+            width: featured ? 42 : 36,
+            height: featured ? 42 : 36,
+            borderRadius: featured ? 21 : 18,
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: tone.backgroundColor
+          }}
+        >
+          <Ionicons
+            name={
+              card.tone === "brand"
+                ? "wallet-outline"
+                : card.tone === "success"
+                  ? "checkmark-done-outline"
+                  : "time-outline"
+            }
+            size={featured ? 20 : 17}
+            color={tone.foregroundColor}
+          />
+        </View>
       </View>
+
     </SurfaceCard>
   );
 }
@@ -256,9 +279,9 @@ function PaymentHistoryCard({ payment }: { payment: PaymentHistoryItem }) {
         <ThemedText color="tertiary">{payment.referenceLabel}</ThemedText>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
           <ThemedText variant="label" size="sm" color="brand">
-            Receipt ready
+            Receipt
           </ThemedText>
-          <Ionicons name="chevron-forward" size={14} color={theme.semantic.foreground.brand} />
+          <Ionicons name="receipt-outline" size={14} color={theme.semantic.foreground.brand} />
         </View>
       </View>
     </SurfaceCard>
