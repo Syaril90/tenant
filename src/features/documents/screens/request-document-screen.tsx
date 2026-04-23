@@ -120,7 +120,7 @@ export function RequestDocumentScreen() {
     <Screen>
       <ScrollView contentContainerStyle={{ paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
         <View style={{ gap: theme.spacing[8] }}>
-          <View style={{ gap: theme.spacing[2] }}>
+          <View style={{ gap: theme.spacing[4] }}>
             <ThemedText variant="label" size="sm" color="tertiary">
               {data.header.eyebrow}
             </ThemedText>
@@ -132,9 +132,82 @@ export function RequestDocumentScreen() {
               ))}
             </View>
             <ThemedText color="secondary">{data.header.description}</ThemedText>
+
+            <SurfaceCard
+              muted
+              elevated={false}
+              style={{
+                gap: theme.spacing[4],
+                borderRadius: 26,
+                overflow: "hidden"
+              }}
+            >
+              <View
+                style={{
+                  marginHorizontal: -theme.spacing[6],
+                  marginTop: -theme.spacing[6],
+                  paddingHorizontal: theme.spacing[6],
+                  paddingTop: theme.spacing[5],
+                  paddingBottom: theme.spacing[5],
+                  backgroundColor: theme.semantic.background.accent,
+                  gap: theme.spacing[4]
+                }}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[3] }}>
+                  <View
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: 22,
+                      backgroundColor: theme.semantic.background.surface,
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}
+                  >
+                    <Ionicons
+                      name="document-text-outline"
+                      size={20}
+                      color={theme.semantic.foreground.brand}
+                    />
+                  </View>
+
+                  <View style={{ flex: 1, gap: 2 }}>
+                    <ThemedText variant="label" size="sm" color="brand">
+                      QUICK FLOW
+                    </ThemedText>
+                    <ThemedText variant="heading" size="md">
+                      Make the request in under a minute
+                    </ThemedText>
+                  </View>
+                </View>
+
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <RequestStepChip index={1} label="Choose type" />
+                  <RequestStepConnector />
+                  <RequestStepChip index={2} label="Add purpose" />
+                  <RequestStepConnector />
+                  <RequestStepChip index={3} label="Submit" />
+                </View>
+              </View>
+
+              <View style={{ gap: theme.spacing[2] }}>
+                <ThemedText color="secondary">
+                  Pick the document, tell management why you need it, and choose how you want to receive it.
+                </ThemedText>
+              </View>
+            </SurfaceCard>
           </View>
 
-          <SurfaceCard style={{ gap: theme.spacing[6] }}>
+          <SurfaceCard style={{ gap: theme.spacing[5], borderRadius: 28 }}>
+            <View style={{ gap: theme.spacing[1] }}>
+              <ThemedText variant="heading" size="lg" color="brand">
+                Request details
+              </ThemedText>
+              <ThemedText color="secondary">
+                Fill in the core details first. Supporting notes and files are optional.
+              </ThemedText>
+            </View>
+
             <PickerField
               label={data.typeField.label}
               value={selectedType?.label ?? ""}
@@ -164,19 +237,19 @@ export function RequestDocumentScreen() {
               onChangeText={setNotes}
               multiline
             />
-
-            <AttachmentUploader
-              label={data.uploadField.label}
-              title={data.uploadField.title}
-              description={data.uploadField.description}
-              buttonLabel={data.uploadField.buttonLabel}
-              attachments={attachments}
-              onBrowse={handleBrowseAttachments}
-              onRemoveAttachment={(attachmentId) => {
-                setAttachments((current) => current.filter((item) => item.id !== attachmentId));
-              }}
-            />
           </SurfaceCard>
+
+          <AttachmentUploader
+            label={data.uploadField.label}
+            title={data.uploadField.title}
+            description={data.uploadField.description}
+            buttonLabel={data.uploadField.buttonLabel}
+            attachments={attachments}
+            onBrowse={handleBrowseAttachments}
+            onRemoveAttachment={(attachmentId) => {
+              setAttachments((current) => current.filter((item) => item.id !== attachmentId));
+            }}
+          />
 
           <SurfaceCard muted elevated={false}>
             <View style={{ flexDirection: "row", gap: theme.spacing[4], alignItems: "flex-start" }}>
@@ -270,5 +343,46 @@ export function RequestDocumentScreen() {
         }}
       />
     </Screen>
+  );
+}
+
+function RequestStepChip({ index, label }: { index: number; label: string }) {
+  const { theme } = useAppTheme();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        borderRadius: theme.radius.md,
+        backgroundColor: theme.semantic.background.surface,
+        paddingHorizontal: theme.spacing[3],
+        paddingVertical: theme.spacing[3],
+        gap: 2
+      }}
+    >
+      <ThemedText variant="label" size="sm" color="brand">
+        {`0${index}`}
+      </ThemedText>
+      <ThemedText color="secondary" style={{ fontSize: 12, lineHeight: 16 }}>
+        {label}
+      </ThemedText>
+    </View>
+  );
+}
+
+function RequestStepConnector() {
+  const { theme } = useAppTheme();
+
+  return (
+    <View
+      style={{
+        width: 18,
+        height: 2,
+        borderRadius: 999,
+        backgroundColor: theme.semantic.foreground.brand,
+        opacity: 0.35,
+        marginHorizontal: theme.spacing[1]
+      }}
+    />
   );
 }

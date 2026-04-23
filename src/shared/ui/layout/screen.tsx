@@ -32,7 +32,7 @@ export function Screen({ children, headerMode = "auto" }: ScreenProps) {
           flex: 1,
           backgroundColor: theme.semantic.background.app,
           paddingHorizontal: theme.spacing[6],
-          paddingTop: theme.spacing[6],
+          paddingTop: resolvedHeaderMode === "none" ? theme.spacing[6] : theme.spacing[4],
           paddingBottom: theme.spacing[6]
         }}
       >
@@ -94,82 +94,89 @@ function AppHeader({ mode }: { mode: "main" | "sub" }) {
     <>
       <View
         style={{
-          backgroundColor: theme.semantic.background.surface,
-          paddingHorizontal: theme.spacing[5],
-          paddingTop: theme.spacing[4],
-          paddingBottom: theme.spacing[4],
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderBottomWidth: 1,
-          borderBottomColor:
-            colorScheme === "dark" ? "rgba(34,53,78,0.9)" : "rgba(215,222,231,0.55)"
+          backgroundColor: theme.semantic.background.app
         }}
       >
-        <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[4], flex: 1 }}>
-          {mode === "sub" ? (
-            <Pressable
-              onPress={() => router.back()}
-              hitSlop={12}
-              style={{
-                width: 38,
-                height: 38,
-                borderRadius: 19,
-                backgroundColor:
-                  colorScheme === "dark" ? theme.semantic.background.muted : "rgba(255,255,255,0.9)",
-                borderWidth: 1,
-                borderColor:
-                  colorScheme === "dark" ? theme.semantic.border.subtle : "rgba(215,222,231,0.8)",
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-            >
-              <Ionicons name="arrow-back" size={18} color={theme.semantic.foreground.brand} />
-            </Pressable>
-          ) : null}
-
-          {mode === "main" ? (
-            <View style={{ gap: 2 }}>
-              <ThemedText variant="label" size="sm" color="tertiary">
-                HOMEBASE
-              </ThemedText>
-              <ThemedText variant="heading" size="md" color="brand">
-                {appIdentity.headerName}
-              </ThemedText>
-            </View>
-          ) : (
-            <View style={{ gap: 2 }}>
-              <ThemedText variant="label" size="sm" color="tertiary">
-                APP VIEW
-              </ThemedText>
-              <ThemedText variant="heading" size="md" color="brand">
-                {appIdentity.headerName}
-              </ThemedText>
-            </View>
-          )}
-        </View>
-
-        <Pressable
-          onPress={openAccountMenu}
-          hitSlop={12}
+        <View
           style={{
-            width: 44,
-            height: 44,
-            borderRadius: theme.radius.pill,
-            backgroundColor: theme.semantic.background.muted,
+            minHeight: 68,
+            borderBottomLeftRadius: 26,
+            borderBottomRightRadius: 26,
+            paddingHorizontal: theme.spacing[4],
+            paddingVertical: theme.spacing[3],
+            backgroundColor: theme.semantic.background.surface,
             borderWidth: 1,
             borderColor: theme.semantic.border.subtle,
+            flexDirection: "row",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "space-between",
+            gap: theme.spacing[4],
+            borderTopWidth: 0,
+            marginTop: 0
           }}
         >
-          <Avatar
-            imageUrl={identity.avatarUrl}
-            fallbackLabel={identity.initials}
-            size={40}
-            inverse={false}
-          />
-        </Pressable>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[3], flex: 1 }}>
+            {mode === "sub" ? (
+              <Pressable
+                onPress={() => router.back()}
+                hitSlop={12}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 20,
+                  backgroundColor: theme.semantic.background.muted,
+                  borderWidth: 1,
+                  borderColor: theme.semantic.border.subtle,
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <Ionicons name="arrow-back" size={18} color={theme.semantic.foreground.brand} />
+              </Pressable>
+            ) : (
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 20,
+                  backgroundColor: theme.semantic.background.accent,
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <Ionicons name="home-outline" size={18} color={theme.semantic.foreground.brand} />
+              </View>
+            )}
+
+            <View style={{ gap: 2, flex: 1 }}>
+              <ThemedText variant="heading" size="md" color="brand">
+                {appIdentity.headerName}
+              </ThemedText>
+            </View>
+          </View>
+
+          <Pressable
+            onPress={openAccountMenu}
+            hitSlop={12}
+            style={{
+              width: 46,
+              height: 46,
+              borderRadius: 23,
+              backgroundColor: theme.semantic.background.muted,
+              borderWidth: 1,
+              borderColor: theme.semantic.border.subtle,
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            <Avatar
+              imageUrl={identity.avatarUrl}
+              fallbackLabel={identity.initials}
+              size={40}
+              inverse={false}
+            />
+          </Pressable>
+        </View>
       </View>
 
       <Modal

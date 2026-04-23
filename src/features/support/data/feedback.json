@@ -2,7 +2,7 @@
   "header": {
     "eyebrow": "RESIDENT RELATIONS",
     "titleLines": ["Share Your", "Voice."],
-    "description": "Your insights help us refine the sanctuary experience. Tell us what is on your mind. We are listening."
+    "description": "Your feedback helps management improve everyday living at the property. Tell us what is on your mind."
   },
   "typeSection": {
     "title": "WHAT KIND OF FEEDBACK IS THIS?",
@@ -20,7 +20,7 @@
       { "id": "fair", "label": "Fair", "icon": "remove-circle-outline" },
       { "id": "good", "label": "Good", "icon": "happy-outline" },
       { "id": "great", "label": "Great", "icon": "happy" },
-      { "id": "excellent", "label": "Elite", "icon": "sparkles-outline" }
+      { "id": "excellent", "label": "Excellent", "icon": "sparkles-outline" }
     ]
   },
   "detailsSection": {
@@ -35,13 +35,13 @@
   },
   "cta": {
     "submitLabel": "Submit Feedback",
-    "helperText": "Your feedback is handled with care. A Resident Experience Manager will review this within 24 hours."
+    "helperText": "Your feedback will be reviewed by the management team and escalated if follow-up is required."
   },
   "messages": {
     "loading": "Loading feedback...",
     "errorTitle": "Feedback unavailable",
     "errorDescription": "The feedback mock request failed. Replace the service when the real feedback API is ready.",
     "successTitle": "Feedback sent",
-    "successDescription": "Your response has been recorded for the resident experience team."
+    "successDescription": "Your response has been recorded for the management team."
   }
 }

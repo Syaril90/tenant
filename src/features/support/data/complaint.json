@@ -1,8 +1,8 @@
 {
   "header": {
     "eyebrow": "SUPPORT REPORTING",
-    "title": "Submit a Report",
-    "description": "Tell us more about the issue so we can help."
+    "title": "Submit a Complaint",
+    "description": "Tell us what happened, where it happened, and we will route it to the right team."
   },
   "fieldLabels": {
     "category": "COMPLAINT CATEGORY",
@@ -14,9 +14,9 @@
   },
   "placeholders": {
     "category": "Select a category",
-    "title": "e.g., Leaking pipe in hallway",
+    "title": "e.g., Water seepage at corridor ceiling",
     "description": "Please provide as much detail as possible...",
-    "location": "e.g., Block B, Level 4"
+    "location": "e.g., Tower B, Level 12 lift lobby"
   },
   "categories": [
     { "id": "maintenance", "label": "Maintenance" },
@@ -32,7 +32,7 @@
   "uploadCard": {
     "title": "ATTACHMENTS",
     "description": "Upload Photos or Videos",
-    "helperText": "Drag and drop or click to browse",
+    "helperText": "Attach photos, videos, or screenshots to help management assess the case faster",
     "buttonLabel": "BROWSE FILES"
   },
   "cta": {
@@ -42,6 +42,6 @@
     "loading": "Loading complaint form...",
     "errorTitle": "Complaint form unavailable",
     "errorDescription": "The complaint mock request failed. Replace the service when the real complaint API is ready.",
-    "successDescription": "Your complaint has been submitted to the building operations team."
+    "successDescription": "Your complaint has been submitted to the management team and a case reference will be generated."
   }
 }

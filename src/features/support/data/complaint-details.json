@@ -11,21 +11,21 @@
     {
       "id": "water-leak-lobby",
       "eyebrow": "SUPPORT / TICKET #492-B8",
-      "title": "Water Seepage in Master Bathroom",
+      "title": "Water seepage from corridor ceiling",
       "category": "Maintenance",
       "statusLabel": "In Progress",
       "statusTone": "warning",
       "reference": "CMP-240381",
-      "location": "Master Bathroom",
-      "submittedAt": "June 14, 2024 · 11:20 PM",
+      "location": "Tower A, Level 12 lift lobby",
+      "submittedAt": "21 Apr 2026 · 11:20 PM",
       "updatedAt": "Today, 10:45 AM",
       "priorityLabel": "High Priority",
-      "assignedTeam": "Building Engineering",
-      "reportDateLabel": "Reported June 14, 2024",
-      "primaryActionLabel": "Edit Report",
+      "assignedTeam": "Building Maintenance Team",
+      "reportDateLabel": "Reported 21 Apr 2026",
+      "primaryActionLabel": "Edit Complaint",
       "secondaryActionLabel": "Download PDF",
       "summaryTitle": "Detailed Description",
-      "summaryBody": "I noticed a significant damp patch appearing on the ceiling of the master bathroom directly below the HVAC unit. The moisture seems to be spreading toward the vanity area. It was first observed after the heavy rainfall last Tuesday evening. There is no active dripping yet, but the drywall feels soft to the touch and there is a faint musty odor beginning to develop.",
+      "summaryBody": "There is visible water seepage and staining on the common corridor ceiling near the lift lobby outside Unit A-12-08. The patch became larger after yesterday's heavy rain and a small amount of dripping was noticed this morning. The floor is still dry at the moment, but the ceiling looks damp and may become a safety issue if left unattended.",
       "previews": [
         {
           "id": "ceiling",
@@ -48,58 +48,59 @@
         {
           "id": "in-progress",
           "title": "In Progress",
-          "description": "Technician Mark S. has been dispatched to assess the HVAC drainage system. Expected arrival within 2 hours.",
+          "description": "The maintenance technician has been assigned to inspect the ceiling slab and rainwater pipe routing. Assessment is expected before noon.",
           "timestamp": "Today, 10:45 AM",
           "isCurrent": true
         },
         {
           "id": "submitted",
           "title": "Submitted",
-          "description": "Report received by management system.",
-          "timestamp": "June 14, 2024 · 11:20 PM"
+          "description": "Complaint received by the resident support system and routed to the maintenance desk.",
+          "timestamp": "21 Apr 2026 · 11:20 PM"
         }
       ],
       "attachmentsTitle": "ATTACHMENTS",
       "attachments": [
         {
           "id": "doc-1",
-          "title": "Lease_Addendum_C.pdf",
+          "title": "seepage-photo-1.jpg",
           "meta": "1.2 MB",
-          "type": "document"
+          "type": "image"
         },
         {
           "id": "image-1",
-          "title": "HVAC_Log_May.jpg",
+          "title": "seepage-photo-2.jpg",
           "meta": "450 KB",
           "type": "image"
         }
       ],
-      "conciergeTitle": "CONCIERGE NOTES",
-      "conciergeMessage": "We have alerted the building engineering team. Since this is in the master bathroom, we have prioritized this as an emergency repair. Please ensure the area remains clear for the technicians.",
-      "conciergeManagerName": "Sarah Miller",
-      "conciergeManagerRole": "Senior Property Manager",
+      "conciergeTitle": "MANAGEMENT NOTES",
+      "conciergeMessage": "We have informed the maintenance supervisor and the affected corridor will be monitored while the team checks whether the seepage is caused by the roof slab or an internal pipe. Please keep the area clear for inspection.",
+      "conciergeManagerName": "Nur Aisyah Rahman",
+      "conciergeManagerRole": "Assistant Building Manager",
       "helpTitle": "NEED HELP ?",
-      "helpBody": "If this issue becomes urgent or water begins to leak actively, please call our 24/7 emergency line immediately.",
+      "helpBody": "If the leak becomes active or the floor becomes slippery, please contact the guard house immediately so the on-duty team can respond.",
       "helpActionLabel": "Emergency Support"
     },
     {
       "id": "parking-bay-lighting",
       "eyebrow": "SUPPORT / TICKET #377-C1",
       "title": "Parking bay lighting outage",
+      "title": "Basement car park lighting not working",
       "category": "Electrical",
       "statusLabel": "Resolved",
       "statusTone": "success",
       "reference": "CMP-238914",
-      "location": "Basement 2, Bay C12 to C18",
+      "location": "Basement 2, Bays C12 to C18",
       "submittedAt": "Apr 19, 2026 • 7:48 PM",
       "updatedAt": "Apr 21, 2026 • 3:15 PM",
       "priorityLabel": "Medium",
       "assignedTeam": "Electrical Services",
       "reportDateLabel": "Reported Apr 19, 2026",
-      "primaryActionLabel": "Edit Report",
+      "primaryActionLabel": "Edit Complaint",
       "secondaryActionLabel": "Download PDF",
       "summaryTitle": "Issue summary",
-      "summaryBody": "Multiple residents reported dim or non-functioning lights across the parking row, reducing visibility during evening access.",
+      "summaryBody": "Several light points at Basement 2 were not functioning, causing poor visibility for residents returning at night and affecting access to nearby parking bays.",
       "previews": [
         {
           "id": "preview-1",
@@ -112,7 +113,7 @@
         {
           "id": "submitted",
           "title": "Complaint submitted",
-          "description": "Your case was logged for the facilities team.",
+          "description": "Your case was logged and forwarded to the building electrical team.",
           "timestamp": "Apr 19, 2026 • 7:48 PM"
         },
         {
@@ -138,12 +139,12 @@
           "type": "document"
         }
       ],
-      "conciergeTitle": "CONCIERGE NOTES",
-      "conciergeMessage": "The lighting contractor confirmed the damaged ballast units were replaced and the row tested normally before reopening the area to residents.",
+      "conciergeTitle": "MANAGEMENT NOTES",
+      "conciergeMessage": "The electrical contractor replaced the faulty ballast and tested the affected fittings before handing the area back to management.",
       "conciergeManagerName": "Daniel Wong",
       "conciergeManagerRole": "Facilities Supervisor",
       "helpTitle": "NEED HELP ?",
-      "helpBody": "If lighting fails again in a high-traffic area, please contact concierge so we can dispatch the on-duty team immediately.",
+      "helpBody": "If lighting fails again in a high-traffic area, please contact the guard house or management office so the on-duty team can respond quickly.",
       "helpActionLabel": "Emergency Support"
     }
   ]

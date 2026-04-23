@@ -2,7 +2,7 @@
   "header": {
     "eyebrow": "SUPPORT CENTRE",
     "title": "Stay informed and raise issues quickly.",
-    "description": "Review building notices, submit complaints, and share feedback from one resident support feed."
+    "description": "Review condo notices, submit complaints, and share feedback from one resident support feed."
   },
   "actions": {
     "title": "COMMUNITY ACTIONS",
@@ -25,7 +25,7 @@
       {
         "id": "browse-documents",
         "title": "Documents & Files",
-        "description": "Open statements, notices, and downloadable resident forms in one place.",
+        "description": "Open statements, circulars, by-laws, and downloadable resident forms in one place.",
         "icon": "folder-open-outline",
         "tone": "brand"
       }
@@ -37,20 +37,20 @@
     "items": [
       {
         "id": "water-leak-lobby",
-        "title": "Leaking pipe near lift lobby",
+        "title": "Water seepage from common corridor ceiling",
         "category": "Maintenance",
         "statusLabel": "In Progress",
         "statusTone": "warning",
-        "updatedAtLabel": "Updated 20 minutes ago",
+        "updatedAtLabel": "Updated 35 minutes ago",
         "referenceLabel": "CMP-240381"
       },
       {
         "id": "parking-bay-lighting",
-        "title": "Parking bay lighting outage",
+        "title": "Basement car park lighting not working",
         "category": "Electrical",
         "statusLabel": "Resolved",
         "statusTone": "success",
-        "updatedAtLabel": "Resolved yesterday",
+        "updatedAtLabel": "Resolved 2 days ago",
         "referenceLabel": "CMP-238914"
       }
     ]
@@ -65,8 +65,8 @@
         "tag": "URGENT",
         "tagTone": "urgent",
         "metaLabel": "2 hours ago",
-        "title": "Scheduled Water Maintenance",
-        "description": "Water supply will be temporarily suspended tomorrow from 1:00 AM to 2:00 PM for critical pipe repairs in Sector B.",
+        "title": "Water Supply Interruption Notice",
+        "description": "Water supply will be temporarily interrupted tomorrow from 10:00 AM to 4:00 PM for pipe rectification at the domestic pump room.",
         "footerType": "avatars",
         "footerLabel": "+12",
         "actionLabel": "Details"
@@ -77,19 +77,19 @@
         "tag": "MAINTENANCE",
         "tagTone": "neutral",
         "metaLabel": "Yesterday",
-        "title": "Rooftop Garden Renovation",
-        "description": "Phase 1 of the SkyGarden enhancement project is now complete. Enjoy the new seating arrangements and improved lighting.",
+        "title": "Surau Refurbishment Works",
+        "description": "The surau at Level 5 will reopen this weekend after carpet replacement, repainting, and lighting upgrades.",
         "imageUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
         "footerType": "date",
-        "footerLabel": "Oct 24, 2023"
+        "footerLabel": "22 Apr 2026"
       },
       {
         "id": "community-potluck-brunch",
         "variant": "compact",
         "tag": "GENERAL",
         "tagTone": "neutral",
-        "title": "Community Potluck Brunch",
-        "description": "Join your neighbors this Sunday at the Grand Lobby for our monthly gathering.",
+        "title": "Hari Raya Potluck at Multipurpose Hall",
+        "description": "Join your neighbours this Saturday evening at the multipurpose hall for a resident potluck session.",
         "imageUrl": "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80"
       }
     ]

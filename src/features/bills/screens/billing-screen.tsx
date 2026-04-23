@@ -136,7 +136,7 @@ export function BillingScreen() {
         <View style={{ gap: theme.spacing[8] }}>
           <View
             style={{
-              backgroundColor: theme.semantic.foreground.brand,
+              backgroundColor: theme.semantic.background.emphasis,
               borderRadius: 30,
               padding: theme.spacing[4],
               borderWidth: 1,

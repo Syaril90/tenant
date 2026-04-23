@@ -2,7 +2,7 @@
   "header": {
     "eyebrow": "IN-APP VIEW",
     "title": "Document Preview",
-    "description": "Preview a lightweight in-app representation before downloading the original file."
+    "description": "Preview a lightweight in-app summary before downloading the original file."
   },
   "labels": {
     "fileType": "FILE TYPE",
@@ -14,4 +14,3 @@
     "secondaryCtaLabel": "Back To Files"
   }
 }
-

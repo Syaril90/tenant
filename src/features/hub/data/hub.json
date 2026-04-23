@@ -3,7 +3,7 @@
     "title": "Hub"
   },
   "composer": {
-    "prompt": "What's on your mind?",
+    "prompt": "Share something with your neighbours",
     "postLabel": "Post",
     "actions": [
       {
@@ -23,11 +23,11 @@
       "id": "post-rooftop-opening",
       "type": "post",
       "author": {
-        "name": "Marcus Sterling",
+        "name": "Hafiz Rahman",
         "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80",
-        "meta": "2 hours ago • Building B"
+        "meta": "2 hours ago • Tower B"
       },
-      "content": "The new rooftop garden lounge is finally open! Truly a masterpiece of urban landscaping. Perfect for sunset reading. Has anyone checked out the herb section yet? 🌿",
+      "content": "The rooftop garden is finally open again after the upgrade. The new benches are nice, and the KL skyline view is great at sunset. Has anyone tried the new herb corner yet?",
       "imageUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
       "likeCount": 24,
       "commentCount": 8,
@@ -35,7 +35,7 @@
         {
           "id": "reply-herb",
           "authorName": "Nadia Lim",
-          "content": "Yes, the herb section looks great already. The rosemary corner smells amazing."
+          "content": "Yes, I went up after Maghrib and it looks much better now. The herb corner is a nice touch."
         }
       ]
     },
@@ -43,11 +43,11 @@
       "id": "post-yoga-reminder",
       "type": "post",
       "author": {
-        "name": "Elena Rodriguez",
+        "name": "Farah Sofea",
         "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80",
-        "meta": "5 hours ago • Penthouse West"
+        "meta": "5 hours ago • Tower C"
       },
-      "content": "Quick reminder that the community yoga session is moving to the indoor studio today due to the light rain. See you all at 6 PM! ✨🧘",
+      "content": "Quick reminder that tonight's yoga session will move to the multipurpose hall because of the rain. See you all at 6 PM.",
       "likeCount": 12,
       "commentCount": 3,
       "replies": []
@@ -56,19 +56,19 @@
       "id": "notice-elevator-maintenance",
       "type": "notice",
       "badge": "MAINTENANCE UPDATE",
-      "title": "Elevator Maintenance: Tower North",
-      "description": "Scheduled maintenance for Elevator #4 will occur tomorrow between 10 AM and 2 PM. Please use alternate elevators.",
-      "meta": "Tomorrow, Oct 14"
+      "title": "Lift Maintenance: Tower B",
+      "description": "Scheduled maintenance for Passenger Lift 2 will take place tomorrow from 10:00 AM to 2:00 PM. Please use the other lift during this period.",
+      "meta": "Tomorrow, 24 Apr"
     },
     {
       "id": "post-lobby-light",
       "type": "post",
       "author": {
-        "name": "Julian Chen",
+        "name": "Jason Tan",
         "avatarUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=160&q=80",
-        "meta": "Yesterday • Building A"
+        "meta": "Yesterday • Tower A"
       },
-      "content": "The evening light in the lobby today was too good not to capture. The Sanctuary really lives up to its name.",
+      "content": "Caught the lobby looking especially nice after the new lighting upgrade. The drop-off area feels brighter and safer at night now.",
       "imageUrl": "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
       "likeCount": 45,
       "commentCount": 12,

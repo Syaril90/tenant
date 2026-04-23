@@ -1,16 +1,16 @@
 {
   "header": {
     "eyebrow": "RESIDENT DASHBOARD",
-    "titleLines": ["Good Morning,", "Alexander"],
-    "description": "Welcome back to your sanctuary. Here is everything happening in your home today.",
-    "pillLabel": "Tower A • Unit 12-08"
+    "titleLines": ["Good Morning,", "Amir"],
+    "description": "Here is a quick view of your unit, charges, notices, and resident services for today.",
+    "pillLabel": "Tower A • Unit A-12-08"
   },
   "balanceCard": {
-    "badge": "DUE IN 4 DAYS",
+    "badge": "DUE IN 5 DAYS",
     "title": "Outstanding Balance",
-    "amount": "$1,248.50",
-    "dueDateLabel": "Due on 28 May 2026",
-    "supportingLabel": "Maintenance, sinking fund, and utility adjustments",
+    "amount": "RM 412.00",
+    "dueDateLabel": "Due on 28 Apr 2026",
+    "supportingLabel": "Maintenance charges, sinking fund, and water bill",
     "primaryActionLabel": "Pay Now",
     "secondaryActionLabel": "View Breakdown",
     "icon": "wallet-outline"
@@ -70,9 +70,9 @@
         "id": "water-main-repair",
         "badge": "URGENT MAINTENANCE",
         "badgeTone": "danger",
-        "title": "Emergency Water Main Repair",
-        "description": "Scheduled maintenance for Zone B. Water supply will be temporarily affected from 2 PM to 6 PM.",
-        "publishedAt": "Oct 24, 2023 • 09:15 AM",
+        "title": "Domestic Water Pipe Rectification",
+        "description": "Water supply to Tower A and Tower B will be interrupted from 10:00 AM to 4:00 PM for urgent pipe rectification at the pump room.",
+        "publishedAt": "23 Apr 2026 • 09:15 AM",
         "icon": "construct-outline",
         "accentColor": "#E77A34",
         "imageUri": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80"
@@ -81,9 +81,9 @@
         "id": "elevator-modernization",
         "badge": "COMMUNITY UPDATE",
         "badgeTone": "brand",
-        "title": "Elevator Modernization",
-        "description": "We are upgrading the South Wing elevators to high-speed smart lifts starting next week.",
-        "publishedAt": "Oct 20, 2023 • 04:30 PM",
+        "title": "Lift Interior Refurbishment",
+        "description": "Lift refurbishment works at Tower C will begin next Monday. One passenger lift will remain in service at all times.",
+        "publishedAt": "20 Apr 2026 • 04:30 PM",
         "icon": "business-outline",
         "accentColor": "#50636F",
         "imageUri": "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80"

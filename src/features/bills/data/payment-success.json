@@ -2,7 +2,7 @@
   "header": {
     "eyebrow": "PAYMENT COMPLETE",
     "title": "Payment Successful",
-    "description": "Your mock gateway flow completed successfully. Replace this handoff with the real payment callback later."
+    "description": "Your payment was recorded successfully. Replace this mock handoff with the real payment callback later."
   },
   "labels": {
     "status": "STATUS",
@@ -16,4 +16,3 @@
     "receiptCtaLabel": "View Receipt"
   }
 }
-

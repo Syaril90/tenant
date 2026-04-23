@@ -2,7 +2,7 @@
   "header": {
     "eyebrow": "DOCUMENT REQUEST",
     "titleLines": ["Request a", "Resident Document"],
-    "description": "Submit a request for certified letters, older statements, management confirmations, or archived building records."
+    "description": "Submit a request for management letters, older statements, visitor records, or archived circulars."
   },
   "typeField": {
     "label": "Document type",
@@ -11,22 +11,22 @@
       {
         "id": "account-statement",
         "label": "Account Statement",
-        "description": "Maintenance and sinking fund statement for a selected period."
+        "description": "Maintenance, sinking fund, or water statement for a selected period."
       },
       {
         "id": "residency-letter",
-        "label": "Residency Confirmation Letter",
-        "description": "Official management letter confirming your current address."
+        "label": "Residence Confirmation Letter",
+        "description": "Official management letter confirming your unit address and occupancy."
       },
       {
         "id": "access-record",
         "label": "Access or Visitor Record",
-        "description": "Building entry log or visitor history confirmation."
+        "description": "Guard house entry log or visitor registration confirmation."
       },
       {
         "id": "archived-circular",
         "label": "Archived Circular or Notice",
-        "description": "Older circulars, notices, and building memos not listed in the app."
+        "description": "Older circulars, notices, and management memos not listed in the app."
       }
     ]
   },
@@ -57,23 +57,23 @@
   "uploadField": {
     "label": "Supporting files",
     "title": "Attach supporting proof",
-    "description": "Upload a form, ID, or reference screenshot if the management office needs supporting context.",
+    "description": "Upload an ID copy, payment slip, booking form, or reference screenshot if management needs supporting context.",
     "buttonLabel": "Browse Files"
   },
   "timelineCard": {
     "eyebrow": "REQUEST TIMELINE",
     "title": "Typical turnaround within 1 to 3 working days",
-    "description": "Certified or archived requests may take longer if manual retrieval or approval is required."
+    "description": "Certified letters and archived records may take longer if manual retrieval, JMB confirmation, or stamping is required."
   },
   "cta": {
     "submitLabel": "Submit Request",
-    "helperText": "Management will review your request and contact you if more details are needed."
+    "helperText": "Management will review your request and contact you if additional details or payment are required."
   },
   "messages": {
     "loading": "Loading document request form...",
     "errorTitle": "Document request unavailable",
     "errorDescription": "The mocked document request form could not be loaded.",
     "successTitle": "Request submitted",
-    "successDescription": "Your document request has been logged. A confirmation will appear once the management team starts processing it."
+    "successDescription": "Your document request has been logged. A confirmation will appear once the management office starts processing it."
   }
 }

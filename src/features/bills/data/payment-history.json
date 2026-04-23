@@ -2,7 +2,7 @@
   "header": {
     "eyebrow": "PAYMENT LEDGER",
     "title": "Review every transaction",
-    "description": "Track completed charges, failed attempts, and payment methods from one billing history timeline."
+    "description": "Track completed charges, pending payments, and payment methods from one billing history timeline."
   },
   "searchPlaceholder": "Search by payment title, method, or reference",
   "filters": [
@@ -23,7 +23,7 @@
     {
       "id": "year-to-date",
       "label": "Year to date",
-      "value": "$14,235.50",
+      "value": "RM 4,860.00",
       "tone": "brand"
     },
     {
@@ -42,58 +42,58 @@
   "payments": [
     {
       "id": "payment-oct-electricity",
-      "title": "Electricity Bill",
-      "category": "Utility",
-      "paidAtLabel": "24 Oct 2023 • 09:22 AM",
-      "amountDisplay": "$245.00",
+      "title": "Maintenance Charges",
+      "category": "Management",
+      "paidAtLabel": "28 Mar 2026 • 09:22 AM",
+      "amountDisplay": "RM 220.00",
       "statusLabel": "Successful",
       "statusTone": "success",
       "methodLabel": "Visa ending 1842",
-      "referenceLabel": "PMT-902184"
+      "referenceLabel": "PMT-MC-902184"
     },
     {
       "id": "payment-sep-water",
-      "title": "Water & Sewage",
+      "title": "Water Bill",
       "category": "Utility",
-      "paidAtLabel": "28 Sep 2023 • 10:45 AM",
-      "amountDisplay": "$82.30",
+      "paidAtLabel": "28 Mar 2026 • 10:45 AM",
+      "amountDisplay": "RM 72.00",
       "statusLabel": "Successful",
       "statusTone": "success",
       "methodLabel": "FPX via CIMB",
-      "referenceLabel": "PMT-887511"
+      "referenceLabel": "PMT-WTR-887511"
     },
     {
       "id": "payment-oct-maintenance",
-      "title": "Maintenance Fee",
+      "title": "Sinking Fund",
       "category": "Management",
-      "paidAtLabel": "01 Oct 2023 • 08:12 PM",
-      "amountDisplay": "$921.20",
+      "paidAtLabel": "01 Apr 2026 • 08:12 PM",
+      "amountDisplay": "RM 120.00",
       "statusLabel": "Pending Review",
       "statusTone": "warning",
       "methodLabel": "DuitNow QR",
-      "referenceLabel": "PMT-901120"
+      "referenceLabel": "PMT-SF-901120"
     },
     {
       "id": "payment-rent-october",
-      "title": "Rent - October",
-      "category": "Rental",
-      "paidAtLabel": "01 Oct 2023 • 07:30 AM",
-      "amountDisplay": "$3,200.00",
+      "title": "Access Card Replacement",
+      "category": "Access",
+      "paidAtLabel": "12 Feb 2026 • 07:30 AM",
+      "amountDisplay": "RM 50.00",
       "statusLabel": "Successful",
       "statusTone": "success",
       "methodLabel": "Visa ending 1842",
-      "referenceLabel": "PMT-864310"
+      "referenceLabel": "PMT-AC-864310"
     },
     {
       "id": "payment-parking",
-      "title": "Parking Fee",
+      "title": "Season Parking",
       "category": "Access",
-      "paidAtLabel": "25 Sep 2023 • 05:18 PM",
-      "amountDisplay": "$150.00",
+      "paidAtLabel": "25 Jan 2026 • 05:18 PM",
+      "amountDisplay": "RM 180.00",
       "statusLabel": "Successful",
       "statusTone": "success",
       "methodLabel": "Auto debit",
-      "referenceLabel": "PMT-851009"
+      "referenceLabel": "PMT-PKG-851009"
     }
   ],
   "emptyState": {

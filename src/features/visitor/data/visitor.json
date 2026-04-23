@@ -6,8 +6,8 @@
   },
   "summary": {
     "badge": "2 EXPECTED TODAY",
-    "title": "Visitor access is active for Unit 402.",
-    "description": "Security will validate registered guests at the main gate before allowing entry."
+    "title": "Visitor access is active for Unit A-12-08.",
+    "description": "Guard house personnel will verify registered guests before granting entry."
   },
   "form": {
     "title": "New Visitor",
@@ -42,7 +42,7 @@
     {
       "id": "visitor-adam-lee",
       "name": "Adam Lee",
-      "purpose": "Delivery handover",
+      "purpose": "Parcel handover",
       "dateLabel": "Today • 9:00 PM",
       "vehicleLabel": "No vehicle",
       "statusLabel": "Pending arrival"
@@ -52,13 +52,13 @@
     {
       "id": "activity-kenny-tan",
       "title": "Kenny Tan checked in",
-      "description": "Security granted access for a maintenance appointment.",
+      "description": "Guard house granted access for an air-conditioner servicing appointment.",
       "timestampLabel": "Yesterday • 11:15 AM"
     },
     {
       "id": "activity-priya-nair",
       "title": "Priya Nair pass expired",
-      "description": "Visitor pass closed automatically after exit confirmation.",
+      "description": "Visitor pass closed automatically after exit confirmation at the guard house.",
       "timestampLabel": "Yesterday • 5:42 PM"
     }
   ],

@@ -2,7 +2,7 @@
   "header": {
     "eyebrow": "PAYMENT RECEIPT",
     "title": "Receipt Ready",
-    "description": "This is a mocked receipt surface. When the gateway is live, map the final transaction payload into this same view model."
+    "description": "This is a mocked receipt view. When the payment gateway is live, map the final transaction payload into this same view model."
   },
   "labels": {
     "receiptNumber": "RECEIPT NO.",
@@ -11,10 +11,9 @@
     "paymentMethod": "PAYMENT METHOD",
     "amount": "AMOUNT",
     "receiptTitle": "Receipt Details",
-    "noteTitle": "Implementation Note",
+    "noteTitle": "For Development",
     "noteDescription": "Replace the mocked route params with the final gateway callback payload or a receipt endpoint response.",
     "primaryCtaLabel": "Back To Bills",
     "secondaryCtaLabel": "Back To Success"
   }
 }
-

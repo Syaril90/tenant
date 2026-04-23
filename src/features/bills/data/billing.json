@@ -2,55 +2,55 @@
   "header": {
     "eyebrow": "PAYMENTS",
     "title": "Settle Your Balance",
-    "description": "Review open charges, choose a payment method, and complete the transaction flow."
+    "description": "Review maintenance-related charges, choose a payment method, and complete payment for your unit."
   },
   "summary": {
     "badge": "TOTAL OUTSTANDING",
     "title": "Outstanding Balance",
-    "amountDue": "$1,248.50",
+    "amountDue": "RM 412.00",
     "highlightLabel": "2 Overdue Bills",
     "primaryActionLabel": "Pay All Now",
-    "dueDateLabel": "Due on 28 May 2026",
-    "description": "Your maintenance charges and sinking fund fees are ready for payment."
+    "dueDateLabel": "Due on 28 Apr 2026",
+    "description": "Your maintenance charges, sinking fund, and current water bill are ready for payment."
   },
   "invoices": [
     {
       "id": "invoice-maintenance-may",
-      "title": "Electricity Bill",
-      "periodLabel": "October 2023",
-      "invoiceLabel": "Inv-8842",
-      "dueLabel": "Due Oct 15",
-      "amount": 245,
-      "displayAmount": "$245.00",
-      "statusLabel": "OVERDUE",
-      "statusTone": "danger",
-      "icon": "flash-outline",
+      "title": "Maintenance Charges",
+      "periodLabel": "April 2026",
+      "invoiceLabel": "INV-MC-2408",
+      "dueLabel": "Due 28 Apr",
+      "amount": 220,
+      "displayAmount": "RM 220.00",
+      "statusLabel": "UNPAID",
+      "statusTone": "neutral",
+      "icon": "home-outline",
       "selectedByDefault": true
     },
     {
       "id": "invoice-sinking-may",
-      "title": "Water & Sewage",
-      "periodLabel": "September 2023",
-      "invoiceLabel": "Inv-7721",
-      "dueLabel": "Due Sep 28",
-      "amount": 82.3,
-      "displayAmount": "$82.30",
-      "statusLabel": "OVERDUE",
-      "statusTone": "danger",
-      "icon": "water-outline",
+      "title": "Sinking Fund",
+      "periodLabel": "April 2026",
+      "invoiceLabel": "INV-SF-2408",
+      "dueLabel": "Due 28 Apr",
+      "amount": 120,
+      "displayAmount": "RM 120.00",
+      "statusLabel": "UNPAID",
+      "statusTone": "neutral",
+      "icon": "wallet-outline",
       "selectedByDefault": true
     },
     {
       "id": "invoice-water-adjustment",
-      "title": "Maintenance Fee",
-      "periodLabel": "November 2023",
-      "invoiceLabel": "Inv-9901",
-      "dueLabel": "Due Nov 30",
-      "amount": 921.2,
-      "displayAmount": "$921.20",
+      "title": "Water Bill",
+      "periodLabel": "March 2026",
+      "invoiceLabel": "INV-WTR-1182",
+      "dueLabel": "Due 28 Apr",
+      "amount": 72,
+      "displayAmount": "RM 72.00",
       "statusLabel": "UNPAID",
       "statusTone": "neutral",
-      "icon": "briefcase-outline",
+      "icon": "water-outline",
       "selectedByDefault": true
     }
   ],
@@ -78,7 +78,7 @@
     "subtotalLabel": "Selected charges",
     "feeLabel": "Processing fee",
     "feeAmount": 0,
-    "feeDisplayAmount": "$0.00",
+    "feeDisplayAmount": "RM 0.00",
     "totalLabel": "Amount to pay"
   },
   "labels": {
@@ -104,16 +104,16 @@
   "recentPayments": [
     {
       "id": "payment-apr-2026",
-      "title": "Rent - October",
-      "dateLabel": "Oct 01, 2023",
-      "amountDisplay": "$3,200.00",
+      "title": "Maintenance Charges",
+      "dateLabel": "28 Mar 2026",
+      "amountDisplay": "RM 220.00",
       "statusLabel": "SUCCESS"
     },
     {
       "id": "payment-mar-2026",
-      "title": "Parking Fee",
-      "dateLabel": "Sep 25, 2023",
-      "amountDisplay": "$150.00",
+      "title": "Sinking Fund",
+      "dateLabel": "28 Mar 2026",
+      "amountDisplay": "RM 120.00",
       "statusLabel": "SUCCESS"
     }
   ]

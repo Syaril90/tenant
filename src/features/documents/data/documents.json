@@ -2,14 +2,14 @@
   "header": {
     "eyebrow": "RESOURCE CENTER",
     "titleLines": ["Forms and", "Documents"],
-    "description": "Browse building records, meeting logs, circulars, and financial statements in one place."
+    "description": "Browse by-laws, AGM minutes, circulars, and management statements in one place."
   },
   "searchPlaceholder": "Find a specific file...",
   "categories": [
     {
       "id": "house-rules",
-      "title": "House Rules",
-      "description": "Legal & Community",
+      "title": "By-Laws",
+      "description": "House Rules",
       "icon": "hammer-outline",
       "featured": true
     },
@@ -29,8 +29,8 @@
     },
     {
       "id": "financials",
-      "title": "Financials",
-      "description": "Budget & Statements",
+      "title": "Statements",
+      "description": "Accounts & Finance",
       "icon": "wallet-outline",
       "featured": false
     }
@@ -46,61 +46,60 @@
   "documents": [
     {
       "id": "renovation-guidelines-2024",
-      "title": "Renovation_Guidelines_2024.pdf",
+      "title": "Renovation_Guidelines_2026.pdf",
       "sizeLabel": "2.4 MB",
-      "description": "Guidelines for unit renovation and contractor access approvals.",
+      "description": "Guidelines for unit renovation, contractor registration, and renovation deposit requirements.",
       "categoryId": "house-rules",
-      "categoryLabel": "House Rules",
+      "categoryLabel": "By-Laws",
       "fileTypeLabel": "PDF",
       "tone": "danger",
       "updatedAtLabel": "Updated 15 May 2026",
-      "previewTitle": "Renovation Guidelines 2024",
-      "previewBody": "This mocked in-app view represents a resident-readable summary of the renovation rules, approved working hours, deposit requirements, and contractor onboarding conditions."
+      "previewTitle": "Renovation Guidelines 2026",
+      "previewBody": "This mocked in-app view represents a resident-readable summary of approved renovation hours, contractor access rules, renovation deposits, and House Rules set by management."
     },
     {
       "id": "agm-minutes-q4-2023",
-      "title": "AGM_Minutes_Q4_2023.docx",
+      "title": "AGM_Minutes_2025.docx",
       "sizeLabel": "856 KB",
-      "description": "Minutes recorded during the fourth quarter annual general meeting.",
+      "description": "Minutes recorded during the annual general meeting with resolutions and voting updates.",
       "categoryId": "agm-minutes",
       "categoryLabel": "AGM Minutes",
       "fileTypeLabel": "DOCX",
       "tone": "info",
       "updatedAtLabel": "Updated 21 Apr 2026",
-      "previewTitle": "AGM Minutes Q4 2023",
-      "previewBody": "This mocked in-app view summarizes agenda items, voting outcomes, maintenance updates, and community decisions recorded during the AGM."
+      "previewTitle": "AGM Minutes 2025",
+      "previewBody": "This mocked in-app view summarizes agenda items, resolutions passed, JMB updates, and maintenance matters recorded during the AGM."
     },
     {
       "id": "annual-financial-statement",
-      "title": "Annual_Financial_Statement.xlsx",
+      "title": "Management_Statement_FY2025.xlsx",
       "sizeLabel": "4.1 MB",
-      "description": "Annual summary of account balances, maintenance collections, and expenses.",
+      "description": "Summary of maintenance collections, sinking fund balances, and major operating expenses.",
       "categoryId": "financials",
-      "categoryLabel": "Financials",
+      "categoryLabel": "Statements",
       "fileTypeLabel": "XLSX",
       "tone": "success",
       "updatedAtLabel": "Updated 09 May 2026",
-      "previewTitle": "Annual Financial Statement",
-      "previewBody": "This mocked in-app view provides a simplified summary of the statement, including maintenance income, sinking fund allocation, and major operating expenses."
+      "previewTitle": "Management Statement FY2025",
+      "previewBody": "This mocked in-app view provides a simplified summary of maintenance income, sinking fund allocation, arrears, and major operating expenses for the property."
     },
     {
       "id": "lift-modernization-circular",
-      "title": "Lift_Modernization_Circular.pdf",
+      "title": "Lift_Refurbishment_Circular.pdf",
       "sizeLabel": "1.3 MB",
-      "description": "Announcement for elevator upgrade schedule and expected service impact.",
+      "description": "Circular on lift refurbishment schedule and expected service impact by tower.",
       "categoryId": "circulars",
       "categoryLabel": "Circulars",
       "fileTypeLabel": "PDF",
       "tone": "neutral",
       "updatedAtLabel": "Updated 11 May 2026",
-      "previewTitle": "Lift Modernization Circular",
-      "previewBody": "This mocked in-app view outlines the modernization timeline, affected towers, and alternative access guidance for residents."
+      "previewTitle": "Lift Refurbishment Circular",
+      "previewBody": "This mocked in-app view outlines the work schedule, affected towers, and access guidance for residents during refurbishment."
     }
   ],
   "helpCard": {
     "titleLines": ["Can't find what", "you're looking", "for?"],
-    "description": "Official hard copies of old deed records and structural blueprints can still be requested at the Concierge Desk.",
+    "description": "Archived circulars, stamped letters, and older management records can still be requested from the management office.",
     "primaryActionLabel": "Request a Document"
   }
 }
-
