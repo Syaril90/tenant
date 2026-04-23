@@ -137,55 +137,139 @@ export function BillingScreen() {
           <View
             style={{
               backgroundColor: theme.semantic.foreground.brand,
-              borderRadius: 28,
+              borderRadius: 30,
               padding: theme.spacing[6],
-              gap: theme.spacing[4],
+              borderWidth: 1,
+              borderColor: "rgba(255,255,255,0.08)",
+              gap: theme.spacing[5],
               shadowColor: theme.shadow.floating.shadowColor,
-              shadowOpacity: theme.shadow.floating.shadowOpacity,
-              shadowRadius: theme.shadow.floating.shadowRadius,
-              shadowOffset: theme.shadow.floating.shadowOffset,
-              elevation: theme.shadow.floating.elevation
+              shadowOpacity: 0.12,
+              shadowRadius: 14,
+              shadowOffset: { width: 0, height: 8 },
+              elevation: 8
             }}
           >
-            <ThemedText variant="label" size="md" color="inverse" style={{ opacity: 0.72 }}>
-              {data.summary.badge}
-            </ThemedText>
-            <ThemedText variant="display" size="large" color="inverse">
-              {data.summary.amountDue}
-            </ThemedText>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: theme.spacing[4]
+              }}
+            >
+              <View style={{ flex: 1, gap: theme.spacing[3] }}>
+                <View
+                  style={{
+                    alignSelf: "flex-start",
+                    backgroundColor: "rgba(255,255,255,0.14)",
+                    borderRadius: theme.radius.pill,
+                    paddingHorizontal: theme.spacing[4],
+                    paddingVertical: 6
+                  }}
+                >
+                  <ThemedText variant="label" size="sm" color="inverse">
+                    {data.summary.badge}
+                  </ThemedText>
+                </View>
+
+                <View style={{ gap: theme.spacing[2] }}>
+                  <ThemedText variant="heading" size="md" color="inverse">
+                    {data.summary.title}
+                  </ThemedText>
+                  <ThemedText variant="display" size="large" color="inverse">
+                    {data.summary.amountDue}
+                  </ThemedText>
+                  <ThemedText color="inverse" style={{ opacity: 0.8 }}>
+                    {data.summary.description}
+                  </ThemedText>
+                </View>
+              </View>
+
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: 25,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "rgba(255,255,255,0.14)"
+                }}
+              >
+                <Ionicons
+                  name="wallet-outline"
+                  size={22}
+                  color={theme.semantic.foreground.inverse}
+                />
+              </View>
+            </View>
 
             <View
               style={{
-                alignSelf: "flex-start",
-                backgroundColor: "rgba(255,255,255,0.16)",
-                borderRadius: theme.radius.pill,
+                backgroundColor: "rgba(255,255,255,0.1)",
+                borderRadius: 18,
                 paddingHorizontal: theme.spacing[4],
                 paddingVertical: theme.spacing[3],
-                flexDirection: "row",
-                alignItems: "center",
-                gap: theme.spacing[2]
+                alignItems: "flex-start",
+                gap: theme.spacing[1]
               }}
             >
-              <Ionicons name="warning-outline" size={16} color={theme.semantic.foreground.inverse} />
-              <ThemedText color="inverse">{data.summary.highlightLabel}</ThemedText>
+              <ThemedText variant="label" size="sm" color="inverse" style={{ opacity: 0.72 }}>
+                PAYMENT WINDOW
+              </ThemedText>
+              <ThemedText color="inverse">{data.summary.dueDateLabel}</ThemedText>
             </View>
 
-            <Pressable
-              disabled={!selectedInvoiceIds.length || submitPaymentMutation.isPending}
-              onPress={() => handleSubmitPayment(selectedInvoiceIds)}
-              style={{
-                alignSelf: "flex-start",
-                backgroundColor: theme.semantic.foreground.inverse,
-                borderRadius: theme.radius.sm,
-                paddingHorizontal: theme.spacing[6],
-                paddingVertical: theme.spacing[4],
-                opacity: !selectedInvoiceIds.length || submitPaymentMutation.isPending ? 0.6 : 1
-              }}
-            >
-              <ThemedText color="brand">
-                {submitPaymentMutation.isPending ? "Processing..." : data.summary.primaryActionLabel}
-              </ThemedText>
-            </Pressable>
+            <View style={{ flexDirection: "row", gap: theme.spacing[3] }}>
+              <Pressable
+                disabled={!selectedInvoiceIds.length || submitPaymentMutation.isPending}
+                onPress={() => handleSubmitPayment(selectedInvoiceIds)}
+                style={{
+                  flex: 1,
+                  backgroundColor: theme.semantic.foreground.inverse,
+                  borderRadius: 14,
+                  paddingHorizontal: theme.spacing[6],
+                  paddingVertical: theme.spacing[4],
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  gap: theme.spacing[2],
+                  opacity: !selectedInvoiceIds.length || submitPaymentMutation.isPending ? 0.6 : 1
+                }}
+              >
+                <Ionicons
+                  name="card-outline"
+                  size={16}
+                  color={theme.semantic.foreground.brand}
+                />
+                <ThemedText color="brand">
+                  {submitPaymentMutation.isPending ? "Processing..." : data.summary.primaryActionLabel}
+                </ThemedText>
+              </Pressable>
+
+              <Pressable
+                onPress={() => router.push("/payment-history")}
+                style={{
+                  flex: 1,
+                  backgroundColor: "transparent",
+                  borderRadius: 14,
+                  borderWidth: 1,
+                  borderColor: "rgba(255,255,255,0.22)",
+                  paddingHorizontal: theme.spacing[6],
+                  paddingVertical: theme.spacing[4],
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  gap: theme.spacing[2]
+                }}
+              >
+                <Ionicons
+                  name="time-outline"
+                  size={16}
+                  color={theme.semantic.foreground.inverse}
+                />
+                <ThemedText color="inverse">{data.labels.paymentHistoryActionLabel}</ThemedText>
+              </Pressable>
+            </View>
           </View>
 
           <View
@@ -214,7 +298,10 @@ export function BillingScreen() {
               <ThemedText variant="heading" size="lg">
                 {data.labels.activeInvoicesTitle}
               </ThemedText>
-              <Pressable style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+              <Pressable
+                onPress={() => router.push("/payment-history")}
+                style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
+              >
                 <ThemedText color="brand">{data.labels.paymentHistoryActionLabel}</ThemedText>
                 <Ionicons name="chevron-forward" size={14} color={theme.semantic.foreground.brand} />
               </Pressable>

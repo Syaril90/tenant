@@ -3,6 +3,7 @@ import { router } from "expo-router";
 
 import { SupportCommunityActions } from "@/features/support/components/support-community-actions";
 import { SupportCaseList } from "@/features/support/components/support-case-list";
+import { SupportShortcuts } from "@/features/support/components/support-shortcuts";
 import { SupportUpdatesFeed } from "@/features/support/components/support-updates-feed";
 import supportJson from "@/features/support/data/support.json";
 import { useSupportQuery } from "@/features/support/queries/use-support-query";
@@ -37,7 +38,7 @@ export function SupportScreen() {
     );
   }
 
-  const { header, actions, cases, updates } = supportQuery.data;
+  const { header, actions, shortcuts, cases, updates } = supportQuery.data;
 
   return (
     <Screen>
@@ -53,8 +54,12 @@ export function SupportScreen() {
             <ThemedText color="secondary">{header.description}</ThemedText>
           </View>
           <SupportCommunityActions section={actions} />
+          <SupportShortcuts section={shortcuts} />
           <SupportCaseList
             section={cases}
+            onViewAll={() => {
+              router.push("/support-cases");
+            }}
             onSelectCase={(caseId) => {
               router.push(`/support-complaints/${caseId}`);
             }}

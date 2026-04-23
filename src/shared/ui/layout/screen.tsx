@@ -96,36 +96,66 @@ function AppHeader({ mode }: { mode: "main" | "sub" }) {
         style={{
           backgroundColor: theme.semantic.background.surface,
           paddingHorizontal: theme.spacing[5],
-          paddingVertical: theme.spacing[4],
+          paddingTop: theme.spacing[4],
+          paddingBottom: theme.spacing[4],
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
+          borderBottomWidth: 1,
+          borderBottomColor: "rgba(215,222,231,0.55)"
         }}
       >
-        <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[4] }}>
-          {mode === "main" ? (
-            <Pressable hitSlop={12}>
-              <Ionicons name="menu" size={22} color={theme.semantic.foreground.brand} />
+        <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[4], flex: 1 }}>
+          {mode === "sub" ? (
+            <Pressable
+              onPress={() => router.back()}
+              hitSlop={12}
+              style={{
+                width: 38,
+                height: 38,
+                borderRadius: 19,
+                backgroundColor: "rgba(255,255,255,0.9)",
+                borderWidth: 1,
+                borderColor: "rgba(215,222,231,0.8)",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <Ionicons name="arrow-back" size={18} color={theme.semantic.foreground.brand} />
             </Pressable>
-          ) : (
-            <Pressable onPress={() => router.back()} hitSlop={12}>
-              <Ionicons name="arrow-back" size={20} color={theme.semantic.foreground.brand} />
-            </Pressable>
-          )}
+          ) : null}
 
-          <ThemedText variant="heading" size="md" color="brand">
-            {appIdentity.headerName}
-          </ThemedText>
+          {mode === "main" ? (
+            <View style={{ gap: 2 }}>
+              <ThemedText variant="label" size="sm" color="tertiary">
+                HOMEBASE
+              </ThemedText>
+              <ThemedText variant="heading" size="md" color="brand">
+                {appIdentity.headerName}
+              </ThemedText>
+            </View>
+          ) : (
+            <View style={{ gap: 2 }}>
+              <ThemedText variant="label" size="sm" color="tertiary">
+                APP VIEW
+              </ThemedText>
+              <ThemedText variant="heading" size="md" color="brand">
+                {appIdentity.headerName}
+              </ThemedText>
+            </View>
+          )}
         </View>
 
         <Pressable
           onPress={openAccountMenu}
           hitSlop={12}
           style={{
-            width: 38,
-            height: 38,
+            width: 44,
+            height: 44,
             borderRadius: theme.radius.pill,
-            backgroundColor: theme.semantic.background.emphasis,
+            backgroundColor: theme.semantic.background.muted,
+            borderWidth: 1,
+            borderColor: theme.semantic.border.subtle,
             alignItems: "center",
             justifyContent: "center"
           }}
@@ -133,8 +163,8 @@ function AppHeader({ mode }: { mode: "main" | "sub" }) {
           <Avatar
             imageUrl={identity.avatarUrl}
             fallbackLabel={identity.initials}
-            size={38}
-            inverse
+            size={40}
+            inverse={false}
           />
         </Pressable>
       </View>

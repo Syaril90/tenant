@@ -6,6 +6,7 @@ export type BillingHeader = {
 
 export type BillingSummary = {
   badge: string;
+  title: string;
   amountDue: string;
   highlightLabel: string;
   primaryActionLabel: string;
@@ -70,6 +71,47 @@ export type BillingRecentPayment = {
   dateLabel: string;
   amountDisplay: string;
   statusLabel: string;
+};
+
+export type PaymentHistoryFilter = {
+  id: string;
+  label: string;
+};
+
+export type PaymentHistorySummaryCard = {
+  id: string;
+  label: string;
+  value: string;
+  tone: "brand" | "success" | "neutral";
+};
+
+export type PaymentHistoryItem = {
+  id: string;
+  title: string;
+  category: string;
+  paidAtLabel: string;
+  amountDisplay: string;
+  statusLabel: string;
+  statusTone: "success" | "warning" | "neutral";
+  methodLabel: string;
+  referenceLabel: string;
+};
+
+export type PaymentHistoryContent = {
+  header: BillingHeader;
+  searchPlaceholder: string;
+  filters: PaymentHistoryFilter[];
+  summaryCards: PaymentHistorySummaryCard[];
+  payments: PaymentHistoryItem[];
+  emptyState: {
+    title: string;
+    description: string;
+  };
+  messages: {
+    loading: string;
+    errorTitle: string;
+    errorDescription: string;
+  };
 };
 
 export type BillingModel = {

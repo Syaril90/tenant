@@ -2,28 +2,32 @@ export type DashboardHeader = {
   eyebrow: string;
   titleLines: string[];
   description: string;
+  pillLabel: string;
 };
 
 export type DashboardBalanceCard = {
   badge: string;
   title: string;
   amount: string;
+  dueDateLabel: string;
+  supportingLabel: string;
   primaryActionLabel: string;
   secondaryActionLabel: string;
   icon: string;
 };
 
-export type DashboardStatusCard = {
+export type DashboardContactCard = {
+  id: string;
   eyebrow: string;
   title: string;
   description: string;
   icon: string;
+  actionLabel: string;
+  accentColor: string;
 };
 
-export type DashboardWeatherCard = {
-  temperature: string;
-  condition: string;
-  icon: string;
+export type DashboardContactSection = {
+  items: DashboardContactCard[];
 };
 
 export type DashboardQuickAction = {
@@ -103,8 +107,7 @@ export type AnnouncementDetailContent = {
 export type DashboardModel = {
   header: DashboardHeader;
   balanceCard: DashboardBalanceCard;
-  statusCard: DashboardStatusCard;
-  weatherCard: DashboardWeatherCard;
+  contacts: DashboardContactSection;
   quickActions: DashboardQuickActionsSection;
   announcements: DashboardAnnouncementsSection;
 };

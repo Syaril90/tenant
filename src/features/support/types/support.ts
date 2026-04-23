@@ -68,6 +68,7 @@ export type SupportCase = {
 
 export type SupportCaseSection = {
   title: string;
+  viewAllLabel: string;
   items: SupportCase[];
 };
 
@@ -93,6 +94,7 @@ export type SupportMessages = {
 export type SupportModel = {
   header: SupportHeader;
   actions: SupportActionsSection;
+  shortcuts: SupportShortcutSection;
   cases: SupportCaseSection;
   updates: SupportUpdatesSection;
   messages: SupportMessages;

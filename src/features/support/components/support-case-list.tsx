@@ -8,6 +8,7 @@ import { useAppTheme } from "@/shared/theme/theme-provider";
 type SupportCaseListProps = {
   section: SupportCaseSection;
   onSelectCase?: (caseId: string) => void;
+  onViewAll?: () => void;
 };
 
 const toneStyles: Record<SupportCaseTone, { backgroundColor: string; color: string }> = {
@@ -16,14 +17,23 @@ const toneStyles: Record<SupportCaseTone, { backgroundColor: string; color: stri
   neutral: { backgroundColor: "#EDF2F7", color: "#51606D" }
 };
 
-export function SupportCaseList({ section, onSelectCase }: SupportCaseListProps) {
+export function SupportCaseList({ section, onSelectCase, onViewAll }: SupportCaseListProps) {
   const { theme } = useAppTheme();
 
   return (
     <View style={{ gap: theme.spacing[4] }}>
-      <ThemedText variant="label" size="sm" color="tertiary">
-        {section.title}
-      </ThemedText>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+        <ThemedText variant="label" size="sm" color="tertiary">
+          {section.title}
+        </ThemedText>
+        {onViewAll ? (
+          <Pressable onPress={onViewAll}>
+            <ThemedText variant="label" size="sm" color="brand">
+              {section.viewAllLabel}
+            </ThemedText>
+          </Pressable>
+        ) : null}
+      </View>
 
       <View style={{ gap: theme.spacing[3] }}>
         {section.items.map((item) => {

@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Image, View } from "react-native";
+import { Image, Pressable, View } from "react-native";
+import { router } from "expo-router";
 
 import type {
   SupportUpdate,
@@ -28,9 +29,11 @@ export function SupportUpdatesFeed({ section }: SupportUpdatesFeedProps) {
         <ThemedText variant="label" size="md" color="tertiary">
           {section.title}
         </ThemedText>
-        <ThemedText variant="label" size="md" color="brand">
-          {section.viewAllLabel}
-        </ThemedText>
+        <Pressable onPress={() => router.push("/announcements")}>
+          <ThemedText variant="label" size="md" color="brand">
+            {section.viewAllLabel}
+          </ThemedText>
+        </Pressable>
       </View>
 
       <View style={{ gap: theme.spacing[4] }}>

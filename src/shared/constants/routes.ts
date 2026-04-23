@@ -3,6 +3,5 @@ export const tabs = [
   { name: "hub", title: "Hub", icon: "apps-outline" },
   { name: "bills", title: "Bills", icon: "receipt-outline" },
   { name: "visitor", title: "Visitor", icon: "people-outline" },
-  { name: "support", title: "Support", icon: "headset-outline" },
-  { name: "files", title: "Files", icon: "folder-open-outline" }
+  { name: "support", title: "Support", icon: "headset-outline" }
 ] as const;

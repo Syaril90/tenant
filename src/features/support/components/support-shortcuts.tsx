@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, View } from "react-native";
+import { router } from "expo-router";
 
 import type { SupportShortcutSection, SupportShortcutTone } from "@/features/support/types/support";
 import { SurfaceCard } from "@/shared/ui/primitives/surface-card";
@@ -30,7 +31,14 @@ export function SupportShortcuts({ section }: SupportShortcutsProps) {
           const colors = toneMap[item.tone];
 
           return (
-            <Pressable key={item.id}>
+            <Pressable
+              key={item.id}
+              onPress={() => {
+                if (item.id === "browse-documents") {
+                  router.push("/files");
+                }
+              }}
+            >
               <SurfaceCard
                 style={{
                   gap: theme.spacing[4],

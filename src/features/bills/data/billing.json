@@ -6,6 +6,7 @@
   },
   "summary": {
     "badge": "TOTAL OUTSTANDING",
+    "title": "Outstanding Balance",
     "amountDue": "$1,248.50",
     "highlightLabel": "2 Overdue Bills",
     "primaryActionLabel": "Pay All Now",

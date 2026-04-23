@@ -37,7 +37,7 @@ export function DashboardScreen() {
     );
   }
 
-  const { header, balanceCard, statusCard, weatherCard, quickActions, announcements } =
+  const { header, balanceCard, contacts, quickActions, announcements } =
     dashboardQuery.data;
   const identity = getUserIdentity(user);
   const titleLines =
@@ -49,10 +49,20 @@ export function DashboardScreen() {
     <Screen>
       <ScrollView contentContainerStyle={{ paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
         <View style={{ gap: theme.spacing[8] }}>
-          <View style={{ gap: theme.spacing[1] }}>
-            <ThemedText variant="label" size="sm" color="tertiary">
-              {header.eyebrow}
-            </ThemedText>
+          <View style={{ gap: theme.spacing[3] }}>
+            <View
+              style={{
+                alignSelf: "flex-start",
+                backgroundColor: "#EAF2FF",
+                borderRadius: theme.radius.pill,
+                paddingHorizontal: theme.spacing[4],
+                paddingVertical: theme.spacing[2]
+              }}
+            >
+              <ThemedText variant="label" size="sm" color="brand">
+                {header.pillLabel}
+              </ThemedText>
+            </View>
             <View>
               {titleLines.map((line) => (
                 <ThemedText key={line} variant="heading" size="xl" color="brand">
@@ -64,7 +74,7 @@ export function DashboardScreen() {
           </View>
 
           <DashboardBalanceCard card={balanceCard} />
-          <DashboardInfoPanels statusCard={statusCard} weatherCard={weatherCard} />
+          <DashboardInfoPanels contacts={contacts} />
           <DashboardQuickActions section={quickActions} />
           <DashboardAnnouncements section={announcements} />
         </View>

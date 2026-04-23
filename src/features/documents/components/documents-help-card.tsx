@@ -1,4 +1,5 @@
 import { Pressable, View } from "react-native";
+import { router } from "expo-router";
 
 import type { DocumentsHelpCard as DocumentsHelpCardModel } from "@/features/documents/types/documents";
 import { useAppTheme } from "@/shared/theme/theme-provider";
@@ -32,6 +33,7 @@ export function DocumentsHelpCard({ card }: DocumentsHelpCardProps) {
       <ThemedText color="inverse">{card.description}</ThemedText>
 
       <Pressable
+        onPress={() => router.push("/request-document")}
         style={{
           alignSelf: "flex-start",
           backgroundColor: theme.semantic.background.surface,
@@ -45,4 +47,3 @@ export function DocumentsHelpCard({ card }: DocumentsHelpCardProps) {
     </View>
   );
 }
-

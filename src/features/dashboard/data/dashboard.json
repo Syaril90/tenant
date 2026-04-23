@@ -2,26 +2,40 @@
   "header": {
     "eyebrow": "RESIDENT DASHBOARD",
     "titleLines": ["Good Morning,", "Alexander"],
-    "description": "Welcome back to your sanctuary. Here is everything happening in your home today."
+    "description": "Welcome back to your sanctuary. Here is everything happening in your home today.",
+    "pillLabel": "Tower A • Unit 12-08"
   },
   "balanceCard": {
     "badge": "DUE IN 4 DAYS",
     "title": "Outstanding Balance",
     "amount": "$1,248.50",
+    "dueDateLabel": "Due on 28 May 2026",
+    "supportingLabel": "Maintenance, sinking fund, and utility adjustments",
     "primaryActionLabel": "Pay Now",
     "secondaryActionLabel": "View Breakdown",
     "icon": "wallet-outline"
   },
-  "statusCard": {
-    "eyebrow": "SECURITY STATUS",
-    "title": "Unit 402 Secure",
-    "description": "Smart locks active • All clear",
-    "icon": "shield-checkmark-outline"
-  },
-  "weatherCard": {
-    "temperature": "24°C",
-    "condition": "Sunny in Setapak",
-    "icon": "sunny-outline"
+  "contacts": {
+    "items": [
+      {
+        "id": "guard-house",
+        "eyebrow": "24/7 SECURITY",
+        "title": "Contact Guard House",
+        "description": "+60 12-662 0048",
+        "icon": "shield-checkmark-outline",
+        "actionLabel": "Call now",
+        "accentColor": "#E8F1FF"
+      },
+      {
+        "id": "management-office",
+        "eyebrow": "MANAGEMENT OFFICE",
+        "title": "Contact Management",
+        "description": "+60 3-4021 8840",
+        "icon": "business-outline",
+        "actionLabel": "Reach office",
+        "accentColor": "#EEF8F1"
+      }
+    ]
   },
   "quickActions": {
     "eyebrow": "RESIDENT SERVICES",

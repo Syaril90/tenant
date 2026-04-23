@@ -1,0 +1,266 @@
+import { useMemo, useState } from "react";
+import { ScrollView, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+import paymentHistoryJson from "@/features/bills/data/payment-history.json";
+import { usePaymentHistoryContentQuery } from "@/features/bills/queries/use-payment-history-content-query";
+import type { PaymentHistoryContent, PaymentHistoryItem } from "@/features/bills/types/billing";
+import { DocumentSearchInput } from "@/features/documents/components/document-search-input";
+import { SupportSegmentedTabs } from "@/features/support/components/support-segmented-tabs";
+import { Screen } from "@/shared/ui/layout/screen";
+import { ScreenState } from "@/shared/ui/layout/screen-state";
+import { useAppTheme } from "@/shared/theme/theme-provider";
+import { SurfaceCard } from "@/shared/ui/primitives/surface-card";
+import { ThemedText } from "@/shared/ui/primitives/themed-text";
+
+const toneStyles = {
+  brand: {
+    backgroundColor: "#E8F1FF",
+    foregroundColor: "#1F5EFF"
+  },
+  success: {
+    backgroundColor: "#ECF9F1",
+    foregroundColor: "#1B7A46"
+  },
+  neutral: {
+    backgroundColor: "#F2F5F9",
+    foregroundColor: "#5E6C7B"
+  }
+} as const;
+
+const statusStyles = {
+  success: {
+    backgroundColor: "#ECF9F1",
+    foregroundColor: "#1B7A46"
+  },
+  warning: {
+    backgroundColor: "#FFF4E8",
+    foregroundColor: "#B85E00"
+  },
+  neutral: {
+    backgroundColor: "#EDF2F7",
+    foregroundColor: "#51606D"
+  }
+} as const;
+
+export function PaymentHistoryScreen() {
+  const { theme } = useAppTheme();
+  const paymentHistoryQuery = usePaymentHistoryContentQuery();
+  const [query, setQuery] = useState("");
+  const [activeFilterId, setActiveFilterId] = useState("all");
+  const fallbackContent = paymentHistoryJson as PaymentHistoryContent;
+
+  const filteredPayments = useMemo(() => {
+    const payments = paymentHistoryQuery.data?.payments ?? [];
+    const normalizedQuery = query.trim().toLowerCase();
+
+    return payments.filter((payment) => {
+      const matchesFilter = activeFilterId === "all" ? true : payment.statusTone === activeFilterId;
+      const matchesQuery = normalizedQuery
+        ? [payment.title, payment.category, payment.methodLabel, payment.referenceLabel]
+            .join(" ")
+            .toLowerCase()
+            .includes(normalizedQuery)
+        : true;
+
+      return matchesFilter && matchesQuery;
+    });
+  }, [activeFilterId, paymentHistoryQuery.data?.payments, query]);
+
+  if (paymentHistoryQuery.isLoading) {
+    return (
+      <Screen>
+        <ScreenState kind="loading" message={fallbackContent.messages.loading} />
+      </Screen>
+    );
+  }
+
+  if (paymentHistoryQuery.isError || !paymentHistoryQuery.data) {
+    return (
+      <Screen>
+        <ScreenState
+          kind="error"
+          title={fallbackContent.messages.errorTitle}
+          description={fallbackContent.messages.errorDescription}
+        />
+      </Screen>
+    );
+  }
+
+  const { header, filters, searchPlaceholder, summaryCards, emptyState } = paymentHistoryQuery.data;
+
+  return (
+    <Screen>
+      <ScrollView contentContainerStyle={{ paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
+        <View style={{ gap: theme.spacing[8] }}>
+          <View style={{ gap: theme.spacing[2] }}>
+            <ThemedText variant="label" size="sm" color="tertiary">
+              {header.eyebrow}
+            </ThemedText>
+            <ThemedText variant="heading" size="xl" color="brand">
+              {header.title}
+            </ThemedText>
+            <ThemedText color="secondary">{header.description}</ThemedText>
+          </View>
+
+          <View style={{ gap: theme.spacing[3] }}>
+            {summaryCards[0] ? (
+              <PaymentHistorySummaryCard card={summaryCards[0]} featured />
+            ) : null}
+
+            {summaryCards.length > 1 ? (
+              <View style={{ flexDirection: "row", gap: theme.spacing[3] }}>
+                {summaryCards.slice(1).map((card) => (
+                  <PaymentHistorySummaryCard key={card.id} card={card} />
+                ))}
+              </View>
+            ) : null}
+          </View>
+
+          <DocumentSearchInput
+            value={query}
+            placeholder={searchPlaceholder}
+            onChangeText={setQuery}
+          />
+
+          <SupportSegmentedTabs
+            tabs={filters}
+            activeTabId={activeFilterId}
+            onChange={setActiveFilterId}
+          />
+
+          {filteredPayments.length ? (
+            <View style={{ gap: theme.spacing[3] }}>
+              {filteredPayments.map((payment) => (
+                <PaymentHistoryCard key={payment.id} payment={payment} />
+              ))}
+            </View>
+          ) : (
+            <SurfaceCard>
+              <View style={{ gap: theme.spacing[2] }}>
+                <ThemedText variant="heading" size="md">
+                  {emptyState.title}
+                </ThemedText>
+                <ThemedText color="secondary">{emptyState.description}</ThemedText>
+              </View>
+            </SurfaceCard>
+          )}
+        </View>
+      </ScrollView>
+    </Screen>
+  );
+}
+
+function PaymentHistorySummaryCard({
+  card,
+  featured = false
+}: {
+  card: PaymentHistoryContent["summaryCards"][number];
+  featured?: boolean;
+}) {
+  const { theme } = useAppTheme();
+  const tone = toneStyles[card.tone];
+
+  return (
+    <SurfaceCard
+      style={{
+        flex: featured ? undefined : 1,
+        gap: featured ? theme.spacing[3] : theme.spacing[2],
+        paddingVertical: featured ? theme.spacing[6] : theme.spacing[5]
+      }}
+    >
+      <ThemedText color="tertiary">{card.label}</ThemedText>
+      <ThemedText
+        variant="heading"
+        size={featured ? "lg" : "md"}
+        style={{ color: tone.foregroundColor }}
+      >
+        {card.value}
+      </ThemedText>
+      <View
+        style={{
+          alignSelf: "flex-start",
+          backgroundColor: tone.backgroundColor,
+          borderRadius: theme.radius.pill,
+          paddingHorizontal: theme.spacing[3],
+          paddingVertical: theme.spacing[2]
+        }}
+      >
+        <ThemedText variant="label" size="sm" style={{ color: tone.foregroundColor }}>
+          {featured ? "Overview" : "Indicator"}
+        </ThemedText>
+      </View>
+    </SurfaceCard>
+  );
+}
+
+function PaymentHistoryCard({ payment }: { payment: PaymentHistoryItem }) {
+  const { theme } = useAppTheme();
+  const status = statusStyles[payment.statusTone];
+
+  return (
+    <SurfaceCard style={{ gap: theme.spacing[4] }}>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", gap: theme.spacing[4] }}>
+        <View style={{ flexDirection: "row", gap: theme.spacing[4], flex: 1 }}>
+          <View
+            style={{
+              width: 42,
+              height: 42,
+              borderRadius: 21,
+              backgroundColor: "#EDF4FF",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            <Ionicons name="wallet-outline" size={18} color={theme.semantic.foreground.brand} />
+          </View>
+
+          <View style={{ gap: theme.spacing[1], flex: 1 }}>
+            <ThemedText variant="heading" size="md">
+              {payment.title}
+            </ThemedText>
+            <ThemedText color="secondary">
+              {payment.category} • {payment.paidAtLabel}
+            </ThemedText>
+            <ThemedText color="tertiary">{payment.methodLabel}</ThemedText>
+          </View>
+        </View>
+
+        <View style={{ alignItems: "flex-end", gap: theme.spacing[2] }}>
+          <ThemedText variant="heading" size="md">
+            {payment.amountDisplay}
+          </ThemedText>
+          <View
+            style={{
+              backgroundColor: status.backgroundColor,
+              borderRadius: theme.radius.pill,
+              paddingHorizontal: theme.spacing[3],
+              paddingVertical: theme.spacing[2]
+            }}
+          >
+            <ThemedText variant="label" size="sm" style={{ color: status.foregroundColor }}>
+              {payment.statusLabel}
+            </ThemedText>
+          </View>
+        </View>
+      </View>
+
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: theme.spacing[3]
+        }}
+      >
+        <ThemedText color="tertiary">{payment.referenceLabel}</ThemedText>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+          <ThemedText variant="label" size="sm" color="brand">
+            Receipt ready
+          </ThemedText>
+          <Ionicons name="chevron-forward" size={14} color={theme.semantic.foreground.brand} />
+        </View>
+      </View>
+    </SurfaceCard>
+  );
+}

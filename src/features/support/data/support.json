@@ -19,8 +19,21 @@
       }
     ]
   },
+  "shortcuts": {
+    "title": "SELF SERVICE",
+    "items": [
+      {
+        "id": "browse-documents",
+        "title": "Documents & Files",
+        "description": "Open statements, notices, and downloadable resident forms in one place.",
+        "icon": "folder-open-outline",
+        "tone": "brand"
+      }
+    ]
+  },
   "cases": {
     "title": "RECENT CASES",
+    "viewAllLabel": "VIEW ALL",
     "items": [
       {
         "id": "water-leak-lobby",

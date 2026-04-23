@@ -1,0 +1,79 @@
+{
+  "header": {
+    "eyebrow": "DOCUMENT REQUEST",
+    "titleLines": ["Request a", "Resident Document"],
+    "description": "Submit a request for certified letters, older statements, management confirmations, or archived building records."
+  },
+  "typeField": {
+    "label": "Document type",
+    "placeholder": "Select the document you need",
+    "options": [
+      {
+        "id": "account-statement",
+        "label": "Account Statement",
+        "description": "Maintenance and sinking fund statement for a selected period."
+      },
+      {
+        "id": "residency-letter",
+        "label": "Residency Confirmation Letter",
+        "description": "Official management letter confirming your current address."
+      },
+      {
+        "id": "access-record",
+        "label": "Access or Visitor Record",
+        "description": "Building entry log or visitor history confirmation."
+      },
+      {
+        "id": "archived-circular",
+        "label": "Archived Circular or Notice",
+        "description": "Older circulars, notices, and building memos not listed in the app."
+      }
+    ]
+  },
+  "purposeField": {
+    "label": "Purpose",
+    "placeholder": "Tell us what the document is needed for"
+  },
+  "preferredFormatField": {
+    "label": "Preferred format",
+    "placeholder": "Choose delivery format",
+    "options": [
+      {
+        "id": "digital-copy",
+        "label": "Digital PDF",
+        "description": "Delivered to your in-app account or registered email."
+      },
+      {
+        "id": "printed-copy",
+        "label": "Printed Copy",
+        "description": "Prepared for collection at the management office."
+      }
+    ]
+  },
+  "notesField": {
+    "label": "Notes",
+    "placeholder": "Add dates, reference numbers, or any details that help us locate the document"
+  },
+  "uploadField": {
+    "label": "Supporting files",
+    "title": "Attach supporting proof",
+    "description": "Upload a form, ID, or reference screenshot if the management office needs supporting context.",
+    "buttonLabel": "Browse Files"
+  },
+  "timelineCard": {
+    "eyebrow": "REQUEST TIMELINE",
+    "title": "Typical turnaround within 1 to 3 working days",
+    "description": "Certified or archived requests may take longer if manual retrieval or approval is required."
+  },
+  "cta": {
+    "submitLabel": "Submit Request",
+    "helperText": "Management will review your request and contact you if more details are needed."
+  },
+  "messages": {
+    "loading": "Loading document request form...",
+    "errorTitle": "Document request unavailable",
+    "errorDescription": "The mocked document request form could not be loaded.",
+    "successTitle": "Request submitted",
+    "successDescription": "Your document request has been logged. A confirmation will appear once the management team starts processing it."
+  }
+}

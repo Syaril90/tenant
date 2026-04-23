@@ -1,0 +1,108 @@
+{
+  "header": {
+    "eyebrow": "PAYMENT LEDGER",
+    "title": "Review every transaction",
+    "description": "Track completed charges, failed attempts, and payment methods from one billing history timeline."
+  },
+  "searchPlaceholder": "Search by payment title, method, or reference",
+  "filters": [
+    {
+      "id": "all",
+      "label": "All"
+    },
+    {
+      "id": "success",
+      "label": "Successful"
+    },
+    {
+      "id": "warning",
+      "label": "Pending"
+    }
+  ],
+  "summaryCards": [
+    {
+      "id": "year-to-date",
+      "label": "Year to date",
+      "value": "$14,235.50",
+      "tone": "brand"
+    },
+    {
+      "id": "successful-payments",
+      "label": "Successful payments",
+      "value": "18",
+      "tone": "success"
+    },
+    {
+      "id": "pending-review",
+      "label": "Pending review",
+      "value": "1",
+      "tone": "neutral"
+    }
+  ],
+  "payments": [
+    {
+      "id": "payment-oct-electricity",
+      "title": "Electricity Bill",
+      "category": "Utility",
+      "paidAtLabel": "24 Oct 2023 • 09:22 AM",
+      "amountDisplay": "$245.00",
+      "statusLabel": "Successful",
+      "statusTone": "success",
+      "methodLabel": "Visa ending 1842",
+      "referenceLabel": "PMT-902184"
+    },
+    {
+      "id": "payment-sep-water",
+      "title": "Water & Sewage",
+      "category": "Utility",
+      "paidAtLabel": "28 Sep 2023 • 10:45 AM",
+      "amountDisplay": "$82.30",
+      "statusLabel": "Successful",
+      "statusTone": "success",
+      "methodLabel": "FPX via CIMB",
+      "referenceLabel": "PMT-887511"
+    },
+    {
+      "id": "payment-oct-maintenance",
+      "title": "Maintenance Fee",
+      "category": "Management",
+      "paidAtLabel": "01 Oct 2023 • 08:12 PM",
+      "amountDisplay": "$921.20",
+      "statusLabel": "Pending Review",
+      "statusTone": "warning",
+      "methodLabel": "DuitNow QR",
+      "referenceLabel": "PMT-901120"
+    },
+    {
+      "id": "payment-rent-october",
+      "title": "Rent - October",
+      "category": "Rental",
+      "paidAtLabel": "01 Oct 2023 • 07:30 AM",
+      "amountDisplay": "$3,200.00",
+      "statusLabel": "Successful",
+      "statusTone": "success",
+      "methodLabel": "Visa ending 1842",
+      "referenceLabel": "PMT-864310"
+    },
+    {
+      "id": "payment-parking",
+      "title": "Parking Fee",
+      "category": "Access",
+      "paidAtLabel": "25 Sep 2023 • 05:18 PM",
+      "amountDisplay": "$150.00",
+      "statusLabel": "Successful",
+      "statusTone": "success",
+      "methodLabel": "Auto debit",
+      "referenceLabel": "PMT-851009"
+    }
+  ],
+  "emptyState": {
+    "title": "No matching payments",
+    "description": "Adjust the search term or switch the filter to see more payment records."
+  },
+  "messages": {
+    "loading": "Loading payment history...",
+    "errorTitle": "Payment history unavailable",
+    "errorDescription": "The mocked payment history feed could not be loaded."
+  }
+}
