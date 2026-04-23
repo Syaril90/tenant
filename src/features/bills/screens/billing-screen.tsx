@@ -244,7 +244,7 @@ export function BillingScreen() {
             </ThemedText>
             <View style={{ gap: theme.spacing[3] }}>
               {data.recentPayments.map((payment) => (
-                <SurfaceCard key={payment.id} muted elevated={false} style={{ paddingVertical: theme.spacing[5] }}>
+                <SurfaceCard key={payment.id} muted style={{ paddingVertical: theme.spacing[5] }}>
                   <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: theme.spacing[4] }}>
                     <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[4], flex: 1 }}>
                       <View

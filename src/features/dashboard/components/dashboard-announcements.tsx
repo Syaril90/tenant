@@ -60,7 +60,20 @@ export function AnnouncementCard({
       : theme.semantic.foreground.brand;
 
   const content = (
-    <SurfaceCard muted elevated={false} style={{ padding: 0, overflow: "hidden", gap: 0 }}>
+    <SurfaceCard
+      style={{
+        padding: 0,
+        overflow: "hidden",
+        gap: 0,
+        borderWidth: 1,
+        borderColor: theme.semantic.border.subtle,
+        shadowColor: theme.shadow.card.shadowColor,
+        shadowOpacity: 0.08,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 2
+      }}
+    >
       <View
         style={{
           height: 190,

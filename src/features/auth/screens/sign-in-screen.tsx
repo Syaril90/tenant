@@ -272,6 +272,7 @@ function AuthButton({
   const borderColor = isBrand ? "#1877F2" : "#E6EAF0";
   const textColor = isBrand ? "#FFFFFF" : "#20262D";
   const iconColor = isBrand ? "#FFFFFF" : "#20262D";
+  const shadowColor = isBrand ? "#0C5ED7" : "#11181C";
 
   return (
     <Pressable
@@ -286,11 +287,11 @@ function AuthButton({
         paddingHorizontal: 18,
         justifyContent: "center",
         opacity: pressed || isLoading ? 0.86 : 1,
-        shadowColor: "transparent",
-        shadowOpacity: 0,
-        shadowRadius: 0,
-        shadowOffset: { width: 0, height: 0 },
-        elevation: 0,
+        shadowColor,
+        shadowOpacity: isBrand ? 0.14 : 0.05,
+        shadowRadius: isBrand ? 10 : 8,
+        shadowOffset: { width: 0, height: isBrand ? 6 : 4 },
+        elevation: isBrand ? 3 : 1,
       })}
     >
       <View

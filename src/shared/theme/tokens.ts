@@ -109,11 +109,11 @@ const primitives = {
   },
   shadow: {
     card: {
-      shadowColor: "#000000",
-      shadowOpacity: 0.05,
-      shadowRadius: 2,
-      shadowOffset: { width: 0, height: 1 },
-      elevation: 1
+      shadowColor: "#0E161A",
+      shadowOpacity: 0.07,
+      shadowRadius: 6,
+      shadowOffset: { width: 0, height: 3 },
+      elevation: 2
     },
     floating: {
       shadowColor: "#003178",

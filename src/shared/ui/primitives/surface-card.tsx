@@ -26,6 +26,8 @@ export function SurfaceCard({
           backgroundColor: muted
             ? theme.semantic.background.muted
             : theme.semantic.background.surface,
+          borderWidth: muted ? 0 : 1,
+          borderColor: theme.semantic.border.subtle,
           borderRadius: theme.radius.lg,
           padding: theme.spacing[6],
           shadowColor: shadow?.shadowColor,
@@ -41,4 +43,3 @@ export function SurfaceCard({
     </View>
   );
 }
-

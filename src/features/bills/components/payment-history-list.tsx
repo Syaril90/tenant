@@ -21,7 +21,7 @@ export function PaymentHistoryList({ label, payments }: PaymentHistoryListProps)
 
       <View style={{ gap: theme.spacing[3] }}>
         {payments.map((payment) => (
-          <SurfaceCard key={payment.id} muted elevated={false} style={{ paddingVertical: theme.spacing[4] }}>
+          <SurfaceCard key={payment.id} muted style={{ paddingVertical: theme.spacing[4] }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
               <View style={{ gap: 2, flex: 1 }}>
                 <ThemedText variant="heading" size="md">
