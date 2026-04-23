@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Image, Pressable, TextInput, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
+import { getUserIdentity } from "@/features/auth/lib/user-identity";
+import { useAuth } from "@/features/auth/providers/auth-provider";
 import type { HubFeedItem, HubNoticeItem, HubPostItem } from "@/features/hub/types/hub";
 import { useAppTheme } from "@/shared/theme/theme-provider";
 import { SurfaceCard } from "@/shared/ui/primitives/surface-card";
@@ -11,9 +13,6 @@ type HubFeedCardProps = {
   item: HubFeedItem;
   onReply?: (postId: string, content: string) => void;
 };
-
-const currentUserAvatar =
-  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=160&q=80";
 
 export function HubFeedCard({ item, onReply }: HubFeedCardProps) {
   if (item.type === "notice") {
@@ -31,8 +30,10 @@ function HubPostCard({
   onReply?: (postId: string, content: string) => void;
 }) {
   const { theme } = useAppTheme();
+  const { user } = useAuth();
   const [replyDraft, setReplyDraft] = useState("");
   const [replying, setReplying] = useState(false);
+  const identity = getUserIdentity(user);
 
   function handleReplySubmit() {
     const trimmed = replyDraft.trim();
@@ -49,9 +50,16 @@ function HubPostCard({
     <SurfaceCard elevated={false} style={{ gap: theme.spacing[4] }}>
       <View style={{ flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between" }}>
         <View style={{ flexDirection: "row", gap: theme.spacing[3], flex: 1 }}>
-          <Image
-            source={{ uri: item.author.avatarUrl }}
-            style={{ width: 34, height: 34, borderRadius: 17 }}
+          <HubAvatar
+            avatarUrl={item.author.avatarUrl || null}
+            fallbackLabel={item.author.name
+              .split(" ")
+              .filter(Boolean)
+              .slice(0, 2)
+              .map((part) => part[0])
+              .join("")
+              .toUpperCase()}
+            size={34}
           />
           <View style={{ flex: 1, gap: 2 }}>
             <ThemedText variant="label" size="md" color="primary">
@@ -167,10 +175,7 @@ function HubPostCard({
           ))}
 
           <View style={{ flexDirection: "row", alignItems: "flex-end", gap: theme.spacing[3] }}>
-            <Image
-              source={{ uri: currentUserAvatar }}
-              style={{ width: 32, height: 32, borderRadius: 16 }}
-            />
+            <HubAvatar avatarUrl={identity.avatarUrl} fallbackLabel={identity.initials} size={32} />
 
             <View
               style={{
@@ -213,6 +218,39 @@ function HubPostCard({
         </View>
       ) : null}
     </SurfaceCard>
+  );
+}
+
+function HubAvatar({
+  avatarUrl,
+  fallbackLabel,
+  size
+}: {
+  avatarUrl: string | null;
+  fallbackLabel: string;
+  size: number;
+}) {
+  const { theme } = useAppTheme();
+
+  if (avatarUrl) {
+    return <Image source={{ uri: avatarUrl }} style={{ width: size, height: size, borderRadius: size / 2 }} />;
+  }
+
+  return (
+    <View
+      style={{
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        backgroundColor: theme.semantic.background.accent,
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
+      <ThemedText variant="label" size="sm" color="brand">
+        {fallbackLabel}
+      </ThemedText>
+    </View>
   );
 }
 

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Image, Pressable, TextInput, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
+import { getUserIdentity } from "@/features/auth/lib/user-identity";
+import { useAuth } from "@/features/auth/providers/auth-provider";
 import type { HubComposer } from "@/features/hub/types/hub";
 import { useAppTheme } from "@/shared/theme/theme-provider";
 import { SurfaceCard } from "@/shared/ui/primitives/surface-card";
@@ -12,12 +14,11 @@ type HubComposerCardProps = {
   onPost: (content: string) => void;
 };
 
-const currentUserAvatar =
-  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=160&q=80";
-
 export function HubComposerCard({ composer, onPost }: HubComposerCardProps) {
   const { theme } = useAppTheme();
+  const { user } = useAuth();
   const [draft, setDraft] = useState("");
+  const identity = getUserIdentity(user);
 
   function handlePost() {
     const trimmed = draft.trim();
@@ -32,10 +33,7 @@ export function HubComposerCard({ composer, onPost }: HubComposerCardProps) {
   return (
     <SurfaceCard elevated={false} style={{ gap: theme.spacing[4] }}>
       <View style={{ flexDirection: "row", alignItems: "flex-start", gap: theme.spacing[3] }}>
-        <Image
-          source={{ uri: currentUserAvatar }}
-          style={{ width: 38, height: 38, borderRadius: 19 }}
-        />
+        <HubAvatar avatarUrl={identity.avatarUrl} fallbackLabel={identity.initials} size={38} />
         <View
           style={{
             flex: 1,
@@ -92,5 +90,38 @@ export function HubComposerCard({ composer, onPost }: HubComposerCardProps) {
         </Pressable>
       </View>
     </SurfaceCard>
+  );
+}
+
+function HubAvatar({
+  avatarUrl,
+  fallbackLabel,
+  size
+}: {
+  avatarUrl: string | null;
+  fallbackLabel: string;
+  size: number;
+}) {
+  const { theme } = useAppTheme();
+
+  if (avatarUrl) {
+    return <Image source={{ uri: avatarUrl }} style={{ width: size, height: size, borderRadius: size / 2 }} />;
+  }
+
+  return (
+    <View
+      style={{
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        backgroundColor: theme.semantic.background.accent,
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
+      <ThemedText variant="label" size="sm" color="brand">
+        {fallbackLabel}
+      </ThemedText>
+    </View>
   );
 }

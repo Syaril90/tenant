@@ -5,6 +5,22 @@ dist
 web-build
 coverage
 *.log
+.DS_Store
+
+# local env / app secrets
+.env
+.env.*
+!.env.example
+GoogleService-Info.plist
+google-services.json
+
+# generated native folders for Expo managed workflow
+ios/
+android/
+
+# native build artifacts
+DerivedData/
+build/
 
 
 # @generated expo-cli sync-2b81b286409207a5da26e14c78851eb30d8ccbdb

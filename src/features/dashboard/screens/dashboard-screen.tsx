@@ -1,5 +1,7 @@
 import { ScrollView, View } from "react-native";
 
+import { getUserIdentity } from "@/features/auth/lib/user-identity";
+import { useAuth } from "@/features/auth/providers/auth-provider";
 import { DashboardAnnouncements } from "@/features/dashboard/components/dashboard-announcements";
 import { DashboardBalanceCard } from "@/features/dashboard/components/dashboard-balance-card";
 import { DashboardInfoPanels } from "@/features/dashboard/components/dashboard-info-panels";
@@ -13,6 +15,7 @@ import { ThemedText } from "@/shared/ui/primitives/themed-text";
 export function DashboardScreen() {
   const { theme } = useAppTheme();
   const dashboardQuery = useDashboardQuery();
+  const { user } = useAuth();
 
   if (dashboardQuery.isLoading) {
     return (
@@ -36,6 +39,11 @@ export function DashboardScreen() {
 
   const { header, balanceCard, statusCard, weatherCard, quickActions, announcements } =
     dashboardQuery.data;
+  const identity = getUserIdentity(user);
+  const titleLines =
+    header.titleLines.length >= 2
+      ? [header.titleLines[0], identity.firstName]
+      : [`Welcome, ${identity.firstName}`];
 
   return (
     <Screen>
@@ -46,7 +54,7 @@ export function DashboardScreen() {
               {header.eyebrow}
             </ThemedText>
             <View>
-              {header.titleLines.map((line) => (
+              {titleLines.map((line) => (
                 <ThemedText key={line} variant="heading" size="xl" color="brand">
                   {line}
                 </ThemedText>

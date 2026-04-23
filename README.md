@@ -38,3 +38,24 @@ After dependencies are installed, the next pass should wire:
 3. React Navigation
 4. Feature entry screens and API modules
 
+## Firebase Auth
+
+Firebase auth scaffolding is now expected under the auth feature slice.
+
+Fill these values in [`app.json`](/Users/syarilnazirul/Documents/Documents%20-%20BLMY-NB0069%E2%80%99s%20MacBook%20Pro/test_figma/app.json:1) before testing sign-in:
+
+- `expo.extra.firebase.apiKey`
+- `expo.extra.firebase.projectId`
+- `expo.extra.firebase.appId`
+- `expo.extra.auth.googleWebClientId`
+- `expo.extra.auth.googleIosClientId`
+- `expo.extra.auth.googleAndroidClientId`
+- `expo.extra.auth.facebookAppId`
+
+You will also need:
+
+- Firebase Authentication enabled for Google and Facebook
+- Android package name and SHA fingerprints registered with Firebase/Google
+- iOS bundle identifier registered with Firebase/Google
+- Facebook app configured in Meta for Developers
+- A development build for native Google/Facebook login because Expo Go cannot run those SDKs
