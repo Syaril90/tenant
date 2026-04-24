@@ -23,7 +23,7 @@
       "amount": 220,
       "displayAmount": "RM 220.00",
       "statusLabel": "UNPAID",
-      "statusTone": "neutral",
+      "statusTone": "danger",
       "icon": "home-outline",
       "selectedByDefault": true
     },
@@ -36,7 +36,7 @@
       "amount": 120,
       "displayAmount": "RM 120.00",
       "statusLabel": "UNPAID",
-      "statusTone": "neutral",
+      "statusTone": "danger",
       "icon": "wallet-outline",
       "selectedByDefault": true
     },
@@ -49,7 +49,7 @@
       "amount": 72,
       "displayAmount": "RM 72.00",
       "statusLabel": "UNPAID",
-      "statusTone": "neutral",
+      "statusTone": "danger",
       "icon": "water-outline",
       "selectedByDefault": true
     }

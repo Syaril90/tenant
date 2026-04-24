@@ -3,6 +3,7 @@ export type DashboardHeader = {
   titleLines: string[];
   description: string;
   pillLabel: string;
+  propertyImageUri: string;
 };
 
 export type DashboardBalanceCard = {
@@ -33,6 +34,9 @@ export type DashboardContactSection = {
 export type DashboardQuickAction = {
   id: string;
   titleLines: string[];
+  description: string;
+  actionLabel: string;
+  accentColor: string;
   icon: string;
 };
 

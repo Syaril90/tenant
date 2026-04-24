@@ -9,7 +9,6 @@ import { useDocumentsQuery } from "@/features/documents/queries/use-documents-qu
 import { Screen } from "@/shared/ui/layout/screen";
 import { ScreenState } from "@/shared/ui/layout/screen-state";
 import { useAppTheme } from "@/shared/theme/theme-provider";
-import { SurfaceCard } from "@/shared/ui/primitives/surface-card";
 import { ThemedText } from "@/shared/ui/primitives/themed-text";
 
 export function DocumentsScreen() {
@@ -60,12 +59,9 @@ export function DocumentsScreen() {
 
   const { header, searchPlaceholder, categories, repository, documents, helpCard } =
     documentsQuery.data;
-  const activeCategory = categories.find((category) => category.id === activeCategoryId);
-  const resultLabel = `${filteredDocuments.length} ${filteredDocuments.length === 1 ? "file" : "files"}`;
-
   return (
     <Screen>
-      <ScrollView contentContainerStyle={{ paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
         <View style={{ gap: theme.spacing[10] }}>
           <View style={{ gap: theme.spacing[6] }}>
             <View style={{ gap: theme.spacing[3] }}>
@@ -81,18 +77,6 @@ export function DocumentsScreen() {
               </View>
               <ThemedText color="secondary">{header.description}</ThemedText>
             </View>
-
-            <SurfaceCard muted elevated={false} style={{ gap: theme.spacing[3], borderRadius: 26 }}>
-              <ThemedText variant="heading" size="md">
-                {activeCategory ? activeCategory.title : "All documents"}
-              </ThemedText>
-              <ThemedText color="secondary">
-                {activeCategory ? activeCategory.description : "Use search or a category chip to narrow the list."}
-              </ThemedText>
-              <ThemedText variant="label" size="sm" color="brand">
-                {resultLabel}
-              </ThemedText>
-            </SurfaceCard>
 
             <DocumentSearchInput
               value={query}

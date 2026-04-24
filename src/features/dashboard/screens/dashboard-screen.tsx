@@ -1,9 +1,9 @@
-import { ScrollView, View } from "react-native";
+import { ImageBackground, ScrollView, View } from "react-native";
 
 import { getUserIdentity } from "@/features/auth/lib/user-identity";
 import { useAuth } from "@/features/auth/providers/auth-provider";
 import { DashboardAnnouncements } from "@/features/dashboard/components/dashboard-announcements";
-import { DashboardBalanceCard } from "@/features/dashboard/components/dashboard-balance-card";
+import { DashboardBalanceSummaryCard } from "@/features/dashboard/components/dashboard-balance-summary-card";
 import { DashboardInfoPanels } from "@/features/dashboard/components/dashboard-info-panels";
 import { DashboardQuickActions } from "@/features/dashboard/components/dashboard-quick-actions";
 import { useDashboardQuery } from "@/features/dashboard/queries/use-dashboard-query";
@@ -40,41 +40,58 @@ export function DashboardScreen() {
   const { header, balanceCard, contacts, quickActions, announcements } =
     dashboardQuery.data;
   const identity = getUserIdentity(user);
-  const titleLines =
-    header.titleLines.length >= 2
-      ? [header.titleLines[0], identity.firstName]
-      : [`Welcome, ${identity.firstName}`];
 
   return (
     <Screen>
-      <ScrollView contentContainerStyle={{ paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
         <View style={{ gap: theme.spacing[8] }}>
-          <View style={{ gap: theme.spacing[3] }}>
+          <ImageBackground
+            source={{ uri: header.propertyImageUri }}
+            imageStyle={{ borderRadius: 28 }}
+            style={{
+              minHeight: 156,
+              borderRadius: 28,
+              overflow: "hidden"
+            }}
+          >
             <View
               style={{
-                alignSelf: "flex-start",
+                flex: 1,
+                borderRadius: 28,
+                padding: theme.spacing[5],
+                justifyContent: "space-between",
                 backgroundColor:
-                  colorScheme === "dark" ? theme.semantic.background.accent : "#EAF2FF",
-                borderRadius: theme.radius.pill,
-                paddingHorizontal: theme.spacing[4],
-                paddingVertical: theme.spacing[2]
+                  colorScheme === "dark" ? "rgba(9,17,29,0.42)" : "rgba(10,28,54,0.38)"
               }}
             >
-              <ThemedText variant="label" size="sm" color="brand">
-                {header.pillLabel}
-              </ThemedText>
-            </View>
-            <View>
-              {titleLines.map((line) => (
-                <ThemedText key={line} variant="heading" size="xl" color="brand">
-                  {line}
+              <View
+                style={{
+                  alignSelf: "flex-start",
+                  backgroundColor: "rgba(255,255,255,0.16)",
+                  borderRadius: theme.radius.pill,
+                  paddingHorizontal: theme.spacing[3],
+                  paddingVertical: 6
+                }}
+              >
+                <ThemedText variant="label" size="sm" color="inverse">
+                  {header.eyebrow}
                 </ThemedText>
-              ))}
-            </View>
-            <ThemedText color="secondary">{header.description}</ThemedText>
-          </View>
+              </View>
 
-          <DashboardBalanceCard card={balanceCard} />
+              <View style={{ gap: theme.spacing[2] }}>
+                <ThemedText variant="heading" size="xl" color="inverse">
+                  {identity.firstName}
+                </ThemedText>
+                <ThemedText color="inverse" style={{ opacity: 0.88 }}>
+                  {header.pillLabel}
+                </ThemedText>
+                <ThemedText color="inverse" style={{ opacity: 0.72 }}>
+                  {header.description}
+                </ThemedText>
+              </View>
+            </View>
+          </ImageBackground>
+          <DashboardBalanceSummaryCard card={balanceCard} />
           <DashboardInfoPanels contacts={contacts} />
           <DashboardQuickActions section={quickActions} />
           <DashboardAnnouncements section={announcements} />

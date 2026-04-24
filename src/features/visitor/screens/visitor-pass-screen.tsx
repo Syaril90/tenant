@@ -51,6 +51,7 @@ export function VisitorPassScreen() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
+          paddingTop: theme.spacing[2],
           paddingBottom: theme.spacing[8],
           gap: theme.spacing[8]
         }}

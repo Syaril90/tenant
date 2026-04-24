@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Pressable, ScrollView, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { ScrollView, View } from "react-native";
 
 import { useRequestDocumentContentQuery } from "@/features/documents/queries/use-request-document-content-query";
 import { useSubmitDocumentRequestMutation } from "@/features/documents/queries/use-submit-document-request-mutation";
@@ -8,7 +7,9 @@ import type { RequestDocumentContent } from "@/features/documents/types/document
 import { pickAttachments } from "@/shared/lib/document-picker";
 import type { SharedAttachment } from "@/shared/lib/document-picker";
 import { AttachmentUploader } from "@/shared/ui/forms/attachment-uploader";
+import { FormNote } from "@/shared/ui/forms/form-note";
 import { PickerField } from "@/shared/ui/forms/picker-field";
+import { PrimaryButton } from "@/shared/ui/forms/primary-button";
 import { SelectSheet } from "@/shared/ui/forms/select-sheet";
 import { TextInputField } from "@/shared/ui/forms/text-input-field";
 import { Screen } from "@/shared/ui/layout/screen";
@@ -118,9 +119,9 @@ export function RequestDocumentScreen() {
 
   return (
     <Screen>
-      <ScrollView contentContainerStyle={{ paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
         <View style={{ gap: theme.spacing[8] }}>
-          <View style={{ gap: theme.spacing[4] }}>
+          <View style={{ gap: theme.spacing[2] }}>
             <ThemedText variant="label" size="sm" color="tertiary">
               {data.header.eyebrow}
             </ThemedText>
@@ -132,70 +133,6 @@ export function RequestDocumentScreen() {
               ))}
             </View>
             <ThemedText color="secondary">{data.header.description}</ThemedText>
-
-            <SurfaceCard
-              muted
-              elevated={false}
-              style={{
-                gap: theme.spacing[4],
-                borderRadius: 26,
-                overflow: "hidden"
-              }}
-            >
-              <View
-                style={{
-                  marginHorizontal: -theme.spacing[6],
-                  marginTop: -theme.spacing[6],
-                  paddingHorizontal: theme.spacing[6],
-                  paddingTop: theme.spacing[5],
-                  paddingBottom: theme.spacing[5],
-                  backgroundColor: theme.semantic.background.accent,
-                  gap: theme.spacing[4]
-                }}
-              >
-                <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[3] }}>
-                  <View
-                    style={{
-                      width: 44,
-                      height: 44,
-                      borderRadius: 22,
-                      backgroundColor: theme.semantic.background.surface,
-                      alignItems: "center",
-                      justifyContent: "center"
-                    }}
-                  >
-                    <Ionicons
-                      name="document-text-outline"
-                      size={20}
-                      color={theme.semantic.foreground.brand}
-                    />
-                  </View>
-
-                  <View style={{ flex: 1, gap: 2 }}>
-                    <ThemedText variant="label" size="sm" color="brand">
-                      QUICK FLOW
-                    </ThemedText>
-                    <ThemedText variant="heading" size="md">
-                      Make the request in under a minute
-                    </ThemedText>
-                  </View>
-                </View>
-
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <RequestStepChip index={1} label="Choose type" />
-                  <RequestStepConnector />
-                  <RequestStepChip index={2} label="Add purpose" />
-                  <RequestStepConnector />
-                  <RequestStepChip index={3} label="Submit" />
-                </View>
-              </View>
-
-              <View style={{ gap: theme.spacing[2] }}>
-                <ThemedText color="secondary">
-                  Pick the document, tell management why you need it, and choose how you want to receive it.
-                </ThemedText>
-              </View>
-            </SurfaceCard>
           </View>
 
           <SurfaceCard style={{ gap: theme.spacing[5], borderRadius: 28 }}>
@@ -221,6 +158,7 @@ export function RequestDocumentScreen() {
               value={purpose}
               onChangeText={setPurpose}
               leadingIcon="briefcase-outline"
+              required
             />
 
             <PickerField
@@ -236,6 +174,7 @@ export function RequestDocumentScreen() {
               value={notes}
               onChangeText={setNotes}
               multiline
+              helperText="Optional"
             />
           </SurfaceCard>
 
@@ -251,70 +190,29 @@ export function RequestDocumentScreen() {
             }}
           />
 
-          <SurfaceCard muted elevated={false}>
-            <View style={{ flexDirection: "row", gap: theme.spacing[4], alignItems: "flex-start" }}>
-              <View
-                style={{
-                  width: 42,
-                  height: 42,
-                  borderRadius: 21,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: theme.semantic.background.accent
-                }}
-              >
-                <Ionicons name="time-outline" size={20} color={theme.semantic.foreground.brand} />
-              </View>
-
-              <View style={{ flex: 1, gap: theme.spacing[1] }}>
-                <ThemedText variant="label" size="sm" color="tertiary">
-                  {data.timelineCard.eyebrow}
-                </ThemedText>
-                <ThemedText variant="heading" size="md">
-                  {data.timelineCard.title}
-                </ThemedText>
-                <ThemedText color="secondary">{data.timelineCard.description}</ThemedText>
-              </View>
-            </View>
-          </SurfaceCard>
+          <FormNote
+            title={data.timelineCard.title}
+            message={data.timelineCard.description}
+            iconName="time-outline"
+            card
+          />
 
           {submitted ? (
-            <SurfaceCard
-              style={{
-                backgroundColor:
-                  colorScheme === "dark" ? theme.semantic.background.muted : "#ECF9F1"
-              }}
-            >
-              <View style={{ gap: theme.spacing[2] }}>
-                <ThemedText
-                  variant="heading"
-                  size="md"
-                  style={{ color: theme.semantic.status.success }}
-                >
-                  {data.messages.successTitle}
-                </ThemedText>
-                <ThemedText color="secondary">{data.messages.successDescription}</ThemedText>
-              </View>
-            </SurfaceCard>
+            <FormNote
+              title={data.messages.successTitle}
+              message={data.messages.successDescription}
+              tone="success"
+              card
+            />
           ) : null}
 
           <View style={{ gap: theme.spacing[3] }}>
-            <Pressable
+            <PrimaryButton
               disabled={isSubmitDisabled}
               onPress={handleSubmit}
-              style={{
-                backgroundColor: theme.semantic.foreground.brand,
-                borderRadius: theme.radius.md,
-                paddingVertical: theme.spacing[4],
-                alignItems: "center",
-                opacity: isSubmitDisabled ? 0.6 : 1
-              }}
-            >
-              <ThemedText color="inverse">
-                {submitRequestMutation.isPending ? "Submitting..." : data.cta.submitLabel}
-              </ThemedText>
-            </Pressable>
-            <ThemedText color="tertiary">{data.cta.helperText}</ThemedText>
+              label={submitRequestMutation.isPending ? "Submitting..." : data.cta.submitLabel}
+            />
+            <FormNote message={data.cta.helperText} />
           </View>
         </View>
       </ScrollView>
@@ -343,46 +241,5 @@ export function RequestDocumentScreen() {
         }}
       />
     </Screen>
-  );
-}
-
-function RequestStepChip({ index, label }: { index: number; label: string }) {
-  const { theme } = useAppTheme();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        borderRadius: theme.radius.md,
-        backgroundColor: theme.semantic.background.surface,
-        paddingHorizontal: theme.spacing[3],
-        paddingVertical: theme.spacing[3],
-        gap: 2
-      }}
-    >
-      <ThemedText variant="label" size="sm" color="brand">
-        {`0${index}`}
-      </ThemedText>
-      <ThemedText color="secondary" style={{ fontSize: 12, lineHeight: 16 }}>
-        {label}
-      </ThemedText>
-    </View>
-  );
-}
-
-function RequestStepConnector() {
-  const { theme } = useAppTheme();
-
-  return (
-    <View
-      style={{
-        width: 18,
-        height: 2,
-        borderRadius: 999,
-        backgroundColor: theme.semantic.foreground.brand,
-        opacity: 0.35,
-        marginHorizontal: theme.spacing[1]
-      }}
-    />
   );
 }

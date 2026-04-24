@@ -2,8 +2,9 @@
   "header": {
     "eyebrow": "RESIDENT DASHBOARD",
     "titleLines": ["Good Morning,", "Amir"],
-    "description": "Here is a quick view of your unit, charges, notices, and resident services for today.",
-    "pillLabel": "Tower A • Unit A-12-08"
+    "description": "Your unit updates, charges, and services at a glance.",
+    "pillLabel": "Tower A • Unit A-12-08",
+    "propertyImageUri": "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80"
   },
   "balanceCard": {
     "badge": "DUE IN 5 DAYS",
@@ -43,21 +44,33 @@
       {
         "id": "register-visitor",
         "titleLines": ["Register", "Visitor"],
+        "description": "Create passes for guests and manage arrival details.",
+        "actionLabel": "Open visitor flow",
+        "accentColor": "#E8F1FF",
         "icon": "person-add-outline"
       },
       {
         "id": "submit-complaint",
         "titleLines": ["Submit", "Complaint"],
+        "description": "Report maintenance issues and track case updates.",
+        "actionLabel": "Report an issue",
+        "accentColor": "#FFF4E7",
         "icon": "megaphone-outline"
       },
       {
         "id": "request-document",
         "titleLines": ["Request", "Document"],
+        "description": "Ask for statements, forms, and official records.",
+        "actionLabel": "Request a file",
+        "accentColor": "#EEF8F1",
         "icon": "document-text-outline"
       },
       {
         "id": "concierge-support",
         "titleLines": ["Concierge", "Support"],
+        "description": "Reach building support, updates, and service channels.",
+        "actionLabel": "Get assistance",
+        "accentColor": "#F4ECFF",
         "icon": "headset-outline"
       }
     ]

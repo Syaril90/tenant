@@ -132,16 +132,16 @@ export function BillingScreen() {
 
   return (
     <Screen>
-      <ScrollView contentContainerStyle={{ paddingBottom: 120, gap: theme.spacing[6] }} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120, gap: theme.spacing[6] }} showsVerticalScrollIndicator={false}>
         <View style={{ gap: theme.spacing[8] }}>
           <View
             style={{
               backgroundColor: theme.semantic.background.emphasis,
               borderRadius: 30,
-              padding: theme.spacing[4],
+              padding: theme.spacing[6],
               borderWidth: 1,
               borderColor: "rgba(255,255,255,0.08)",
-              gap: theme.spacing[3],
+              gap: theme.spacing[5],
               shadowColor: theme.shadow.floating.shadowColor,
               shadowOpacity: 0.12,
               shadowRadius: 14,
@@ -149,57 +149,72 @@ export function BillingScreen() {
               elevation: 8
             }}
           >
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-                gap: theme.spacing[4]
-              }}
-            >
-              <View style={{ flex: 1, gap: theme.spacing[3] }}>
-                <View style={{ gap: theme.spacing[2] }}>
-                  <View
-                    style={{
-                      alignSelf: "flex-start",
-                      backgroundColor: "rgba(255,255,255,0.14)",
-                      borderRadius: theme.radius.pill,
-                      paddingHorizontal: theme.spacing[3],
-                      paddingVertical: 5
-                    }}
-                  >
-                    <ThemedText variant="label" size="sm" color="inverse">
-                      {data.summary.badge}
-                    </ThemedText>
-                  </View>
-                  <ThemedText variant="display" size="large" color="inverse">
-                    {data.summary.amountDue}
-                  </ThemedText>
+            <View style={{ gap: theme.spacing[3] }}>
+              <View
+                style={{
+                  alignSelf: "flex-start",
+                  backgroundColor: "rgba(255,255,255,0.14)",
+                  borderRadius: theme.radius.pill,
+                  paddingHorizontal: theme.spacing[4],
+                  paddingVertical: 6
+                }}
+              >
+                <ThemedText variant="label" size="sm" color="inverse">
+                  {data.summary.badge}
+                </ThemedText>
+              </View>
+
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", gap: theme.spacing[4] }}>
+                <View style={{ gap: theme.spacing[2], flex: 1 }}>
                   <ThemedText variant="heading" size="md" color="inverse">
                     {data.summary.title}
                   </ThemedText>
-                  <ThemedText color="inverse" style={{ opacity: 0.78 }}>
-                    {data.summary.dueDateLabel}
+                  <ThemedText variant="display" size="large" color="inverse">
+                    {data.summary.amountDue}
+                  </ThemedText>
+                  <ThemedText color="inverse" style={{ opacity: 0.8 }}>
+                    {data.summary.description}
                   </ThemedText>
                 </View>
-              </View>
 
-              <View
-                style={{
-                  width: 50,
-                  height: 50,
-                  borderRadius: 25,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: "rgba(255,255,255,0.14)"
-                }}
-              >
-                <Ionicons
-                  name="wallet-outline"
-                  size={20}
-                  color={theme.semantic.foreground.inverse}
-                />
+                <View
+                  style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: 24,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "rgba(255,255,255,0.14)"
+                  }}
+                >
+                  <Ionicons
+                    name="wallet-outline"
+                    size={22}
+                    color={theme.semantic.foreground.inverse}
+                  />
+                </View>
               </View>
+            </View>
+
+            <View
+              style={{
+                backgroundColor: "rgba(255,255,255,0.09)",
+                borderRadius: 18,
+                paddingHorizontal: theme.spacing[4],
+                paddingVertical: theme.spacing[3],
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: theme.spacing[4]
+              }}
+            >
+              <View style={{ gap: 2 }}>
+                <ThemedText variant="label" size="sm" color="inverse" style={{ opacity: 0.72 }}>
+                  PAYMENT WINDOW
+                </ThemedText>
+                <ThemedText color="inverse">{data.summary.dueDateLabel}</ThemedText>
+              </View>
+              <Ionicons name="time-outline" size={18} color={theme.semantic.foreground.inverse} />
             </View>
 
             <View style={{ flexDirection: "row", gap: theme.spacing[3] }}>
@@ -208,10 +223,10 @@ export function BillingScreen() {
                 onPress={() => handleSubmitPayment(selectedInvoiceIds)}
                 style={{
                   flex: 1,
-                  backgroundColor: theme.semantic.foreground.inverse,
+                  backgroundColor: theme.semantic.background.surface,
                   borderRadius: 14,
-                  paddingHorizontal: theme.spacing[5],
-                  paddingVertical: 14,
+                  paddingVertical: theme.spacing[4],
+                  paddingHorizontal: theme.spacing[6],
                   alignItems: "center",
                   justifyContent: "center",
                   flexDirection: "row",
@@ -237,8 +252,8 @@ export function BillingScreen() {
                   borderRadius: 14,
                   borderWidth: 1,
                   borderColor: "rgba(255,255,255,0.22)",
-                  paddingHorizontal: theme.spacing[5],
-                  paddingVertical: 14,
+                  paddingVertical: theme.spacing[4],
+                  paddingHorizontal: theme.spacing[6],
                   alignItems: "center",
                   justifyContent: "center",
                   flexDirection: "row",
@@ -334,7 +349,7 @@ function PaidActivitySection() {
                 paddingVertical: theme.spacing[5]
               }}
             >
-              <View style={{ flexDirection: "row", justifyContent: "space-between", gap: theme.spacing[4] }}>
+              <View style={{ flexDirection: "row", gap: theme.spacing[4] }}>
                 <View style={{ flexDirection: "row", alignItems: "flex-start", gap: theme.spacing[4], flex: 1 }}>
                   <View
                     style={{
@@ -355,8 +370,15 @@ function PaidActivitySection() {
                   </View>
 
                   <View style={{ gap: 4, flex: 1 }}>
-                    <View style={{ gap: theme.spacing[2] }}>
-                      <ThemedText variant="heading" size="md">
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "flex-start",
+                        justifyContent: "space-between",
+                        gap: theme.spacing[3]
+                      }}
+                    >
+                      <ThemedText variant="heading" size="md" style={{ flex: 1 }}>
                         {payment.title}
                       </ThemedText>
                       <View
@@ -378,23 +400,27 @@ function PaidActivitySection() {
                         </ThemedText>
                       </View>
                     </View>
-
                     <ThemedText color="tertiary">{payment.dateLabel}</ThemedText>
-                    <ThemedText color="secondary">
+                    <ThemedText
+                      color="secondary"
+                      style={{ fontSize: 13, lineHeight: 18 }}
+                    >
                       Reference {String(index + 1).padStart(2, "0")} • Posted to resident ledger
                     </ThemedText>
-                  </View>
-                </View>
-
-                <View style={{ alignItems: "flex-end", gap: 6 }}>
-                  <ThemedText variant="heading" size="md">
-                    {payment.amountDisplay}
-                  </ThemedText>
-                  <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
-                    <ThemedText variant="label" size="sm" color="brand">
-                      Receipt
+                    <ThemedText variant="heading" size="md">
+                      {payment.amountDisplay}
                     </ThemedText>
-                    <Ionicons name="receipt-outline" size={14} color={theme.semantic.foreground.brand} />
+
+                    <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+                      <ThemedText variant="label" size="sm" color="brand">
+                        Receipt
+                      </ThemedText>
+                      <Ionicons
+                        name="receipt-outline"
+                        size={14}
+                        color={theme.semantic.foreground.brand}
+                      />
+                    </View>
                   </View>
                 </View>
               </View>

@@ -44,7 +44,7 @@ export function VisitorScreen() {
 
   return (
     <Screen>
-      <ScrollView contentContainerStyle={{ paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
         <View style={{ gap: theme.spacing[8] }}>
           <View style={{ gap: theme.spacing[1] }}>
             <ThemedText variant="label" size="sm" color="tertiary">

@@ -49,42 +49,59 @@ export function DashboardQuickActions({ section }: DashboardQuickActionsProps) {
             <SurfaceCard
               elevated={false}
               style={{
-                alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "space-between",
                 gap: theme.spacing[4],
-                minHeight: 118,
-                paddingHorizontal: theme.spacing[4]
+                minHeight: 176,
+                paddingHorizontal: theme.spacing[4],
+                borderRadius: 26
               }}
             >
-              <View
-                style={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: 19,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: theme.semantic.background.accent
-                }}
-              >
-                <Ionicons
-                  name={item.icon as IoniconName}
-                  size={18}
-                  color={theme.semantic.foreground.brand}
-                />
+              <View style={{ gap: theme.spacing[4] }}>
+                <View
+                  style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: theme.radius.md,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: item.accentColor
+                  }}
+                >
+                  <Ionicons
+                    name={item.icon as IoniconName}
+                    size={20}
+                    color={theme.semantic.foreground.brand}
+                  />
+                </View>
+
+                <View style={{ gap: theme.spacing[2] }}>
+                  <View style={{ gap: 2 }}>
+                    {item.titleLines.map((line) => (
+                      <ThemedText
+                        key={line}
+                        variant="heading"
+                        size="md"
+                        color="brand"
+                        style={{ lineHeight: 22 }}
+                      >
+                        {line}
+                      </ThemedText>
+                    ))}
+                  </View>
+
+                  <ThemedText color="secondary">{item.description}</ThemedText>
+                </View>
               </View>
 
-              <View style={{ gap: 2 }}>
-                {item.titleLines.map((line) => (
-                  <ThemedText
-                    key={line}
-                    variant="label"
-                    size="sm"
-                    color="brand"
-                    style={{ textAlign: "center", lineHeight: 18 }}
-                  >
-                    {line}
-                  </ThemedText>
-                ))}
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+                <ThemedText variant="label" size="sm" color="brand">
+                  {item.actionLabel}
+                </ThemedText>
+                <Ionicons
+                  name="chevron-forward"
+                  size={14}
+                  color={theme.semantic.foreground.brand}
+                />
               </View>
             </SurfaceCard>
           </Pressable>

@@ -2,7 +2,9 @@ import { TextInput, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { useAppTheme } from "@/shared/theme/theme-provider";
+import { FieldShell } from "@/shared/ui/forms/field-shell";
 import { FormField } from "@/shared/ui/forms/form-field";
+import { ThemedText } from "@/shared/ui/primitives/themed-text";
 
 type TextInputFieldProps = {
   label: string;
@@ -11,6 +13,11 @@ type TextInputFieldProps = {
   onChangeText: (value: string) => void;
   multiline?: boolean;
   leadingIcon?: string;
+  helperText?: string;
+  errorMessage?: string;
+  required?: boolean;
+  maxLength?: number;
+  showCharacterCount?: boolean;
 };
 
 export function TextInputField({
@@ -19,24 +26,31 @@ export function TextInputField({
   value,
   onChangeText,
   multiline = false,
-  leadingIcon
+  leadingIcon,
+  helperText,
+  errorMessage,
+  required = false,
+  maxLength,
+  showCharacterCount = false
 }: TextInputFieldProps) {
   const { theme } = useAppTheme();
+  const footer = showCharacterCount && maxLength
+    ? (
+      <ThemedText color="tertiary">
+        {value.length} / {maxLength}
+      </ThemedText>
+    )
+    : undefined;
 
   return (
-    <FormField label={label}>
-      <View
-        style={{
-          backgroundColor: theme.semantic.background.muted,
-          borderRadius: theme.radius.sm,
-          paddingHorizontal: theme.spacing[4],
-          paddingVertical: theme.spacing[4],
-          minHeight: multiline ? 120 : undefined,
-          flexDirection: "row",
-          alignItems: multiline ? "flex-start" : "center",
-          gap: theme.spacing[3]
-        }}
-      >
+    <FormField
+      label={label}
+      helperText={helperText}
+      errorMessage={errorMessage}
+      required={required}
+      footer={footer}
+    >
+      <FieldShell multiline={multiline} invalid={Boolean(errorMessage)}>
         {leadingIcon ? (
           <Ionicons
             name={leadingIcon as never}
@@ -47,10 +61,13 @@ export function TextInputField({
         ) : null}
         <TextInput
           value={value}
-          onChangeText={onChangeText}
+          onChangeText={(nextValue) =>
+            onChangeText(maxLength ? nextValue.slice(0, maxLength) : nextValue)
+          }
           placeholder={placeholder}
           placeholderTextColor={theme.semantic.foreground.tertiary}
           multiline={multiline}
+          maxLength={maxLength}
           textAlignVertical={multiline ? "top" : "center"}
           style={{
             flex: 1,
@@ -58,7 +75,7 @@ export function TextInputField({
             color: theme.semantic.foreground.primary
           }}
         />
-      </View>
+      </FieldShell>
     </FormField>
   );
 }

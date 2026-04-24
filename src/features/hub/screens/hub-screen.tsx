@@ -88,7 +88,7 @@ export function HubScreen() {
 
   return (
     <Screen>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 120 }}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120 }}>
         <View style={{ gap: theme.spacing[6] }}>
           <HubComposerCard composer={data.composer} onPost={handlePost} />
 

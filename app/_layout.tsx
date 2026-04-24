@@ -39,6 +39,7 @@ function RootNavigator() {
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="announcements" />
         <Stack.Screen name="announcements/[announcementId]" />
+        <Stack.Screen name="notifications" />
         <Stack.Screen name="document-preview/[fileId]" />
         <Stack.Screen name="visitor-pass/[visitorId]" />
         <Stack.Screen name="payment-history" />

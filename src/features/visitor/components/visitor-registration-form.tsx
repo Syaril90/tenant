@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Pressable, View } from "react-native";
+import { View } from "react-native";
 
 import type { VisitorFormContent } from "@/features/visitor/types/visitor";
 import { CalendarSheet } from "@/shared/ui/forms/calendar-sheet";
 import { PickerField } from "@/shared/ui/forms/picker-field";
+import { PrimaryButton } from "@/shared/ui/forms/primary-button";
 import { TextInputField } from "@/shared/ui/forms/text-input-field";
 import { SurfaceCard } from "@/shared/ui/primitives/surface-card";
 import { ThemedText } from "@/shared/ui/primitives/themed-text";
@@ -31,6 +32,7 @@ export function VisitorRegistrationForm({
   const [dateLabel, setDateLabel] = useState("");
   const [vehicleLabel, setVehicleLabel] = useState("");
   const [datePickerVisible, setDatePickerVisible] = useState(false);
+  const isSubmitDisabled = !name.trim() || !purpose.trim() || !dateLabel.trim() || loading;
 
   function handleSubmit() {
     if (!name.trim() || !purpose.trim() || !dateLabel.trim()) {
@@ -61,12 +63,14 @@ export function VisitorRegistrationForm({
         placeholder={form.fields.namePlaceholder}
         value={name}
         onChangeText={setName}
+        required
       />
       <TextInputField
         label={form.fields.purposeLabel}
         placeholder={form.fields.purposePlaceholder}
         value={purpose}
         onChangeText={setPurpose}
+        required
       />
       <PickerField
         label={form.fields.dateLabel}
@@ -80,22 +84,14 @@ export function VisitorRegistrationForm({
         placeholder={form.fields.vehiclePlaceholder}
         value={vehicleLabel}
         onChangeText={setVehicleLabel}
+        helperText="Optional"
       />
 
-      <Pressable
+      <PrimaryButton
         onPress={handleSubmit}
-        disabled={loading}
-        style={{
-          backgroundColor: theme.semantic.foreground.brand,
-          borderRadius: theme.radius.sm,
-          paddingVertical: theme.spacing[4],
-          alignItems: "center"
-        }}
-      >
-        <ThemedText color="inverse">
-          {loading ? "Registering..." : form.submitLabel}
-        </ThemedText>
-      </Pressable>
+        disabled={isSubmitDisabled}
+        label={loading ? "Registering..." : form.submitLabel}
+      />
 
       <CalendarSheet
         visible={datePickerVisible}

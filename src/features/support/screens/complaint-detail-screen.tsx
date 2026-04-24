@@ -83,7 +83,7 @@ export function ComplaintDetailScreen() {
     <Screen>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 120 }}
+        contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120 }}
       >
         <View style={{ gap: theme.spacing[6] }}>
           <View

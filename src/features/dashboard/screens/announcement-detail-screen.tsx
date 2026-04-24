@@ -66,7 +66,7 @@ export function AnnouncementDetailScreen() {
     <Screen>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 120, gap: theme.spacing[6] }}
+        contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120, gap: theme.spacing[6] }}
       >
         <View style={{ paddingHorizontal: theme.spacing[4], gap: theme.spacing[6] }}>
           <View style={{ gap: theme.spacing[3] }}>

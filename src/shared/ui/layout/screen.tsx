@@ -7,6 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { authContent } from "@/features/auth/lib/auth-content";
 import { getUserIdentity } from "@/features/auth/lib/user-identity";
+import { useDashboardQuery } from "@/features/dashboard/queries/use-dashboard-query";
 import { appIdentity } from "@/shared/config/app-identity";
 import { useAuth } from "@/features/auth/providers/auth-provider";
 import { useAppTheme } from "@/shared/theme/theme-provider";
@@ -18,7 +19,10 @@ type ScreenProps = PropsWithChildren<{
 
 const MAIN_ROUTES = new Set(["/", "/hub", "/bills", "/visitor", "/support", "/files"]);
 
-export function Screen({ children, headerMode = "auto" }: ScreenProps) {
+export function Screen({
+  children,
+  headerMode = "auto"
+}: ScreenProps) {
   const { theme } = useAppTheme();
   const pathname = usePathname();
   const resolvedHeaderMode =
@@ -32,7 +36,7 @@ export function Screen({ children, headerMode = "auto" }: ScreenProps) {
           flex: 1,
           backgroundColor: theme.semantic.background.app,
           paddingHorizontal: theme.spacing[6],
-          paddingTop: resolvedHeaderMode === "none" ? theme.spacing[6] : theme.spacing[4],
+          paddingTop: resolvedHeaderMode === "none" ? theme.spacing[6] : 0,
           paddingBottom: theme.spacing[6]
         }}
       >
@@ -45,8 +49,11 @@ export function Screen({ children, headerMode = "auto" }: ScreenProps) {
 function AppHeader({ mode }: { mode: "main" | "sub" }) {
   const { colorScheme, theme, toggleNightMode } = useAppTheme();
   const { signOut, user } = useAuth();
+  const dashboardQuery = useDashboardQuery();
+  const pathname = usePathname();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const notificationCount = dashboardQuery.data?.announcements.items.length ?? 0;
 
   function openAccountMenu() {
     setIsMenuVisible(true);
@@ -155,27 +162,79 @@ function AppHeader({ mode }: { mode: "main" | "sub" }) {
             </View>
           </View>
 
-          <Pressable
-            onPress={openAccountMenu}
-            hitSlop={12}
-            style={{
-              width: 46,
-              height: 46,
-              borderRadius: 23,
-              backgroundColor: theme.semantic.background.muted,
-              borderWidth: 1,
-              borderColor: theme.semantic.border.subtle,
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <Avatar
-              imageUrl={identity.avatarUrl}
-              fallbackLabel={identity.initials}
-              size={40}
-              inverse={false}
-            />
-          </Pressable>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[3] }}>
+            <Pressable
+              onPress={() => {
+                if (pathname !== "/notifications") {
+                  router.push("/notifications");
+                }
+              }}
+              hitSlop={12}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                backgroundColor: theme.semantic.background.muted,
+                borderWidth: 1,
+                borderColor: theme.semantic.border.subtle,
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <Ionicons
+                name={pathname === "/notifications" ? "notifications" : "notifications-outline"}
+                size={18}
+                color={theme.semantic.foreground.brand}
+              />
+              {notificationCount > 0 ? (
+                <View
+                  style={{
+                    position: "absolute",
+                    top: 7,
+                    right: 7,
+                    minWidth: 16,
+                    height: 16,
+                    borderRadius: 8,
+                    paddingHorizontal: 4,
+                    backgroundColor: theme.semantic.status.danger,
+                    alignItems: "center",
+                    justifyContent: "center"
+                  }}
+                >
+                  <ThemedText
+                    variant="label"
+                    size="sm"
+                    color="inverse"
+                    style={{ fontSize: 9, lineHeight: 12, letterSpacing: 0.4 }}
+                  >
+                    {notificationCount > 9 ? "9+" : String(notificationCount)}
+                  </ThemedText>
+                </View>
+              ) : null}
+            </Pressable>
+
+            <Pressable
+              onPress={openAccountMenu}
+              hitSlop={12}
+              style={{
+                width: 46,
+                height: 46,
+                borderRadius: 23,
+                backgroundColor: theme.semantic.background.muted,
+                borderWidth: 1,
+                borderColor: theme.semantic.border.subtle,
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <Avatar
+                imageUrl={identity.avatarUrl}
+                fallbackLabel={identity.initials}
+                size={40}
+                inverse={false}
+              />
+            </Pressable>
+          </View>
         </View>
       </View>
 

@@ -17,13 +17,26 @@ export function DashboardInfoPanels({ contacts }: DashboardInfoPanelsProps) {
   const { theme } = useAppTheme();
 
   return (
-    <View style={{ gap: theme.spacing[3] }}>
-      {contacts.items.map((contact) => (
-        <Pressable key={contact.id}>
-          <SurfaceCard
+    <SurfaceCard
+      muted
+      elevated={false}
+      style={{
+        gap: theme.spacing[1],
+        borderRadius: 28,
+        paddingHorizontal: theme.spacing[5],
+        paddingVertical: theme.spacing[3],
+        borderWidth: 1,
+        borderColor: theme.semantic.border.subtle
+      }}
+    >
+      {contacts.items.map((contact, index) => (
+        <View key={contact.id}>
+          <Pressable
             style={{
-              gap: theme.spacing[4],
-              borderRadius: 26
+              paddingVertical: theme.spacing[4],
+              paddingHorizontal: theme.spacing[3],
+              marginHorizontal: -theme.spacing[3],
+              borderRadius: theme.radius.lg
             }}
           >
             <View
@@ -60,21 +73,45 @@ export function DashboardInfoPanels({ contacts }: DashboardInfoPanelsProps) {
                     {contact.title}
                   </ThemedText>
                   <ThemedText color="secondary">{contact.description}</ThemedText>
+
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+                    <ThemedText variant="label" size="sm" color="brand">
+                      {contact.actionLabel}
+                    </ThemedText>
+                    <Ionicons
+                      name="chevron-forward"
+                      size={14}
+                      color={theme.semantic.foreground.brand}
+                    />
+                  </View>
                 </View>
               </View>
 
-              <Ionicons name="call-outline" size={18} color={theme.semantic.foreground.brand} />
+              <View
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 18,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: theme.semantic.background.surface
+                }}
+              >
+                <Ionicons name="call-outline" size={16} color={theme.semantic.foreground.brand} />
+              </View>
             </View>
+          </Pressable>
 
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
-              <ThemedText variant="label" size="sm" color="brand">
-                {contact.actionLabel}
-              </ThemedText>
-              <Ionicons name="chevron-forward" size={14} color={theme.semantic.foreground.brand} />
-            </View>
-          </SurfaceCard>
-        </Pressable>
+          {index < contacts.items.length - 1 ? (
+            <View
+              style={{
+                height: 1,
+                backgroundColor: theme.semantic.border.subtle
+              }}
+            />
+          ) : null}
+        </View>
       ))}
-    </View>
+    </SurfaceCard>
   );
 }

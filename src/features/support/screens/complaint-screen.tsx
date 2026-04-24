@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Pressable, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 
@@ -17,6 +17,8 @@ import { pickAttachments } from "@/shared/lib/document-picker";
 import { Screen } from "@/shared/ui/layout/screen";
 import { ScreenState } from "@/shared/ui/layout/screen-state";
 import { AttachmentUploader } from "@/shared/ui/forms/attachment-uploader";
+import { FormNote } from "@/shared/ui/forms/form-note";
+import { PrimaryButton } from "@/shared/ui/forms/primary-button";
 import { TextInputField } from "@/shared/ui/forms/text-input-field";
 import { ThemedText } from "@/shared/ui/primitives/themed-text";
 import { useAppTheme } from "@/shared/theme/theme-provider";
@@ -131,7 +133,7 @@ export function ComplaintScreen() {
 
   return (
     <Screen>
-      <ScrollView contentContainerStyle={{ paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
         <View style={{ gap: theme.spacing[8] }}>
           <View style={{ gap: theme.spacing[2] }}>
             <ThemedText variant="label" size="sm" color="tertiary">
@@ -240,6 +242,7 @@ function ComplaintSubmitTab({
         placeholder={data.placeholders.title}
         value={title}
         onChangeText={onTitleChange}
+        required
       />
 
       <TextInputField
@@ -248,6 +251,7 @@ function ComplaintSubmitTab({
         value={description}
         onChangeText={onDescriptionChange}
         multiline
+        required
       />
 
       <TextInputField
@@ -256,6 +260,7 @@ function ComplaintSubmitTab({
         value={location}
         onChangeText={onLocationChange}
         leadingIcon="location-outline"
+        required
       />
 
       <ComplaintPrioritySelector
@@ -277,34 +282,20 @@ function ComplaintSubmitTab({
       />
 
       <View style={{ gap: theme.spacing[4] }}>
-        <Pressable
+        <PrimaryButton
           onPress={onSubmit}
           disabled={isSubmitDisabled}
-          style={{
-            backgroundColor: theme.semantic.foreground.brand,
-            borderRadius: theme.radius.md,
-            paddingVertical: theme.spacing[5],
-            alignItems: "center",
-            opacity: isSubmitDisabled ? 0.6 : 1
-          }}
-        >
-          <ThemedText color="inverse">
-            {isSubmitting ? "Submitting..." : data.cta.submitLabel}
-          </ThemedText>
-        </Pressable>
+          label={isSubmitting ? "Submitting..." : data.cta.submitLabel}
+        />
 
-        <View style={{ flexDirection: "row", gap: theme.spacing[3], alignItems: "flex-start" }}>
-          <Ionicons
-            name={submitted ? "checkmark-circle-outline" : "shield-checkmark-outline"}
-            size={16}
-            color={theme.semantic.foreground.brand}
-          />
-          <ThemedText color="secondary">
-            {submitted
+        <FormNote
+          message={
+            submitted
               ? data.messages.successDescription
-              : "Your complaint is reviewed by the resident support team and updated in the case feed."}
-          </ThemedText>
-        </View>
+              : "Your complaint is reviewed by the resident support team and updated in the case feed."
+          }
+          tone={submitted ? "success" : "info"}
+        />
       </View>
     </View>
   );
@@ -335,21 +326,11 @@ function ComplaintCasesTab({
         onSelectCase={onSelectCase}
       />
 
-      <View
-        style={{
-          gap: theme.spacing[3],
-          backgroundColor: theme.semantic.background.surface,
-          borderRadius: theme.radius.lg,
-          padding: theme.spacing[6]
-        }}
-      >
-        <ThemedText variant="heading" size="md">
-          Need to report another issue?
-        </ThemedText>
-        <ThemedText color="secondary">
-          Switch back to `Submit New` to create another complaint using the same support workflow.
-        </ThemedText>
-      </View>
+      <FormNote
+        title="Need to report another issue?"
+        message="Switch back to `Submit New` to create another complaint using the same support workflow."
+        card
+      />
     </View>
   );
 }

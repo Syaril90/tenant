@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { Pressable, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import feedbackJson from "@/features/support/data/feedback.json";
 import { pickAttachments } from "@/shared/lib/document-picker";
 import { AttachmentUploader } from "@/shared/ui/forms/attachment-uploader";
+import { FormNote } from "@/shared/ui/forms/form-note";
+import { PrimaryButton } from "@/shared/ui/forms/primary-button";
 import { FeedbackDetailsField } from "@/features/support/components/feedback-details-field";
 import { FeedbackRatingSelector } from "@/features/support/components/feedback-rating-selector";
 import { FeedbackTypeSelector } from "@/features/support/components/feedback-type-selector";
@@ -108,7 +110,7 @@ export function FeedbackScreen() {
 
   return (
     <Screen>
-      <ScrollView contentContainerStyle={{ paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
         <View style={{ gap: theme.spacing[8] }}>
           <View style={{ gap: theme.spacing[2] }}>
             <ThemedText variant="label" size="sm" color="tertiary">
@@ -156,32 +158,16 @@ export function FeedbackScreen() {
           />
 
           <View style={{ gap: theme.spacing[4] }}>
-            <Pressable
+            <PrimaryButton
               onPress={handleSubmit}
               disabled={!details.trim() || submitFeedbackMutation.isPending}
-              style={{
-                backgroundColor: theme.semantic.foreground.brand,
-                borderRadius: theme.radius.md,
-                paddingVertical: theme.spacing[5],
-                alignItems: "center",
-                opacity: !details.trim() || submitFeedbackMutation.isPending ? 0.6 : 1
-              }}
-            >
-              <ThemedText color="inverse">
-                {submitFeedbackMutation.isPending ? "Submitting..." : data.cta.submitLabel}
-              </ThemedText>
-            </Pressable>
+              label={submitFeedbackMutation.isPending ? "Submitting..." : data.cta.submitLabel}
+            />
 
-            <View style={{ flexDirection: "row", gap: theme.spacing[3], alignItems: "flex-start" }}>
-              <Ionicons
-                name={submitted ? "checkmark-circle-outline" : "shield-checkmark-outline"}
-                size={16}
-                color={theme.semantic.foreground.brand}
-              />
-              <ThemedText color="secondary">
-                {submitted ? data.messages.successDescription : data.cta.helperText}
-              </ThemedText>
-            </View>
+            <FormNote
+              message={submitted ? data.messages.successDescription : data.cta.helperText}
+              tone={submitted ? "success" : "info"}
+            />
           </View>
         </View>
       </ScrollView>

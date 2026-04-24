@@ -66,7 +66,7 @@ export function AnnouncementsScreen() {
     <Screen>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: theme.spacing[8], gap: theme.spacing[6] }}
+        contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: theme.spacing[8], gap: theme.spacing[6] }}
       >
         <View style={{ gap: theme.spacing[2], paddingHorizontal: theme.spacing[4] }}>
           <ThemedText variant="label" size="sm" color="tertiary">

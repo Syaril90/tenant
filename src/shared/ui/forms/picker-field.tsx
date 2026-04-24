@@ -2,6 +2,7 @@ import { Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { useAppTheme } from "@/shared/theme/theme-provider";
+import { FieldShell } from "@/shared/ui/forms/field-shell";
 import { FormField } from "@/shared/ui/forms/form-field";
 import { ThemedText } from "@/shared/ui/primitives/themed-text";
 
@@ -24,26 +25,17 @@ export function PickerField({
 
   return (
     <FormField label={label}>
-      <Pressable
-        onPress={onPress}
-        style={{
-          backgroundColor: theme.semantic.background.muted,
-          borderRadius: theme.radius.sm,
-          paddingHorizontal: theme.spacing[4],
-          paddingVertical: theme.spacing[4],
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between"
-        }}
-      >
-        <ThemedText color={value ? "primary" : "tertiary"}>
-          {value || placeholder}
-        </ThemedText>
-        <Ionicons
-          name={iconName as never}
-          size={18}
-          color={theme.semantic.foreground.tertiary}
-        />
+      <Pressable onPress={onPress}>
+        <FieldShell style={{ justifyContent: "space-between" }}>
+          <ThemedText color={value ? "primary" : "tertiary"}>
+            {value || placeholder}
+          </ThemedText>
+          <Ionicons
+            name={iconName as never}
+            size={18}
+            color={theme.semantic.foreground.tertiary}
+          />
+        </FieldShell>
       </Pressable>
     </FormField>
   );
