@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { Image, Pressable, ScrollView, View } from "react-native";
+import { Image, Linking, Pressable, ScrollView, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 
@@ -29,7 +29,7 @@ const attachmentIcons: Record<ComplaintDetailAttachment["type"], IoniconName> = 
 export function ComplaintDetailScreen() {
   const { colorScheme, theme } = useAppTheme();
   const params = useLocalSearchParams<ComplaintDetailRouteParams>();
-  const detailQuery = useComplaintDetailQuery();
+  const detailQuery = useComplaintDetailQuery(params.complaintId);
 
   if (detailQuery.isLoading) {
     return (
@@ -52,7 +52,7 @@ export function ComplaintDetailScreen() {
   }
 
   const { items, labels } = detailQuery.data;
-  const complaint = items.find((item) => item.id === params.complaintId);
+  const complaint = items[0];
 
   if (!complaint) {
     return (
@@ -502,7 +502,12 @@ function AttachmentRow({ attachment }: { attachment: ComplaintDetailAttachment }
   const { colorScheme, theme } = useAppTheme();
 
   return (
-    <View
+    <Pressable
+      onPress={() => {
+        if (attachment.fileUrl) {
+          Linking.openURL(attachment.fileUrl).catch(() => {});
+        }
+      }}
       style={{
         flexDirection: "row",
         alignItems: "center",
@@ -537,6 +542,6 @@ function AttachmentRow({ attachment }: { attachment: ComplaintDetailAttachment }
         </ThemedText>
       </View>
       <Ionicons name="download-outline" size={14} color={theme.semantic.foreground.tertiary} />
-    </View>
+    </Pressable>
   );
 }

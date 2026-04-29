@@ -1,7 +1,6 @@
-import supportJson from "@/features/support/data/support.json";
+import { getSupportFromAPI } from "@/features/support/api/complaints-api";
 import type { SupportModel } from "@/features/support/types/support";
-import { mockApiResponse } from "@/shared/lib/mock-api";
 
-export async function getSupport(): Promise<SupportModel> {
-  return mockApiResponse(supportJson as SupportModel, 250);
+export async function getSupport(unitCode?: string | null): Promise<SupportModel> {
+  return getSupportFromAPI(unitCode);
 }

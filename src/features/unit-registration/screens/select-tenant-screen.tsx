@@ -18,16 +18,20 @@ export function SelectTenantScreen() {
   const [activeTenantId, setActiveTenantId] = useState<string>("");
 
   useEffect(() => {
-    if (!activeTenantId && tenants.length > 0) {
+    if (tenants.length === 0) {
+      setActiveTenantId("");
+      return;
+    }
+
+    if (selectedTenant && tenants.some((tenant) => tenant.id === selectedTenant.id)) {
+      setActiveTenantId(selectedTenant.id);
+      return;
+    }
+
+    if (!activeTenantId || !tenants.some((tenant) => tenant.id === activeTenantId)) {
       setActiveTenantId(tenants[0].id);
     }
-  }, [activeTenantId, tenants]);
-
-  useEffect(() => {
-    if (selectedTenant) {
-      router.replace("/(tabs)");
-    }
-  }, [selectedTenant]);
+  }, [activeTenantId, selectedTenant, tenants]);
 
   if (isLoading) {
     return (
@@ -80,6 +84,7 @@ export function SelectTenantScreen() {
     }
 
     selectTenant(activeTenantId);
+    router.replace("/(tabs)");
   }
 
   return (

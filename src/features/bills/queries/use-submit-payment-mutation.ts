@@ -2,7 +2,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { queryKeys } from "@/core/config/query";
 import { submitPayment } from "@/features/bills/api/submit-payment";
-import { buildPaymentHistoryContent } from "@/features/bills/data/billing-adapters";
 import type {
   BillingModel,
   PaymentHistoryContent,
@@ -22,7 +21,7 @@ export function useSubmitPaymentMutation() {
   return useMutation({
     mutationFn: submitPayment,
     onSuccess: (result, variables: SubmitPaymentInput) => {
-      queryClient.setQueryData<BillingModel>(queryKeys.bills, (current) => {
+      queryClient.setQueryData<BillingModel>([...queryKeys.bills, variables.unitCode], (current) => {
         if (!current) {
           return current;
         }
@@ -77,7 +76,7 @@ export function useSubmitPaymentMutation() {
         };
       });
 
-      queryClient.setQueryData<PaymentHistoryContent>(queryKeys.paymentHistory, (current) => {
+      queryClient.setQueryData<PaymentHistoryContent>([...queryKeys.paymentHistory, variables.unitCode], (current) => {
         const nextPayment = {
           id: result.paymentId,
           title: current?.payments[0]?.title ?? "Resident Payment",
@@ -92,10 +91,7 @@ export function useSubmitPaymentMutation() {
         };
 
         if (!current) {
-          return {
-            ...buildPaymentHistoryContent(result.unitCode),
-            payments: [nextPayment, ...buildPaymentHistoryContent(result.unitCode).payments]
-          };
+          return current;
         }
 
         return {

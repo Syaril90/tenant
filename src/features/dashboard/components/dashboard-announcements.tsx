@@ -16,6 +16,7 @@ type DashboardAnnouncementsProps = {
 
 export function DashboardAnnouncements({ section }: DashboardAnnouncementsProps) {
   const { theme } = useAppTheme();
+  const visibleItems = section.items.slice(0, 3);
 
   return (
     <View style={{ gap: theme.spacing[4] }}>
@@ -29,7 +30,7 @@ export function DashboardAnnouncements({ section }: DashboardAnnouncementsProps)
       </View>
 
       <View style={{ gap: theme.spacing[4] }}>
-        {section.items.map((item) => (
+        {visibleItems.map((item) => (
           <AnnouncementCard
             key={item.id}
             item={item}

@@ -2,6 +2,7 @@ import * as DocumentPicker from "expo-document-picker";
 
 export type SharedAttachment = {
   id: string;
+  uri?: string;
   name: string;
   sizeLabel: string;
   mimeType: string;
@@ -19,6 +20,7 @@ export async function pickAttachments() {
 
   return result.assets.map((asset) => ({
     id: asset.uri,
+    uri: asset.uri,
     name: asset.name,
     sizeLabel: formatFileSize(asset.size),
     mimeType: asset.mimeType ?? "file"

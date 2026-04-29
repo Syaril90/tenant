@@ -8,6 +8,7 @@ import { SupportUpdatesFeed } from "@/features/support/components/support-update
 import supportJson from "@/features/support/data/support.json";
 import { useSupportQuery } from "@/features/support/queries/use-support-query";
 import type { SupportModel } from "@/features/support/types/support";
+import { useTenant } from "@/features/unit-registration/providers/tenant-provider";
 import { Screen } from "@/shared/ui/layout/screen";
 import { ScreenState } from "@/shared/ui/layout/screen-state";
 import { ThemedText } from "@/shared/ui/primitives/themed-text";
@@ -15,7 +16,8 @@ import { useAppTheme } from "@/shared/theme/theme-provider";
 
 export function SupportScreen() {
   const { theme } = useAppTheme();
-  const supportQuery = useSupportQuery();
+  const { selectedTenant } = useTenant();
+  const supportQuery = useSupportQuery(selectedTenant?.unitNumber ?? null);
   const fallbackContent = supportJson as SupportModel;
 
   if (supportQuery.isLoading) {

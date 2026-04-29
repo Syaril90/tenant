@@ -1,7 +1,6 @@
-import { buildBillingModel } from "@/features/bills/data/billing-adapters";
+import { getBillingFromAPI } from "@/features/bills/api/billing-api";
 import type { BillingModel } from "@/features/bills/types/billing";
-import { mockApiResponse } from "@/shared/lib/mock-api";
 
-export async function getBilling(): Promise<BillingModel> {
-  return mockApiResponse(buildBillingModel(), 250);
+export async function getBilling(unitCode: string): Promise<BillingModel> {
+  return getBillingFromAPI(unitCode);
 }

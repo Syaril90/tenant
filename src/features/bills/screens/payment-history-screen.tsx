@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useLocalSearchParams, router } from "expo-router";
 
 import { buildPaymentHistoryContent } from "@/features/bills/data/billing-adapters";
+import { useTenant } from "@/features/unit-registration/providers/tenant-provider";
 import { usePaymentHistoryContentQuery } from "@/features/bills/queries/use-payment-history-content-query";
 import type { PaymentHistoryContent, PaymentHistoryItem } from "@/features/bills/types/billing";
 import { DocumentSearchInput } from "@/features/documents/components/document-search-input";
@@ -45,10 +47,13 @@ const statusStyles = {
 
 export function PaymentHistoryScreen() {
   const { colorScheme, theme } = useAppTheme();
-  const paymentHistoryQuery = usePaymentHistoryContentQuery();
+  const { unitCode: unitCodeParam } = useLocalSearchParams<{ unitCode?: string }>();
+  const { selectedTenant } = useTenant();
+  const unitCode = typeof unitCodeParam === "string" ? unitCodeParam : selectedTenant?.unitNumber ?? null;
+  const paymentHistoryQuery = usePaymentHistoryContentQuery(unitCode);
   const [query, setQuery] = useState("");
   const [activeFilterId, setActiveFilterId] = useState("all");
-  const fallbackContent = buildPaymentHistoryContent() as PaymentHistoryContent;
+  const fallbackContent = buildPaymentHistoryContent(selectedTenant?.unitNumber) as PaymentHistoryContent;
 
   const filteredPayments = useMemo(() => {
     const payments = paymentHistoryQuery.data?.payments ?? [];
@@ -93,6 +98,29 @@ export function PaymentHistoryScreen() {
     <Screen>
       <ScrollView contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
         <View style={{ gap: theme.spacing[8] }}>
+          {selectedTenant ? (
+            <SurfaceCard style={{ gap: theme.spacing[3] }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: theme.spacing[3]
+                }}
+              >
+                <View style={{ flex: 1, gap: theme.spacing[1] }}>
+                  <ThemedText variant="label" size="sm" color="tertiary">
+                    TENANT LEDGER
+                  </ThemedText>
+                  <ThemedText variant="heading" size="md">
+                    {selectedTenant.propertyName} • {selectedTenant.unitNumber}
+                  </ThemedText>
+                </View>
+                <PressableSwitchTenant onPress={() => router.push("/select-tenant")} />
+              </View>
+            </SurfaceCard>
+          ) : null}
+
           <View style={{ gap: theme.spacing[2] }}>
             <ThemedText variant="label" size="sm" color="tertiary">
               {header.eyebrow}
@@ -148,6 +176,33 @@ export function PaymentHistoryScreen() {
         </View>
       </ScrollView>
     </Screen>
+  );
+}
+
+function PressableSwitchTenant({ onPress }: { onPress: () => void }) {
+  const { theme } = useAppTheme();
+
+  return (
+    <Pressable
+      onPress={onPress}
+      style={{
+        backgroundColor: theme.semantic.background.muted,
+        borderRadius: theme.radius.pill,
+        paddingHorizontal: theme.spacing[4],
+        paddingVertical: theme.spacing[2]
+      }}
+    >
+      <ThemedText
+        variant="label"
+        size="sm"
+        color="brand"
+        style={{
+          lineHeight: 16
+        }}
+      >
+        Switch Tenant
+      </ThemedText>
+    </Pressable>
   );
 }
 

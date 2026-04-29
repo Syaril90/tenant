@@ -12,8 +12,8 @@ export function useRegisterVisitorMutation() {
 
   return useMutation({
     mutationFn: registerVisitor,
-    onSuccess: (result, _variables: RegisterVisitorInput) => {
-      queryClient.setQueryData<VisitorModel>(queryKeys.visitor, (current) => {
+    onSuccess: (result, variables: RegisterVisitorInput) => {
+      queryClient.setQueryData<VisitorModel>([...queryKeys.visitor, variables.unitCode], (current) => {
         if (!current) {
           return current;
         }
@@ -24,7 +24,16 @@ export function useRegisterVisitorMutation() {
             ...current.summary,
             badge: `${current.upcomingVisitors.length + 1} EXPECTED`
           },
-          upcomingVisitors: [result, ...current.upcomingVisitors]
+          upcomingVisitors: [result, ...current.upcomingVisitors],
+          recentActivity: [
+            {
+              id: `activity-${result.id}`,
+              title: `${result.name} registration received`,
+              description: "The visitor request is waiting for management review and parking validation.",
+              timestampLabel: "Just now"
+            },
+            ...current.recentActivity
+          ].slice(0, 5)
         };
       });
     }

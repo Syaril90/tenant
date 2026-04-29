@@ -42,6 +42,7 @@
     "loading": "Loading complaint form...",
     "errorTitle": "Complaint form unavailable",
     "errorDescription": "The complaint mock request failed. Replace the service when the real complaint API is ready.",
+    "successTitle": "Complaint submitted",
     "successDescription": "Your complaint has been submitted to the management team and a case reference will be generated."
   }
 }

@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ScrollView, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Alert, ScrollView, View } from "react-native";
 
 import feedbackJson from "@/features/support/data/feedback.json";
 import { pickAttachments } from "@/shared/lib/document-picker";
@@ -13,6 +12,7 @@ import { FeedbackTypeSelector } from "@/features/support/components/feedback-typ
 import { useFeedbackQuery } from "@/features/support/queries/use-feedback-query";
 import { useSubmitFeedbackMutation } from "@/features/support/queries/use-submit-feedback-mutation";
 import type { FeedbackAttachment, FeedbackModel } from "@/features/support/types/support";
+import { useTenant } from "@/features/unit-registration/providers/tenant-provider";
 import { Screen } from "@/shared/ui/layout/screen";
 import { ScreenState } from "@/shared/ui/layout/screen-state";
 import { ThemedText } from "@/shared/ui/primitives/themed-text";
@@ -20,6 +20,7 @@ import { useAppTheme } from "@/shared/theme/theme-provider";
 
 export function FeedbackScreen() {
   const { theme } = useAppTheme();
+  const { selectedTenant } = useTenant();
   const feedbackQuery = useFeedbackQuery();
   const submitFeedbackMutation = useSubmitFeedbackMutation();
   const fallbackContent = feedbackJson as FeedbackModel;
@@ -66,13 +67,17 @@ export function FeedbackScreen() {
     );
   }
 
+  const content = data;
+
   function handleSubmit() {
-    if (!details.trim()) {
+    if (!selectedTenant || !details.trim()) {
       return;
     }
 
     submitFeedbackMutation.mutate(
       {
+        accountCode: selectedTenant?.id ?? null,
+        unitCode: selectedTenant?.unitNumber ?? null,
         typeId: selectedTypeId,
         ratingId: selectedRatingId,
         details: details.trim(),
@@ -81,14 +86,27 @@ export function FeedbackScreen() {
       {
         onSuccess: () => {
           setSubmitted(true);
+          setSelectedTypeId(selectedTypeDefault);
+          setSelectedRatingId(selectedRatingDefault);
           setDetails("");
           setAttachments([]);
+          Alert.alert(content.messages.successTitle, content.messages.successDescription);
+        },
+        onError: (error) => {
+          Alert.alert(
+            content.messages.errorTitle,
+            error instanceof Error ? error.message : content.messages.errorDescription
+          );
         }
       }
     );
   }
 
   async function handleBrowseFiles() {
+    if (submitted) {
+      setSubmitted(false);
+    }
+
     const nextAttachments = await pickAttachments();
 
     setAttachments((current) => {
@@ -105,6 +123,10 @@ export function FeedbackScreen() {
   }
 
   function handleRemoveAttachment(attachmentId: string) {
+    if (submitted) {
+      setSubmitted(false);
+    }
+
     setAttachments((current) => current.filter((attachment) => attachment.id !== attachmentId));
   }
 
@@ -114,43 +136,58 @@ export function FeedbackScreen() {
         <View style={{ gap: theme.spacing[8] }}>
           <View style={{ gap: theme.spacing[2] }}>
             <ThemedText variant="label" size="sm" color="tertiary">
-              {data.header.eyebrow}
+              {content.header.eyebrow}
             </ThemedText>
             <View>
-              {data.header.titleLines.map((line, index) => (
+              {content.header.titleLines.map((line, index) => (
                 <ThemedText
                   key={line}
                   variant="heading"
                   size="xl"
-                  color={index === data.header.titleLines.length - 1 ? "brand" : "primary"}
+                  color={index === content.header.titleLines.length - 1 ? "brand" : "primary"}
                 >
                   {line}
                 </ThemedText>
               ))}
             </View>
-            <ThemedText color="secondary">{data.header.description}</ThemedText>
+            <ThemedText color="secondary">{content.header.description}</ThemedText>
           </View>
 
           <FeedbackTypeSelector
-            section={data.typeSection}
+            section={content.typeSection}
             selectedId={selectedTypeId}
-            onSelect={setSelectedTypeId}
+            onSelect={(value) => {
+              if (submitted) {
+                setSubmitted(false);
+              }
+              setSelectedTypeId(value);
+            }}
           />
           <FeedbackRatingSelector
-            section={data.ratingSection}
+            section={content.ratingSection}
             selectedId={selectedRatingId}
-            onSelect={setSelectedRatingId}
+            onSelect={(value) => {
+              if (submitted) {
+                setSubmitted(false);
+              }
+              setSelectedRatingId(value);
+            }}
           />
           <FeedbackDetailsField
-            section={data.detailsSection}
+            section={content.detailsSection}
             value={details}
-            onChangeText={setDetails}
+            onChangeText={(value) => {
+              if (submitted) {
+                setSubmitted(false);
+              }
+              setDetails(value);
+            }}
           />
           <AttachmentUploader
-            label={data.uploadSection.title}
-            title={data.uploadSection.description}
+            label={content.uploadSection.title}
+            title={content.uploadSection.description}
             description={undefined}
-            buttonLabel={data.uploadSection.buttonLabel}
+            buttonLabel={content.uploadSection.buttonLabel}
             iconName="camera-outline"
             attachments={attachments}
             onBrowse={handleBrowseFiles}
@@ -160,12 +197,18 @@ export function FeedbackScreen() {
           <View style={{ gap: theme.spacing[4] }}>
             <PrimaryButton
               onPress={handleSubmit}
-              disabled={!details.trim() || submitFeedbackMutation.isPending}
-              label={submitFeedbackMutation.isPending ? "Submitting..." : data.cta.submitLabel}
+              disabled={!selectedTenant || !details.trim() || submitFeedbackMutation.isPending}
+              label={submitFeedbackMutation.isPending ? "Submitting..." : content.cta.submitLabel}
             />
 
             <FormNote
-              message={submitted ? data.messages.successDescription : data.cta.helperText}
+              message={
+                submitted
+                  ? content.messages.successDescription
+                  : selectedTenant
+                    ? content.cta.helperText
+                    : "Select a tenant profile first before submitting feedback."
+              }
               tone={submitted ? "success" : "info"}
             />
           </View>

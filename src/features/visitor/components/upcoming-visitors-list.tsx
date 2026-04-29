@@ -18,7 +18,7 @@ export function UpcomingVisitorsList({
   generatePassLabel,
   visitors
 }: UpcomingVisitorsListProps) {
-  const { theme } = useAppTheme();
+  const { colorScheme, theme } = useAppTheme();
 
   return (
     <View style={{ gap: theme.spacing[4] }}>
@@ -28,19 +28,73 @@ export function UpcomingVisitorsList({
 
       <View style={{ gap: theme.spacing[3] }}>
         {visitors.map((visitor) => (
-          <SurfaceCard key={visitor.id} style={{ gap: theme.spacing[2], paddingVertical: theme.spacing[4] }}>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", gap: theme.spacing[4] }}>
-              <View style={{ flex: 1, gap: 2 }}>
-                <ThemedText variant="heading" size="md">
-                  {visitor.name}
-                </ThemedText>
-                <ThemedText color="secondary">{visitor.purpose}</ThemedText>
-                <ThemedText color="tertiary">{visitor.vehicleLabel}</ThemedText>
+          <SurfaceCard
+            key={visitor.id}
+            style={{
+              gap: theme.spacing[4],
+              borderRadius: 24,
+              paddingVertical: theme.spacing[5]
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "flex-start",
+                gap: theme.spacing[4],
+                flex: 1
+              }}
+            >
+              <View
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: 19,
+                  backgroundColor: colorScheme === "dark" ? "#1A2A3D" : "#EAF2FF",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <Ionicons
+                  name="people-outline"
+                  size={20}
+                  color={theme.semantic.foreground.brand}
+                />
               </View>
 
-              <View style={{ alignItems: "flex-end", gap: 2 }}>
-                <ThemedText>{visitor.dateLabel}</ThemedText>
-                <ThemedText style={{ color: "#1C7C54" }}>{visitor.statusLabel}</ThemedText>
+              <View style={{ gap: 4, flex: 1 }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "flex-start",
+                    justifyContent: "space-between",
+                    gap: theme.spacing[3]
+                  }}
+                >
+                  <ThemedText variant="heading" size="md" style={{ flex: 1 }}>
+                    {visitor.name}
+                  </ThemedText>
+                  <View
+                    style={{
+                      alignSelf: "flex-start",
+                      backgroundColor:
+                        colorScheme === "dark" ? "#1A2A3D" : "#EAF2FF",
+                      borderRadius: theme.radius.pill,
+                      paddingHorizontal: theme.spacing[2],
+                      paddingVertical: 2
+                    }}
+                  >
+                    <ThemedText variant="label" size="sm" color="brand">
+                      Upcoming
+                    </ThemedText>
+                  </View>
+                </View>
+
+                <ThemedText color="tertiary">{visitor.dateLabel}</ThemedText>
+                <ThemedText color="secondary">{visitor.purpose}</ThemedText>
+                <ThemedText color="tertiary">{visitor.vehicleLabel}</ThemedText>
+                <ThemedText style={{ color: "#1C7C54" }}>
+                  {visitor.statusLabel}
+                </ThemedText>
               </View>
             </View>
 

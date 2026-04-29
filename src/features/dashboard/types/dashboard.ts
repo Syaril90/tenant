@@ -83,6 +83,7 @@ export type AnnouncementDetail = DashboardAnnouncement & {
     title: string;
     meta: string;
     type: "pdf" | "image";
+    fileUrl?: string;
   }[];
   supportTitle: string;
   supportDescription: string;

@@ -4,6 +4,7 @@ import { ActivityIndicator, Pressable, ScrollView, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 
+import { useTenant } from "@/features/unit-registration/providers/tenant-provider";
 import { useBillingQuery } from "@/features/bills/queries/use-billing-query";
 import { useSubmitPaymentMutation } from "@/features/bills/queries/use-submit-payment-mutation";
 import type { BillingInvoice } from "@/features/bills/types/billing";
@@ -24,7 +25,8 @@ function formatCurrency(amount: number) {
 
 export function BillingScreen() {
   const { colorScheme, theme } = useAppTheme();
-  const billingQuery = useBillingQuery();
+  const { selectedTenant } = useTenant();
+  const billingQuery = useBillingQuery(selectedTenant?.unitNumber ?? null);
   const submitPaymentMutation = useSubmitPaymentMutation();
 
   const [selectedInvoiceIds, setSelectedInvoiceIds] = useState<string[]>([]);
@@ -136,7 +138,46 @@ export function BillingScreen() {
   return (
     <Screen>
       <ScrollView contentContainerStyle={{ paddingTop: theme.spacing[2], paddingBottom: 120, gap: theme.spacing[6] }} showsVerticalScrollIndicator={false}>
-        <View style={{ gap: theme.spacing[8] }}>
+          <View style={{ gap: theme.spacing[8] }}>
+          {selectedTenant ? (
+            <SurfaceCard style={{ gap: theme.spacing[4] }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                  gap: theme.spacing[4]
+                }}
+              >
+                <View style={{ flex: 1, gap: theme.spacing[1] }}>
+                  <ThemedText variant="label" size="sm" color="tertiary">
+                    ACTIVE TENANT
+                  </ThemedText>
+                  <ThemedText variant="heading" size="md">
+                    {selectedTenant.tenantName}
+                  </ThemedText>
+                  <ThemedText color="secondary">
+                    {selectedTenant.propertyName} • {selectedTenant.unitNumber}
+                  </ThemedText>
+                </View>
+
+                <Pressable
+                  onPress={() => router.push("/select-tenant")}
+                  style={{
+                    borderRadius: theme.radius.pill,
+                    paddingHorizontal: theme.spacing[4],
+                    paddingVertical: theme.spacing[2],
+                    backgroundColor: theme.semantic.background.muted
+                  }}
+                >
+                  <ThemedText variant="label" size="sm" color="brand">
+                    Switch Tenant
+                  </ThemedText>
+                </Pressable>
+              </View>
+            </SurfaceCard>
+          ) : null}
+
           <View
             style={{
               backgroundColor: theme.semantic.background.emphasis,
@@ -248,7 +289,12 @@ export function BillingScreen() {
               </Pressable>
 
               <Pressable
-                onPress={() => router.push("/payment-history")}
+                onPress={() =>
+                  router.push({
+                    pathname: "/payment-history",
+                    params: { unitCode: data.unitCode }
+                  })
+                }
                 style={{
                   flex: 1,
                   backgroundColor: "transparent",
@@ -328,7 +374,8 @@ export function BillingScreen() {
 
 function PaidActivitySection() {
   const { colorScheme, theme } = useAppTheme();
-  const billingQuery = useBillingQuery();
+  const { selectedTenant } = useTenant();
+  const billingQuery = useBillingQuery(selectedTenant?.unitNumber ?? null);
   const data = billingQuery.data;
 
   if (!data) {

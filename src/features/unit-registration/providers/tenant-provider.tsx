@@ -3,6 +3,7 @@ import type { PropsWithChildren } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { useAuth } from "@/features/auth/providers/auth-provider";
+import { getResidentAccountsByEmail } from "@/features/unit-registration/api/get-resident-accounts";
 import { tenantFlowContent } from "@/features/unit-registration/lib/tenant-flow-content";
 import type { TenantProfile } from "@/features/unit-registration/types/tenant-flow";
 
@@ -47,9 +48,14 @@ export function TenantProvider({ children }: PropsWithChildren) {
         const storedProfiles = await AsyncStorage.getItem(
           `${TENANT_STORAGE_KEY}:${user.uid}`
         );
-        const nextTenants = storedProfiles
+        const localTenants = storedProfiles
           ? (JSON.parse(storedProfiles) as TenantProfile[])
-          : tenantFlowContent.seedTenants;
+          : [];
+        const apiTenants = user.email ? await getResidentAccountsByEmail(user.email) : [];
+        const nextTenants = mergeTenantProfiles(
+          apiTenants,
+          localTenants.length > 0 ? localTenants : apiTenants.length === 0 ? tenantFlowContent.seedTenants : []
+        );
 
         if (isActive) {
           setTenants(nextTenants);
@@ -134,4 +140,14 @@ export function useTenant() {
   }
 
   return context;
+}
+
+function mergeTenantProfiles(primary: TenantProfile[], secondary: TenantProfile[]) {
+  const merged = new Map<string, TenantProfile>();
+
+  for (const tenant of [...primary, ...secondary]) {
+    merged.set(tenant.id, tenant);
+  }
+
+  return Array.from(merged.values());
 }

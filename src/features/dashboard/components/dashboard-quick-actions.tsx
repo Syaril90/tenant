@@ -44,6 +44,10 @@ export function DashboardQuickActions({ section }: DashboardQuickActionsProps) {
               if (item.id === "concierge-support") {
                 router.push("/support");
               }
+
+              if (item.id === "view-announcements") {
+                router.push("/announcements");
+              }
             }}
           >
             <SurfaceCard

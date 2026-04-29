@@ -72,6 +72,14 @@
         "actionLabel": "Get assistance",
         "accentColor": "#F4ECFF",
         "icon": "headset-outline"
+      },
+      {
+        "id": "view-announcements",
+        "titleLines": ["View", "Announcements"],
+        "description": "Open all resident notices, updates, and urgent building alerts.",
+        "actionLabel": "Open notices",
+        "accentColor": "#EAF3FF",
+        "icon": "notifications-outline"
       }
     ]
   },

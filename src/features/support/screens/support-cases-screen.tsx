@@ -7,6 +7,7 @@ import { SupportCaseList } from "@/features/support/components/support-case-list
 import { SupportSegmentedTabs } from "@/features/support/components/support-segmented-tabs";
 import { useSupportQuery } from "@/features/support/queries/use-support-query";
 import type { SupportCase, SupportModel } from "@/features/support/types/support";
+import { useTenant } from "@/features/unit-registration/providers/tenant-provider";
 import { DocumentSearchInput } from "@/features/documents/components/document-search-input";
 import { Screen } from "@/shared/ui/layout/screen";
 import { ScreenState } from "@/shared/ui/layout/screen-state";
@@ -17,12 +18,13 @@ import { useAppTheme } from "@/shared/theme/theme-provider";
 const caseTabs = [
   { id: "all", label: "All" },
   { id: "warning", label: "Open" },
-  { id: "success", label: "Resolved" }
+  { id: "success", label: "Done" }
 ] as const;
 
 export function SupportCasesScreen() {
   const { theme } = useAppTheme();
-  const supportQuery = useSupportQuery();
+  const { selectedTenant } = useTenant();
+  const supportQuery = useSupportQuery(selectedTenant?.unitNumber ?? null);
   const [query, setQuery] = useState("");
   const [activeTabId, setActiveTabId] = useState<(typeof caseTabs)[number]["id"]>("all");
   const fallbackContent = supportJson as SupportModel;

@@ -8,6 +8,7 @@ import visitorJson from "@/features/visitor/data/visitor.json";
 import { useRegisterVisitorMutation } from "@/features/visitor/queries/use-register-visitor-mutation";
 import { useVisitorQuery } from "@/features/visitor/queries/use-visitor-query";
 import type { VisitorModel } from "@/features/visitor/types/visitor";
+import { useTenant } from "@/features/unit-registration/providers/tenant-provider";
 import { Screen } from "@/shared/ui/layout/screen";
 import { ScreenState } from "@/shared/ui/layout/screen-state";
 import { ThemedText } from "@/shared/ui/primitives/themed-text";
@@ -15,7 +16,8 @@ import { useAppTheme } from "@/shared/theme/theme-provider";
 
 export function VisitorScreen() {
   const { theme } = useAppTheme();
-  const visitorQuery = useVisitorQuery();
+  const { selectedTenant } = useTenant();
+  const visitorQuery = useVisitorQuery(selectedTenant?.unitNumber ?? null);
   const registerVisitorMutation = useRegisterVisitorMutation();
   const fallbackContent = visitorJson as VisitorModel;
 
@@ -33,7 +35,11 @@ export function VisitorScreen() {
         <ScreenState
           kind="error"
           title={fallbackContent.messages.errorTitle}
-          description={fallbackContent.messages.errorDescription}
+          description={
+            selectedTenant
+              ? fallbackContent.messages.errorDescription
+              : "Select a tenant profile first before registering visitors."
+          }
         />
       </Screen>
     );
@@ -60,7 +66,13 @@ export function VisitorScreen() {
           <VisitorRegistrationForm
             form={form}
             loading={registerVisitorMutation.isPending}
-            onSubmit={(values) => registerVisitorMutation.mutate(values)}
+            onSubmit={(values) =>
+              registerVisitorMutation.mutate({
+                accountCode: selectedTenant?.id ?? "",
+                unitCode: selectedTenant?.unitNumber ?? "",
+                ...values
+              })
+            }
           />
           <UpcomingVisitorsList
             label={sections.upcomingLabel}

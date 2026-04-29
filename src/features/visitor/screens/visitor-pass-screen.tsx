@@ -18,6 +18,20 @@ function buildPassCode(visitorId?: string) {
   return `VP-${visitorId.replace("visitor-", "").slice(0, 10).toUpperCase()}`;
 }
 
+function buildVisitorQRValue(params: VisitorPassRouteParams, passCode: string) {
+  const visitorId = params.visitorId ?? "unknown";
+  const search = new URLSearchParams({
+    type: "visitor-pass",
+    visitorId,
+    passCode,
+    visitorName: params.name ?? "",
+    visitDate: params.dateLabel ?? "",
+    status: params.statusLabel ?? ""
+  });
+
+  return `propertyops://visitor-pass?${search.toString()}`;
+}
+
 export function VisitorPassScreen() {
   const { theme } = useAppTheme();
   const contentQuery = useVisitorPassContentQuery();
@@ -45,6 +59,7 @@ export function VisitorPassScreen() {
 
   const { header, labels } = contentQuery.data;
   const passCode = buildPassCode(params.visitorId);
+  const qrValue = buildVisitorQRValue(params, passCode);
 
   return (
     <Screen>
@@ -67,7 +82,7 @@ export function VisitorPassScreen() {
             <ThemedText color="secondary">{header.description}</ThemedText>
           </View>
 
-          <VisitorPassCard title={labels.qrTitle} passCode={passCode} />
+          <VisitorPassCard title={labels.qrTitle} passCode={passCode} qrValue={qrValue} />
 
           <SurfaceCard style={{ gap: theme.spacing[3] }}>
             <DetailRow label={labels.visitorName} value={params.name ?? "-"} />

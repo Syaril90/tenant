@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { Image, Pressable, ScrollView, View } from "react-native";
+import { Image, Linking, Pressable, ScrollView, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 
@@ -20,7 +20,8 @@ type AnnouncementRouteParams = {
 export function AnnouncementDetailScreen() {
   const { theme } = useAppTheme();
   const params = useLocalSearchParams<AnnouncementRouteParams>();
-  const detailQuery = useAnnouncementDetailQuery();
+  const announcementId = typeof params.announcementId === "string" ? params.announcementId : null;
+  const detailQuery = useAnnouncementDetailQuery(announcementId);
 
   if (detailQuery.isLoading) {
     return (
@@ -172,14 +173,19 @@ export function AnnouncementDetailScreen() {
             <ThemedText variant="label" size="md" color="tertiary">
               {labels.attachmentsTitle}
             </ThemedText>
-            {announcement.attachments.map((attachment) => (
-              <AttachmentRow
-                key={attachment.id}
-                title={attachment.title}
-                meta={attachment.meta}
-                type={attachment.type}
-              />
-            ))}
+            {announcement.attachments.length > 0 ? (
+              announcement.attachments.map((attachment) => (
+                <AttachmentRow
+                  key={attachment.id}
+                  title={attachment.title}
+                  meta={attachment.meta}
+                  type={attachment.type}
+                  fileUrl={attachment.fileUrl}
+                />
+              ))
+            ) : (
+              <ThemedText color="secondary">No attachments available for this notice.</ThemedText>
+            )}
           </SurfaceCard>
 
           <SurfaceCard
@@ -279,11 +285,13 @@ function InfoRow({
 function AttachmentRow({
   title,
   meta,
-  type
+  type,
+  fileUrl
 }: {
   title: string;
   meta: string;
   type: "pdf" | "image";
+  fileUrl?: string;
 }) {
   const { theme } = useAppTheme();
   const iconName: IoniconName = type === "pdf" ? "document-text-outline" : "map-outline";
@@ -311,7 +319,26 @@ function AttachmentRow({
           {meta}
         </ThemedText>
       </View>
-      <Ionicons name={actionIcon} size={18} color={theme.semantic.foreground.tertiary} />
+      {fileUrl ? (
+        <Pressable
+          onPress={() => {
+            Linking.openURL(fileUrl).catch(() => {});
+          }}
+          style={{
+            borderRadius: theme.radius.pill,
+            borderWidth: 1,
+            borderColor: theme.semantic.foreground.brand,
+            paddingHorizontal: theme.spacing[3],
+            paddingVertical: theme.spacing[2]
+          }}
+        >
+          <ThemedText variant="label" size="sm" color="brand">
+            Open
+          </ThemedText>
+        </Pressable>
+      ) : (
+        <Ionicons name={actionIcon} size={18} color={theme.semantic.foreground.tertiary} />
+      )}
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { Alert, ScrollView, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 
@@ -13,6 +13,7 @@ import { useComplaintFormQuery } from "@/features/support/queries/use-complaint-
 import { useSubmitComplaintMutation } from "@/features/support/queries/use-submit-complaint-mutation";
 import { useSupportQuery } from "@/features/support/queries/use-support-query";
 import type { ComplaintModel, FeedbackAttachment, SupportModel } from "@/features/support/types/support";
+import { useTenant } from "@/features/unit-registration/providers/tenant-provider";
 import { pickAttachments } from "@/shared/lib/document-picker";
 import { Screen } from "@/shared/ui/layout/screen";
 import { ScreenState } from "@/shared/ui/layout/screen-state";
@@ -32,8 +33,9 @@ const complaintTabs = [
 
 export function ComplaintScreen() {
   const { theme } = useAppTheme();
+  const { selectedTenant } = useTenant();
   const complaintQuery = useComplaintFormQuery();
-  const supportQuery = useSupportQuery();
+  const supportQuery = useSupportQuery(selectedTenant?.unitNumber ?? null);
   const submitComplaintMutation = useSubmitComplaintMutation();
   const fallbackComplaintContent = complaintJson as ComplaintModel;
   const fallbackSupportContent = supportJson as SupportModel;
@@ -83,14 +85,17 @@ export function ComplaintScreen() {
     );
   }
 
+  const content = data;
   const supportData = supportQuery.data;
   function handleSubmit() {
-    if (!title.trim() || !description.trim() || !location.trim()) {
+    if (!selectedTenant || !title.trim() || !description.trim() || !location.trim()) {
       return;
     }
 
     submitComplaintMutation.mutate(
       {
+        accountId: selectedTenant?.id ?? "",
+        unitCode: selectedTenant?.unitNumber ?? "",
         categoryId,
         title: title.trim(),
         description: description.trim(),
@@ -99,19 +104,33 @@ export function ComplaintScreen() {
         attachments
       },
       {
-        onSuccess: () => {
+        onSuccess: (result) => {
           setSubmitted(true);
           setTitle("");
           setDescription("");
           setLocation("");
           setAttachments([]);
           setActiveTab("my-complaints");
+          Alert.alert(
+            content.messages.successTitle,
+            `${content.messages.successDescription}\n\nReference: ${result.reference}`
+          );
+        },
+        onError: (error) => {
+          Alert.alert(
+            content.messages.errorTitle,
+            error instanceof Error ? error.message : content.messages.errorDescription
+          );
         }
       }
     );
   }
 
   async function handleBrowseFiles() {
+    if (submitted) {
+      setSubmitted(false);
+    }
+
     const nextAttachments = await pickAttachments();
 
     setAttachments((current) => {
@@ -128,6 +147,10 @@ export function ComplaintScreen() {
   }
 
   function handleRemoveAttachment(attachmentId: string) {
+    if (submitted) {
+      setSubmitted(false);
+    }
+
     setAttachments((current) => current.filter((attachment) => attachment.id !== attachmentId));
   }
 
@@ -137,12 +160,12 @@ export function ComplaintScreen() {
         <View style={{ gap: theme.spacing[8] }}>
           <View style={{ gap: theme.spacing[2] }}>
             <ThemedText variant="label" size="sm" color="tertiary">
-              {data.header.eyebrow}
+              {content.header.eyebrow}
             </ThemedText>
             <ThemedText variant="heading" size="xl" color="brand">
-              {data.header.title}
+              {content.header.title}
             </ThemedText>
-            <ThemedText color="secondary">{data.header.description}</ThemedText>
+            <ThemedText color="secondary">{content.header.description}</ThemedText>
           </View>
 
           <SupportSegmentedTabs
@@ -153,23 +176,49 @@ export function ComplaintScreen() {
 
           {activeTab === "submit-new" ? (
             <ComplaintSubmitTab
-              data={data}
+              data={content}
               categoryId={categoryId}
-              onCategoryChange={setCategoryId}
+              onCategoryChange={(value) => {
+                if (submitted) {
+                  setSubmitted(false);
+                }
+                setCategoryId(value);
+              }}
               title={title}
-              onTitleChange={setTitle}
+              onTitleChange={(value) => {
+                if (submitted) {
+                  setSubmitted(false);
+                }
+                setTitle(value);
+              }}
               description={description}
-              onDescriptionChange={setDescription}
+              onDescriptionChange={(value) => {
+                if (submitted) {
+                  setSubmitted(false);
+                }
+                setDescription(value);
+              }}
               location={location}
-              onLocationChange={setLocation}
+              onLocationChange={(value) => {
+                if (submitted) {
+                  setSubmitted(false);
+                }
+                setLocation(value);
+              }}
               priorityId={priorityId}
-              onPriorityChange={setPriorityId}
+              onPriorityChange={(value) => {
+                if (submitted) {
+                  setSubmitted(false);
+                }
+                setPriorityId(value);
+              }}
               attachments={attachments}
               onBrowseAttachments={handleBrowseFiles}
               onRemoveAttachment={handleRemoveAttachment}
               onSubmit={handleSubmit}
               isSubmitting={submitComplaintMutation.isPending}
               submitted={submitted}
+              hasSelectedTenant={Boolean(selectedTenant)}
             />
           ) : (
             <ComplaintCasesTab
@@ -203,6 +252,7 @@ type ComplaintSubmitTabProps = {
   onSubmit: () => void;
   isSubmitting: boolean;
   submitted: boolean;
+  hasSelectedTenant: boolean;
 };
 
 function ComplaintSubmitTab({
@@ -222,11 +272,12 @@ function ComplaintSubmitTab({
   onRemoveAttachment,
   onSubmit,
   isSubmitting,
-  submitted
+  submitted,
+  hasSelectedTenant
 }: ComplaintSubmitTabProps) {
   const { theme } = useAppTheme();
   const isSubmitDisabled =
-    !title.trim() || !description.trim() || !location.trim() || isSubmitting;
+    !hasSelectedTenant || !title.trim() || !description.trim() || !location.trim() || isSubmitting;
 
   return (
     <View style={{ gap: theme.spacing[6] }}>
@@ -292,7 +343,9 @@ function ComplaintSubmitTab({
           message={
             submitted
               ? data.messages.successDescription
-              : "Your complaint is reviewed by the resident support team and updated in the case feed."
+              : hasSelectedTenant
+                ? "Your complaint is reviewed by the resident support team and updated in the case feed."
+                : "Select a tenant profile first before submitting a complaint."
           }
           tone={submitted ? "success" : "info"}
         />

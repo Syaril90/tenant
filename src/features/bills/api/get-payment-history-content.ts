@@ -1,7 +1,6 @@
-import { buildPaymentHistoryContent } from "@/features/bills/data/billing-adapters";
+import { getPaymentHistoryFromAPI } from "@/features/bills/api/billing-api";
 import type { PaymentHistoryContent } from "@/features/bills/types/billing";
-import { mockApiResponse } from "@/shared/lib/mock-api";
 
-export async function getPaymentHistoryContent(): Promise<PaymentHistoryContent> {
-  return mockApiResponse(buildPaymentHistoryContent(), 180);
+export async function getPaymentHistoryContent(unitCode: string): Promise<PaymentHistoryContent> {
+  return getPaymentHistoryFromAPI(unitCode);
 }

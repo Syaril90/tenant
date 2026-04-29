@@ -1,7 +1,8 @@
-import complaintDetailsJson from "@/features/support/data/complaint-details.json";
+import { getComplaintDetailFromAPI } from "@/features/support/api/complaints-api";
 import type { ComplaintDetailContent } from "@/features/support/types/support";
-import { mockApiResponse } from "@/shared/lib/mock-api";
 
-export async function getComplaintDetailContent(): Promise<ComplaintDetailContent> {
-  return mockApiResponse(complaintDetailsJson as ComplaintDetailContent, 200);
+export async function getComplaintDetailContent(
+  complaintId: string
+): Promise<ComplaintDetailContent> {
+  return getComplaintDetailFromAPI(complaintId);
 }

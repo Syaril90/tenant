@@ -129,6 +129,7 @@ export type FeedbackUploadCard = {
 
 export type FeedbackAttachment = {
   id: string;
+  uri?: string;
   name: string;
   sizeLabel: string;
   mimeType: string;
@@ -163,9 +164,28 @@ export type FeedbackModel = {
 };
 
 export type SubmitFeedbackInput = {
+  accountCode?: string | null;
+  userEmail?: string | null;
+  unitCode?: string | null;
   typeId: string;
   ratingId: string;
   details: string;
+  attachments: FeedbackAttachment[];
+};
+
+export type SubmitFeedbackResult = {
+  id: string;
+  accountCode: string;
+  residentCode: string;
+  residentName: string;
+  buildingName: string;
+  unitCode: string;
+  type: string;
+  rating: string;
+  details: string;
+  status: "submitted";
+  submittedAt: string;
+  updatedAt: string;
   attachments: FeedbackAttachment[];
 };
 
@@ -224,17 +244,42 @@ export type ComplaintModel = {
     loading: string;
     errorTitle: string;
     errorDescription: string;
+    successTitle: string;
     successDescription: string;
   };
 };
 
 export type SubmitComplaintInput = {
+  accountId: string;
+  unitCode: string;
   categoryId: string;
   title: string;
   description: string;
   location: string;
   priorityId: string;
   attachments: FeedbackAttachment[];
+};
+
+export type SubmitComplaintResult = {
+  id: string;
+  reference: string;
+  residentName: string;
+  residentCode: string;
+  buildingName: string;
+  unitCode: string;
+  category: string;
+  title: string;
+  description: string;
+  location: string;
+  priority: string;
+  status: "received" | "in_progress" | "done";
+  submittedAt: string;
+  updatedAt: string;
+  latestUpdate: string;
+  assignedTeam: string;
+  attachments: ComplaintDetailAttachment[];
+  previews: ComplaintDetailPreview[];
+  timeline: ComplaintDetailTimelineItem[];
 };
 
 export type ComplaintDetailStatusTone = "warning" | "success" | "neutral";
@@ -252,6 +297,7 @@ export type ComplaintDetailAttachment = {
   title: string;
   meta: string;
   type: "image" | "video" | "document";
+  fileUrl?: string;
 };
 
 export type ComplaintDetailPreview = {

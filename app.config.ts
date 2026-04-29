@@ -36,6 +36,9 @@ export default {
       googleIosClientId: getEnv("EXPO_AUTH_GOOGLE_IOS_CLIENT_ID"),
       googleAndroidClientId: getEnv("EXPO_AUTH_GOOGLE_ANDROID_CLIENT_ID"),
       facebookAppId: getEnv("EXPO_AUTH_FACEBOOK_APP_ID")
+    },
+    api: {
+      baseUrl: getEnv("EXPO_API_BASE_URL")
     }
   },
   web: {

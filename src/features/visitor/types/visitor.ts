@@ -68,6 +68,8 @@ export type VisitorModel = {
 };
 
 export type RegisterVisitorInput = {
+  accountCode: string;
+  unitCode: string;
   name: string;
   purpose: string;
   dateLabel: string;
