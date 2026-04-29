@@ -16,9 +16,9 @@ type IoniconName = ComponentProps<typeof Ionicons>["name"];
 type BillingTab = "outstanding" | "paid";
 
 function formatCurrency(amount: number) {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("en-MY", {
     style: "currency",
-    currency: "USD"
+    currency: "MYR"
   }).format(amount);
 }
 
@@ -78,9 +78,12 @@ export function BillingScreen() {
 
     submitPaymentMutation.mutate(
       {
-        invoiceIds,
+        accountId: data.accountId,
+        unitCode: data.unitCode,
+        chargeIds: invoiceIds,
         paymentMethodId: selectedMethodId,
-        amount
+        amount,
+        currency: "MYR"
       },
       {
         onSuccess: (result) => {
@@ -126,9 +129,9 @@ export function BillingScreen() {
     );
   }
 
-  const outstandingInvoices = data.invoices;
-  const visibleInvoices =
-    activeTab === "outstanding" ? outstandingInvoices : [];
+  const outstandingInvoices = data.invoices.filter((invoice) => invoice.statusLabel !== "PAID");
+  const paidInvoices = data.invoices.filter((invoice) => invoice.statusLabel === "PAID");
+  const visibleInvoices = activeTab === "outstanding" ? outstandingInvoices : paidInvoices;
 
   return (
     <Screen>
@@ -491,6 +494,7 @@ function InvoiceCard({
         : "#D8E1EA";
   const buttonTextColor =
     invoice.statusTone === "danger" ? theme.semantic.foreground.inverse : theme.semantic.foreground.primary;
+  const canPay = invoice.statusLabel !== "PAID";
 
   return (
     <SurfaceCard style={{ gap: theme.spacing[5], borderRadius: 26, paddingVertical: theme.spacing[5] }}>
@@ -559,7 +563,7 @@ function InvoiceCard({
         </View>
 
         <Pressable
-          disabled={loading}
+          disabled={loading || !canPay}
           onPress={onPay}
           style={{
             backgroundColor: buttonBackground,
@@ -568,11 +572,11 @@ function InvoiceCard({
             paddingVertical: theme.spacing[4],
             minWidth: 92,
             alignItems: "center",
-            opacity: loading ? 0.7 : 1
+            opacity: loading || !canPay ? 0.7 : 1
           }}
         >
           <ThemedText style={{ color: buttonTextColor }}>
-            {loading ? "..." : "Pay Now"}
+            {loading ? "..." : canPay ? "Pay Now" : "Paid"}
           </ThemedText>
         </Pressable>
       </View>

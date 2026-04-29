@@ -5,9 +5,9 @@ import type {
 import { mockApiResponse } from "@/shared/lib/mock-api";
 
 function formatCurrency(amount: number) {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("en-MY", {
     style: "currency",
-    currency: "USD"
+    currency: "MYR"
   }).format(amount);
 }
 
@@ -17,6 +17,8 @@ export async function submitPayment(
   return mockApiResponse(
     {
       paymentId: `payment-${Date.now()}`,
+      accountId: input.accountId,
+      unitCode: input.unitCode,
       paidAmount: input.amount,
       paidAmountDisplay: formatCurrency(input.amount),
       paidAtLabel: "Today",
@@ -26,4 +28,3 @@ export async function submitPayment(
     600
   );
 }
-

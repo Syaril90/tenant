@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { Text, type TextStyle } from "react-native";
+import { Text, type TextProps, type TextStyle } from "react-native";
 
 import { useAppTheme } from "@/shared/theme/theme-provider";
 
@@ -8,14 +8,16 @@ type ThemedTextProps = PropsWithChildren<{
   variant?: "display" | "heading" | "body" | "label";
   size?: "large" | "xl" | "lg" | "md" | "sm";
   style?: TextStyle;
-}>;
+}> &
+  Pick<TextProps, "numberOfLines">;
 
 export function ThemedText({
   children,
   color = "primary",
   variant = "body",
   size = "md",
-  style
+  style,
+  numberOfLines
 }: ThemedTextProps) {
   const { theme } = useAppTheme();
   let textToken:
@@ -46,6 +48,7 @@ export function ThemedText({
 
   return (
     <Text
+      numberOfLines={numberOfLines}
       style={[
         {
           color: theme.semantic.foreground[color],

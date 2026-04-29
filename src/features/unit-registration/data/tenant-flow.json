@@ -1,0 +1,106 @@
+{
+  "seedTenants": [
+    {
+      "id": "tenant-serene-heights-a1208",
+      "tenantName": "Serene Heights",
+      "propertyName": "Tower A",
+      "unitNumber": "A-12-08",
+      "residentLabel": "Primary occupant"
+    },
+    {
+      "id": "tenant-serene-heights-b0911",
+      "tenantName": "Serene Heights",
+      "propertyName": "Tower B",
+      "unitNumber": "B-09-11",
+      "residentLabel": "Family account"
+    }
+  ],
+  "selectTenant": {
+    "eyebrow": "After Sign In",
+    "title": "Select Your Tenant",
+    "description": "Choose the tenant profile you want to use for this session. Bills, visitors and support requests will follow the selected unit.",
+    "primaryAction": "Continue to portal",
+    "secondaryAction": "Register tenant instead",
+    "emptyTitle": "No tenant profile found",
+    "emptyDescription": "Register your first tenant profile to continue into the resident portal."
+  },
+  "registerTenant": {
+    "eyebrow": "Tenant Setup",
+    "title": "Register Tenant",
+    "description": "Verify the resident code, confirm the unit details, then upload the required documents.",
+    "submitLabel": "Create tenant and continue",
+    "backAction": "Back to tenant list",
+    "summaryTitle": "What this unlocks",
+    "summaryDescription": "Your tenant profile scopes resident features like billing, visitor passes and support history.",
+    "steps": [
+      {
+        "id": "verify-code",
+        "label": "Resident Code",
+        "title": "Scan QR or enter resident code",
+        "description": "Use the QR invitation from management or type the resident code manually to start verification."
+      },
+      {
+        "id": "unit-details",
+        "label": "Unit Details",
+        "title": "Confirm unit details",
+        "description": "Check the property, unit and resident information before proceeding."
+      },
+      {
+        "id": "documents",
+        "label": "Documents",
+        "title": "Upload supporting documents",
+        "description": "Attach the resident documents required for validation."
+      }
+    ],
+    "residentCode": {
+      "label": "Resident Code",
+      "placeholder": "Enter resident code",
+      "helperText": "Example: RES-A1208-2026",
+      "scanAction": "Scan QR code",
+      "continueAction": "Verify code"
+    },
+    "documents": {
+      "label": "Required Documents",
+      "title": "Required upload checklist",
+      "description": "Upload each required document before submitting the tenant registration.",
+      "buttonLabel": "Upload",
+      "helperTitle": "Before you submit",
+      "helperDescription": "Make sure the files are clear and complete. Each required row should have a file attached.",
+      "requiredList": [
+        {
+          "id": "tenancy-agreement",
+          "label": "Tenancy Agreement",
+          "description": "Signed agreement or booking form"
+        },
+        {
+          "id": "identity-document",
+          "label": "IC / Passport",
+          "description": "Front copy of identification document"
+        },
+        {
+          "id": "supporting-proof",
+          "label": "Supporting Proof",
+          "description": "Utility bill, company letter or other proof"
+        }
+      ]
+    },
+    "fields": {
+      "tenantName": {
+        "label": "Tenant / Residence Name",
+        "placeholder": "Enter tenant or residence name"
+      },
+      "propertyName": {
+        "label": "Property / Tower",
+        "placeholder": "Enter tower, block or building"
+      },
+      "unitNumber": {
+        "label": "Unit Number",
+        "placeholder": "Enter unit number"
+      },
+      "residentLabel": {
+        "label": "Resident Label",
+        "placeholder": "Primary occupant, owner, family account"
+      }
+    }
+  }
+}

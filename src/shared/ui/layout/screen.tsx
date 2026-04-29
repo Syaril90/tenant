@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { authContent } from "@/features/auth/lib/auth-content";
 import { getUserIdentity } from "@/features/auth/lib/user-identity";
 import { useDashboardQuery } from "@/features/dashboard/queries/use-dashboard-query";
+import { useTenant } from "@/features/unit-registration/providers/tenant-provider";
 import { appIdentity } from "@/shared/config/app-identity";
 import { useAuth } from "@/features/auth/providers/auth-provider";
 import { useAppTheme } from "@/shared/theme/theme-provider";
@@ -49,6 +50,7 @@ export function Screen({
 function AppHeader({ mode }: { mode: "main" | "sub" }) {
   const { colorScheme, theme, toggleNightMode } = useAppTheme();
   const { signOut, user } = useAuth();
+  const { selectedTenant } = useTenant();
   const dashboardQuery = useDashboardQuery();
   const pathname = usePathname();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -159,6 +161,11 @@ function AppHeader({ mode }: { mode: "main" | "sub" }) {
               <ThemedText variant="heading" size="md" color="brand">
                 {appIdentity.headerName}
               </ThemedText>
+              {selectedTenant ? (
+                <ThemedText color="secondary" style={{ fontSize: 12, lineHeight: 16 }}>
+                  {selectedTenant.propertyName} · {selectedTenant.unitNumber}
+                </ThemedText>
+              ) : null}
             </View>
           </View>
 

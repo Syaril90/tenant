@@ -13,6 +13,7 @@ import { router } from "expo-router";
 
 import { authContent } from "@/features/auth/lib/auth-content";
 import { useAuth } from "@/features/auth/providers/auth-provider";
+import { useTenant } from "@/features/unit-registration/providers/tenant-provider";
 import { appIdentity } from "@/shared/config/app-identity";
 import { useAppTheme } from "@/shared/theme/theme-provider";
 import { Screen } from "@/shared/ui/layout/screen";
@@ -26,14 +27,15 @@ const lobbyImage =
 export function SignInScreen() {
   const { theme } = useAppTheme();
   const { signInWithFacebook, signInWithGoogle, user } = useAuth();
+  const { isLoading: isTenantLoading, tenants } = useTenant();
   const [pendingProvider, setPendingProvider] = useState<Provider>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (user) {
-      router.replace("/(tabs)");
+    if (user && !isTenantLoading) {
+      router.replace("/select-tenant");
     }
-  }, [user]);
+  }, [isTenantLoading, user]);
 
   async function handleProviderSignIn(provider: Exclude<Provider, null>) {
     setPendingProvider(provider);
@@ -45,8 +47,6 @@ export function SignInScreen() {
       } else {
         await signInWithFacebook();
       }
-
-      router.replace("/(tabs)");
     } catch (error) {
       const message =
         error instanceof Error

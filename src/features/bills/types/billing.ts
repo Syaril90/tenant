@@ -16,6 +16,10 @@ export type BillingSummary = {
 
 export type BillingInvoice = {
   id: string;
+  accountId: string;
+  unitCode: string;
+  buildingName: string;
+  billingType: string;
   title: string;
   periodLabel: string;
   invoiceLabel: string;
@@ -115,6 +119,10 @@ export type PaymentHistoryContent = {
 };
 
 export type BillingModel = {
+  accountId: string;
+  unitCode: string;
+  buildingName: string;
+  residentName: string;
   header: BillingHeader;
   summary: BillingSummary;
   invoices: BillingInvoice[];
@@ -126,13 +134,18 @@ export type BillingModel = {
 };
 
 export type SubmitPaymentInput = {
-  invoiceIds: string[];
+  accountId: string;
+  unitCode: string;
+  chargeIds: string[];
   paymentMethodId: string;
   amount: number;
+  currency: "MYR";
 };
 
 export type SubmitPaymentResult = {
   paymentId: string;
+  accountId: string;
+  unitCode: string;
   paidAmount: number;
   paidAmountDisplay: string;
   paidAtLabel: string;

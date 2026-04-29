@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import paymentHistoryJson from "@/features/bills/data/payment-history.json";
+import { buildPaymentHistoryContent } from "@/features/bills/data/billing-adapters";
 import { usePaymentHistoryContentQuery } from "@/features/bills/queries/use-payment-history-content-query";
 import type { PaymentHistoryContent, PaymentHistoryItem } from "@/features/bills/types/billing";
 import { DocumentSearchInput } from "@/features/documents/components/document-search-input";
@@ -48,7 +48,7 @@ export function PaymentHistoryScreen() {
   const paymentHistoryQuery = usePaymentHistoryContentQuery();
   const [query, setQuery] = useState("");
   const [activeFilterId, setActiveFilterId] = useState("all");
-  const fallbackContent = paymentHistoryJson as PaymentHistoryContent;
+  const fallbackContent = buildPaymentHistoryContent() as PaymentHistoryContent;
 
   const filteredPayments = useMemo(() => {
     const payments = paymentHistoryQuery.data?.payments ?? [];
