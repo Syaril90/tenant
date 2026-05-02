@@ -70,7 +70,7 @@ export function DocumentPreviewScreen() {
 
         <View style={{ gap: theme.spacing[3] }}>
           <Pressable
-            onPress={() => downloadMutation.mutate({ fileId: file.id })}
+            onPress={() => downloadMutation.mutate({ fileId: file.id, fileUrl: file.fileUrl })}
             style={{
               backgroundColor: theme.semantic.foreground.brand,
               borderRadius: theme.radius.sm,

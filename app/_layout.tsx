@@ -49,6 +49,8 @@ function RootNavigator() {
           <Stack.Screen name="document-preview/[fileId]" />
           <Stack.Screen name="visitor-pass/[visitorId]" />
           <Stack.Screen name="payment-history" />
+          <Stack.Screen name="payment-return" />
+          <Stack.Screen name="payment-failed" />
           <Stack.Screen name="payment-success" />
           <Stack.Screen name="payment-receipt" />
           <Stack.Screen name="request-document" />

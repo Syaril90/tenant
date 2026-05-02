@@ -23,6 +23,7 @@ export type PaymentRouteParams = {
   paidAt?: string;
   status?: string;
   methodLabel?: string;
+  unitCode?: string;
 };
 
 export type PaymentReceiptContent = {

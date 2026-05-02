@@ -50,7 +50,7 @@ export function Screen({
 function AppHeader({ mode }: { mode: "main" | "sub" }) {
   const { colorScheme, theme, toggleNightMode } = useAppTheme();
   const { signOut, user } = useAuth();
-  const { selectedTenant } = useTenant();
+  const { selectedTenant, tenants } = useTenant();
   const dashboardQuery = useDashboardQuery();
   const pathname = usePathname();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -70,6 +70,11 @@ function AppHeader({ mode }: { mode: "main" | "sub" }) {
   function handleSupportPress() {
     closeAccountMenu();
     router.push("/(tabs)/support");
+  }
+
+  function handleSwitchTenantPress() {
+    closeAccountMenu();
+    router.push("/select-tenant");
   }
 
   function handleLogoutPress() {
@@ -380,6 +385,34 @@ function AppHeader({ mode }: { mode: "main" | "sub" }) {
                 />
               </View>
             </Pressable>
+
+            {tenants.length > 0 ? (
+              <Pressable
+                onPress={handleSwitchTenantPress}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: theme.spacing[3],
+                  paddingVertical: theme.spacing[2]
+                }}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[3] }}>
+                  <Ionicons
+                    name="business-outline"
+                    size={18}
+                    color={theme.semantic.foreground.brand}
+                  />
+                  <ThemedText>{authContent.accountMenu.switchTenantLabel}</ThemedText>
+                </View>
+
+                {selectedTenant ? (
+                  <ThemedText color="secondary" style={{ fontSize: 12 }}>
+                    {selectedTenant.unitNumber}
+                  </ThemedText>
+                ) : null}
+              </Pressable>
+            ) : null}
 
             <Pressable
               onPress={handleLogoutPress}

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useLocalSearchParams, router } from "expo-router";
+import { useFocusEffect, useLocalSearchParams, router } from "expo-router";
 
 import { buildPaymentHistoryContent } from "@/features/bills/data/billing-adapters";
 import { useTenant } from "@/features/unit-registration/providers/tenant-provider";
@@ -71,6 +71,12 @@ export function PaymentHistoryScreen() {
       return matchesFilter && matchesQuery;
     });
   }, [activeFilterId, paymentHistoryQuery.data?.payments, query]);
+
+  useFocusEffect(() => {
+    if (unitCode) {
+      paymentHistoryQuery.refetch().catch(() => {});
+    }
+  });
 
   if (paymentHistoryQuery.isLoading) {
     return (

@@ -27,9 +27,9 @@ export function DocumentTable({
   const downloadMutation = useDownloadDocumentMutation();
   const [downloadedIds, setDownloadedIds] = useState<string[]>([]);
 
-  function handleDownload(fileId: string) {
+  function handleDownload(fileId: string, fileUrl?: string) {
     downloadMutation.mutate(
-      { fileId },
+      { fileId, fileUrl },
       {
         onSuccess: (result) => {
           setDownloadedIds((current) =>
@@ -133,7 +133,7 @@ export function DocumentTable({
                   </Pressable>
 
                   <Pressable
-                    onPress={() => handleDownload(file.id)}
+                    onPress={() => handleDownload(file.id, file.fileUrl)}
                     style={{
                       width: 32,
                       height: 32,
@@ -184,4 +184,3 @@ function getToneVisual(fileType: DocumentFile["fileTypeLabel"], tone: DocumentFi
     color: "#16A34A"
   };
 }
-

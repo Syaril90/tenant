@@ -13,6 +13,7 @@ type AuthContent = {
   };
   accountMenu: {
     supportLabel: string;
+    switchTenantLabel: string;
     nightModeLabel: string;
     logoutTitle: string;
     logoutMessage: string;

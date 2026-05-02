@@ -137,6 +137,7 @@ export type SubmitPaymentInput = {
   accountId: string;
   unitCode: string;
   chargeIds: string[];
+  chargeReferences: string[];
   paymentMethodId: string;
   amount: number;
   currency: "MYR";
@@ -151,4 +152,5 @@ export type SubmitPaymentResult = {
   paidAtLabel: string;
   statusLabel: string;
   methodId: string;
+  outcome: "success" | "failed" | "cancelled";
 };

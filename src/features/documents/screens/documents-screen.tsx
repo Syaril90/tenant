@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { ScrollView, View } from "react-native";
+import { useFocusEffect } from "expo-router";
 
 import { DocumentCategoryList } from "@/features/documents/components/document-category-list";
 import { DocumentsHelpCard } from "@/features/documents/components/documents-help-card";
@@ -17,6 +18,10 @@ export function DocumentsScreen() {
   const [query, setQuery] = useState("");
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const documentsData = documentsQuery.data;
+
+  useFocusEffect(() => {
+    documentsQuery.refetch();
+  });
 
   const filteredDocuments = useMemo(() => {
     const documents = documentsData?.documents ?? [];

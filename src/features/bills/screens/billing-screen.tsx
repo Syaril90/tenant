@@ -2,8 +2,10 @@ import type { ComponentProps } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
+import { useQueryClient } from "@tanstack/react-query";
 
+import { queryKeys } from "@/core/config/query";
 import { useTenant } from "@/features/unit-registration/providers/tenant-provider";
 import { useBillingQuery } from "@/features/bills/queries/use-billing-query";
 import { useSubmitPaymentMutation } from "@/features/bills/queries/use-submit-payment-mutation";
@@ -26,6 +28,7 @@ function formatCurrency(amount: number) {
 export function BillingScreen() {
   const { colorScheme, theme } = useAppTheme();
   const { selectedTenant } = useTenant();
+  const queryClient = useQueryClient();
   const billingQuery = useBillingQuery(selectedTenant?.unitNumber ?? null);
   const submitPaymentMutation = useSubmitPaymentMutation();
 
@@ -61,6 +64,12 @@ export function BillingScreen() {
     }
   }, [initializedMethodId, selectedMethodId]);
 
+  useFocusEffect(() => {
+    if (selectedTenant?.unitNumber) {
+      billingQuery.refetch().catch(() => {});
+    }
+  });
+
   const subtotalAmount =
     data?.invoices
       .filter((invoice) => selectedInvoiceIds.includes(invoice.id))
@@ -83,6 +92,9 @@ export function BillingScreen() {
         accountId: data.accountId,
         unitCode: data.unitCode,
         chargeIds: invoiceIds,
+        chargeReferences: data.invoices
+          .filter((invoice) => invoiceIds.includes(invoice.id))
+          .map((invoice) => invoice.invoiceLabel),
         paymentMethodId: selectedMethodId,
         amount,
         currency: "MYR"
@@ -90,16 +102,28 @@ export function BillingScreen() {
       {
         onSuccess: (result) => {
           setSelectedInvoiceIds([]);
-          router.push({
-            pathname: "/payment-success",
-            params: {
-              amount: result.paidAmountDisplay,
-              paymentId: result.paymentId,
-              paidAt: result.paidAtLabel,
-              status: result.statusLabel,
-              methodLabel: selectedMethodLabel
-            }
-          });
+          queryClient.invalidateQueries({ queryKey: [...queryKeys.bills, data.unitCode] });
+          queryClient.invalidateQueries({ queryKey: [...queryKeys.paymentHistory, data.unitCode] });
+          const params = {
+            amount: result.paidAmountDisplay,
+            paymentId: result.paymentId,
+            paidAt: result.paidAtLabel,
+            status: result.statusLabel,
+            methodLabel: selectedMethodLabel,
+            unitCode: result.unitCode
+          };
+
+          router.push(
+            result.outcome === "success"
+              ? {
+                  pathname: "/payment-success",
+                  params
+                }
+              : {
+                  pathname: "/payment-failed",
+                  params
+                }
+          );
         }
       }
     );
@@ -124,7 +148,7 @@ export function BillingScreen() {
             Billing unavailable
           </ThemedText>
           <ThemedText color="secondary">
-            The billing mock request failed. Replace the API adapter when gateway integration starts.
+            The live billing request failed. Check the API base URL and Billplz sandbox config.
           </ThemedText>
         </View>
       </Screen>

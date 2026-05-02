@@ -2,10 +2,12 @@ import type { PropsWithChildren } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 import type { User } from "firebase/auth";
 import { onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { signInWithFacebook } from "@/features/auth/api/sign-in-with-facebook";
 import { signInWithGoogle, signOutFromGoogle } from "@/features/auth/api/sign-in-with-google";
 import { auth, clearPersistedAuthSession } from "@/features/auth/lib/firebase";
+import { getSelectedTenantStorageKey } from "@/features/unit-registration/lib/tenant-storage";
 
 type AuthContextValue = {
   isLoading: boolean;
@@ -43,11 +45,15 @@ export function AuthProvider({ children }: PropsWithChildren) {
         },
         signOut: async () => {
           setIsLoading(true);
+          const currentUserId = auth.currentUser?.uid ?? user?.uid ?? null;
 
           try {
             await signOutFromGoogle();
             await firebaseSignOut(auth);
             await clearPersistedAuthSession();
+            if (currentUserId) {
+              await AsyncStorage.removeItem(getSelectedTenantStorageKey(currentUserId));
+            }
             setUser(null);
           } finally {
             setIsLoading(false);

@@ -5,9 +5,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "@/features/auth/providers/auth-provider";
 import { getResidentAccountsByEmail } from "@/features/unit-registration/api/get-resident-accounts";
 import { tenantFlowContent } from "@/features/unit-registration/lib/tenant-flow-content";
+import {
+  getSelectedTenantStorageKey,
+  getTenantProfilesStorageKey
+} from "@/features/unit-registration/lib/tenant-storage";
 import type { TenantProfile } from "@/features/unit-registration/types/tenant-flow";
-
-const TENANT_STORAGE_KEY = "tenant_profiles";
 
 type RegisterTenantInput = Omit<TenantProfile, "id">;
 
@@ -45,9 +47,10 @@ export function TenantProvider({ children }: PropsWithChildren) {
       setSelectedTenantId(null);
 
       try {
-        const storedProfiles = await AsyncStorage.getItem(
-          `${TENANT_STORAGE_KEY}:${user.uid}`
-        );
+        const [storedProfiles, storedSelectedTenantId] = await Promise.all([
+          AsyncStorage.getItem(getTenantProfilesStorageKey(user.uid)),
+          AsyncStorage.getItem(getSelectedTenantStorageKey(user.uid))
+        ]);
         const localTenants = storedProfiles
           ? (JSON.parse(storedProfiles) as TenantProfile[])
           : [];
@@ -59,10 +62,17 @@ export function TenantProvider({ children }: PropsWithChildren) {
 
         if (isActive) {
           setTenants(nextTenants);
+          setSelectedTenantId(
+            storedSelectedTenantId &&
+              nextTenants.some((tenant) => tenant.id === storedSelectedTenantId)
+              ? storedSelectedTenantId
+              : null
+          );
         }
       } catch {
         if (isActive) {
           setTenants(tenantFlowContent.seedTenants);
+          setSelectedTenantId(null);
         }
       } finally {
         if (isActive) {
@@ -83,14 +93,27 @@ export function TenantProvider({ children }: PropsWithChildren) {
       return;
     }
 
-    await AsyncStorage.setItem(
-      `${TENANT_STORAGE_KEY}:${user.uid}`,
-      JSON.stringify(nextTenants)
-    );
+    await AsyncStorage.setItem(getTenantProfilesStorageKey(user.uid), JSON.stringify(nextTenants));
+  }
+
+  async function persistSelectedTenant(tenantId: string | null) {
+    if (!user?.uid) {
+      return;
+    }
+
+    const key = getSelectedTenantStorageKey(user.uid);
+
+    if (tenantId) {
+      await AsyncStorage.setItem(key, tenantId);
+      return;
+    }
+
+    await AsyncStorage.removeItem(key);
   }
 
   function selectTenant(tenantId: string) {
     setSelectedTenantId(tenantId);
+    persistSelectedTenant(tenantId).catch(() => {});
   }
 
   function registerTenant(input: RegisterTenantInput) {
@@ -110,6 +133,7 @@ export function TenantProvider({ children }: PropsWithChildren) {
       return nextTenants;
     });
     setSelectedTenantId(nextTenant.id);
+    persistSelectedTenant(nextTenant.id).catch(() => {});
 
     return nextTenant;
   }

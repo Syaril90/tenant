@@ -28,11 +28,12 @@ export type DocumentFile = {
   description: string;
   categoryId: string;
   categoryLabel: string;
-  fileTypeLabel: "PDF" | "DOCX" | "XLSX";
+  fileTypeLabel: "PDF" | "DOCX" | "XLSX" | "JPG" | "PNG";
   tone: "danger" | "info" | "success" | "neutral";
   updatedAtLabel: string;
   previewTitle: string;
   previewBody: string;
+  fileUrl?: string;
 };
 
 export type DocumentsHelpCard = {
@@ -105,6 +106,7 @@ export type DocumentsModel = {
 
 export type DocumentDownloadInput = {
   fileId: string;
+  fileUrl?: string;
 };
 
 export type DocumentDownloadResult = {

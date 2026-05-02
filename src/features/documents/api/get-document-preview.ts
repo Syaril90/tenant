@@ -1,29 +1,24 @@
-import documentsJson from "@/features/documents/data/documents.json";
 import previewJson from "@/features/documents/data/document-preview.json";
 import type {
   DocumentFile,
   DocumentPreviewContent,
-  DocumentsModel
 } from "@/features/documents/types/documents";
-import { mockApiResponse } from "@/shared/lib/mock-api";
+import { getAPIBaseURL } from "@/shared/lib/api-config";
 
 export async function getDocumentPreview(fileId: string): Promise<{
   content: DocumentPreviewContent;
   file: DocumentFile;
 }> {
-  const data = documentsJson as DocumentsModel;
-  const file = data.documents.find((item) => item.id === fileId);
+  const response = await fetch(`${getAPIBaseURL()}/api/v1/documents/${encodeURIComponent(fileId)}`);
 
-  if (!file) {
-    throw new Error(`Unknown document: ${fileId}`);
+  if (!response.ok) {
+    throw new Error(`Document preview request failed with status ${response.status}`);
   }
 
-  return mockApiResponse(
-    {
-      content: previewJson as DocumentPreviewContent,
-      file
-    },
-    180
-  );
-}
+  const payload = (await response.json()) as { item: DocumentFile };
 
+  return {
+    content: previewJson as DocumentPreviewContent,
+    file: payload.item
+  };
+}
